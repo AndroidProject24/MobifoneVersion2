@@ -93,6 +93,10 @@ public class KhosoFragment extends BaseFragment {
   public void onDestroyView() {
     super.onDestroyView();
     toolbarTitleListener.hideToolBar(false);
+    removePages();
+  }
+  public void removePages() {
+    mFragments.clear();
   }
 }
 

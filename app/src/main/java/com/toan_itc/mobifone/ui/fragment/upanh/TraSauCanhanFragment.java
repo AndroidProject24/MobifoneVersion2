@@ -203,5 +203,12 @@ public class TraSauCanhanFragment extends BaseFragment implements UpanhView {
   private boolean showFab(){
     return requestBody!= null && requestBody1 != null && requestBody2 != null&& requestBody3 != null&& requestBody4 != null;
   }
+
+
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    mUpanhPresenter.detachView();
+  }
 }
 

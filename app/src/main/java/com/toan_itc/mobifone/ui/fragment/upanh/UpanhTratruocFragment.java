@@ -197,5 +197,10 @@ public class UpanhTratruocFragment extends BaseFragment implements UpanhView {
     return requestBody!= null && requestBody1 != null && requestBody2 != null;
   }
 
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    mUpanhPresenter.detachView();
+  }
 }
 

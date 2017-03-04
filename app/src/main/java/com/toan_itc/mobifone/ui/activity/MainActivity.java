@@ -22,6 +22,7 @@ import com.toan_itc.mobifone.interfaces.OnBackListener;
 import com.toan_itc.mobifone.interfaces.ToolbarTitleListener;
 import com.toan_itc.mobifone.ui.fragment.MainFragment;
 import com.toan_itc.mobifone.ui.fragment.congno.CongnoFragment;
+import com.toan_itc.mobifone.ui.fragment.contact.LienHeFragment;
 import com.toan_itc.mobifone.ui.fragment.khoso.KhosoFragment;
 import com.toan_itc.mobifone.ui.fragment.km.KhuyenmaiFragment;
 import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
@@ -79,24 +80,48 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
                 )
                 .withOnDrawerItemClickListener((view, position, drawerItem) -> {
                     if (drawerItem != null) {
-                        if (!mPreferencesHelper.getUserId().equalsIgnoreCase("")) {
-                            if (drawerItem.getIdentifier() == 1) {
-                                replaceFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
-                            } else if (drawerItem.getIdentifier() == 2) {
-                                replaceFagment(getSupportFragmentManager(), R.id.fragment, KhosoFragment.newInstance());
-                            } else if (drawerItem.getIdentifier() == 3) {
-                                replaceFagment(getSupportFragmentManager(), R.id.fragment, KhuyenmaiFragment.newInstance());
-                            } else if (drawerItem.getIdentifier() == 4) {
-                                replaceFagment(getSupportFragmentManager(), R.id.fragment, CongnoFragment.newInstance());
-                            } else if (drawerItem.getIdentifier() == 5) {
-                                replaceFagment(getSupportFragmentManager(), R.id.fragment, ThutucFragment.newInstance());
-                            }else if (drawerItem.getIdentifier() == 6) {
-                                replaceFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
-                            }
+                        if (drawerItem.getIdentifier() == 1) {
+                            replaceFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
+                        } else if (drawerItem.getIdentifier() == 2) {
+                            replaceFagment(getSupportFragmentManager(), R.id.fragment, KhosoFragment.newInstance());
+                        } else if (drawerItem.getIdentifier() == 3) {
+                            replaceFagment(getSupportFragmentManager(), R.id.fragment, KhuyenmaiFragment.newInstance());
+                        } else if (drawerItem.getIdentifier() == 4) {
+                            replaceFagment(getSupportFragmentManager(), R.id.fragment, CongnoFragment.newInstance());
+                        } else if (drawerItem.getIdentifier() == 5) {
+                            replaceFagment(getSupportFragmentManager(), R.id.fragment, ThutucFragment.newInstance());
+                        }else if (drawerItem.getIdentifier() == 6) {
+                            replaceFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
+                        }else if (drawerItem.getIdentifier() == 7) {
+                            replaceFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
+                        }else if (drawerItem.getIdentifier() == 8) {
+                            replaceFagment(getSupportFragmentManager(), R.id.fragment, LienHeFragment.newInstance());
                         }else{
                             replaceFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());//TODO: LoginFragment
                             //Snackbar.make(mToolbar, "Please login!", Snackbar.LENGTH_LONG).show();
                         }
+                       /* if (!mPreferencesHelper.getUserId().equalsIgnoreCase("")) {
+                            if (drawerItem.getIdentifier() == 1) {
+                                addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
+                            } else if (drawerItem.getIdentifier() == 2) {
+                                addFagment(getSupportFragmentManager(), R.id.fragment, KhosoFragment.newInstance());
+                            } else if (drawerItem.getIdentifier() == 3) {
+                                addFagment(getSupportFragmentManager(), R.id.fragment, KhuyenmaiFragment.newInstance());
+                            } else if (drawerItem.getIdentifier() == 4) {
+                                addFagment(getSupportFragmentManager(), R.id.fragment, CongnoFragment.newInstance());
+                            } else if (drawerItem.getIdentifier() == 5) {
+                                addFagment(getSupportFragmentManager(), R.id.fragment, ThutucFragment.newInstance());
+                            }else if (drawerItem.getIdentifier() == 6) {
+                                addFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
+                            }else if (drawerItem.getIdentifier() == 7) {
+                                addFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
+                            }else if (drawerItem.getIdentifier() == 8) {
+                                addFagment(getSupportFragmentManager(), R.id.fragment, LienHeFragment.newInstance());
+                            }
+                        }else{
+                            addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());//TODO: LoginFragment
+                            //Snackbar.make(mToolbar, "Please login!", Snackbar.LENGTH_LONG).show();
+                        }*/
                     }
                     return false;
                 })

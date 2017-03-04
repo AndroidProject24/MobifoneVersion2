@@ -2,7 +2,7 @@ package com.toan_itc.mobifone.ui.adapter.khoso;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Created by hugeterry(http://hugeterry.cn)
  * Date: 16/1/28 17:24
  */
-public class MyPagerAdapter extends FragmentPagerAdapter {
+public class MyPagerAdapter extends FragmentStatePagerAdapter{
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private String[] mTitles;
 
@@ -34,4 +34,5 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         return mFragments.get(position);
     }
+
 }

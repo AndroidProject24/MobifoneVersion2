@@ -98,4 +98,10 @@ public class KMNaptheFragment extends BaseFragment implements TheloaiView{
       }
     });
   }
+
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    mTheloaiPresenter.detachView();
+  }
 }

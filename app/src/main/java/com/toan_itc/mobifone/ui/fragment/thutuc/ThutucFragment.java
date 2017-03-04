@@ -138,5 +138,11 @@ public class ThutucFragment extends BaseFragment implements TheloaiView {
       Log.i("asd", "onRepeatClick:" + index);
     }
   };
+
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    mTheloaiPresenter.detachView();
+  }
 }
 

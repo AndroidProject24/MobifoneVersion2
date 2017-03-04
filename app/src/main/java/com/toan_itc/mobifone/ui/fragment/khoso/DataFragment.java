@@ -169,13 +169,13 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   public void onCheckedChanged(RadioGroup group, int checkedId) {
     switch (checkedId){
       case R.id.rad_089:
-        search_sim("",mRad089.getText().toString(),"");
+        search_sim(txt_search.getText().toString(),mRad089.getText().toString(), mSpinner.getSelectedItem().toString().trim());
         break;
       case R.id.rad_090:
-        search_sim("",mRad090.getText().toString(),"");
+        search_sim(txt_search.getText().toString(),mRad090.getText().toString(),mSpinner.getSelectedItem().toString().trim());
         break;
       case R.id.rad_093:
-        search_sim("",mRad093.getText().toString(),"");
+        search_sim(txt_search.getText().toString(),mRad093.getText().toString(),mSpinner.getSelectedItem().toString().trim());
         break;
     }
   }
@@ -184,11 +184,17 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   public void onClick(View v) {
     try {
       txt_search.setText("");
-      mKhosoPresenter.dangSim("0");
       int selectedId = mRadioGroup.getCheckedRadioButtonId();
-      search_sim("", ((RadioButton) ButterKnife.findById(getView(), selectedId)).getText().toString(), "");
+      search_sim(txt_search.getText().toString(), ((RadioButton) ButterKnife.findById(getView(), selectedId)).getText().toString(), mSpinner.getSelectedItem().toString().trim());
     }catch (Exception e){
       e.printStackTrace();
+      search_sim("", mRad090.getText().toString(), "");
     }
+  }
+
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    mKhosoPresenter.detachView();
   }
 }

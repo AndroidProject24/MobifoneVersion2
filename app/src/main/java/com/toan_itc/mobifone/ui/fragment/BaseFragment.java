@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.interfaces.OnBackListener;
 import com.toan_itc.mobifone.interfaces.ToolbarTitleListener;
-import com.toan_itc.mobifone.libs.logger.Logger;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.view.base.BaseView;
 import com.toan_itc.mobifone.ui.fragment.congno.CongnoFragment;
@@ -60,7 +59,6 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    Logger.d(TAG);
     if (null == mContentView) {
       mContentView = inflater.inflate(setLayoutResourceID(),container, false);
     }
@@ -145,14 +143,12 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   @Override
   public void onDestroyView() {
     super.onDestroyView();
-    Logger.d(TAG);
     unbinder.unbind();
   }
 
   @Override
   public void onDestroy() {
     super.onDestroy();
-    Logger.d(TAG);
     unsubscribe();
     Glide.get(mContext).clearMemory();
   }
@@ -233,7 +229,7 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   @Override
   public void onBackPress() {
     String currenttag=getFragmentManager().findFragmentById(R.id.fragment).getTag();
-    Logger.e(currenttag);
+    _removeWorkerFragments(currenttag);
     if(currenttag.equalsIgnoreCase(KhosoFragment.class.getName())) {
       replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
     }else if(currenttag.equalsIgnoreCase(KhuyenmaiFragment.class.getName())) {
@@ -241,13 +237,14 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
     }else if(currenttag.equalsIgnoreCase(UpanhFragment.class.getName())) {
       replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
     }else{
-      _removeWorkerFragments(currenttag);
       replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
     }
   }
   private void _removeWorkerFragments(String fragmentTAG) {
     if(!fragmentTAG.equalsIgnoreCase("")) {
-      getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentByTag(fragmentTAG)).commit();
+      Fragment fragment=getFragmentManager().findFragmentByTag(fragmentTAG);
+      if(fragment!=null)
+        getFragmentManager().beginTransaction().remove(fragment).commit();
     }
   }
 }

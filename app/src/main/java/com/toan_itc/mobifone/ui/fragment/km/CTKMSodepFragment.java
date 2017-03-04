@@ -98,5 +98,11 @@ public class CTKMSodepFragment extends BaseFragment implements TheloaiView{
       }
     });
   }
+
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    mTheloaiPresenter.detachView();
+  }
 }
 
