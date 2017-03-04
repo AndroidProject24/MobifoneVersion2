@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:layout_gravity="bottom|right">
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_send_white_24dp"
+        app:fab_colorNormal="@color/fab_normal"
+        app:fab_colorPressed="@color/fab_Pressed"
+        app:fab_colorRipple="@color/fab_Ripple"
+        app:fab_hideAnimation="@anim/hide_to_bottom"
+        app:fab_showAnimation="@anim/show_from_bottom"
+        app:fab_progress_backgroundColor="@color/fab_normal2"
+        app:fab_progress_color="@color/fab_Ripple2"
+        app:fab_progress_indeterminate="false"
+        app:fab_progress_showBackground="true"
+        app:fab_shadowColor="@color/md_black_1000"
+        app:fab_shadowRadius="4dp"
+        app:fab_shadowXOffset="1dp"
+        app:fab_shadowYOffset="3dp"
+        app:fab_showShadow="true"
+        app:fab_size="normal"
+        app:layout_behavior="com.toan_itc.mobifone.libs.FabBehavior"
+        android:visibility="gone"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"/>
+
+</RelativeLayout>

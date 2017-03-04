@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/coordinatorlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.toan_itc.mobifone.libs.view.StateLayout
+        android:id="@+id/stateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow android:layout_marginTop="2dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn_cmnd_mattruoc"
+                    style="@style/style_btn_upload"
+                    android:text="CMND MẶT TRƯỚC"/>
+
+                <Button
+                    android:id="@+id/btn_cmnd_matsau"
+                    style="@style/style_btn_upload"
+                    android:layout_marginLeft="20dp"
+                    android:text="CMND MẶT SAU"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/img_cmnd_mattruoc"
+                    style="@style/style_img_upanh"/>
+
+                <ImageView
+                    android:id="@+id/img_cmnd_matsau"
+                    style="@style/style_img_upanh"
+                    android:layout_marginLeft="20dp"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn_hd_mattruoc"
+                    style="@style/style_btn_upload"
+                    android:text="HỢP ĐỒNG TRẢ SAU MẶT TRƯỚC"/>
+
+                <Button
+                    android:id="@+id/btn_hd_matsau"
+                    style="@style/style_btn_upload"
+                    android:layout_marginLeft="20dp"
+                    android:text="HỢP ĐỒNG TRẢ SAU MẶT SAU"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/img_hd_mattruoc"
+                    style="@style/style_img_upanh"/>
+
+                <ImageView
+                    android:id="@+id/img_hd_matsau"
+                    style="@style/style_img_upanh"
+                    android:layout_marginLeft="20dp"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn_phuluc"
+                    style="@style/style_btn_upload"
+                    android:text="PHỤ LỤC 4"/>
+                <Button
+                    style="@style/style_btn_upload"
+                    android:visibility="invisible"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="5dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/img_phuluc"
+                    style="@style/style_img_upanh"/>
+            </TableRow>
+        </TableLayout>
+
+
+    </com.toan_itc.mobifone.libs.view.StateLayout>
+
+    <include layout="@layout/layout_fab"/>
+</android.support.design.widget.CoordinatorLayout>

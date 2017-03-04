@@ -1,0 +1,27 @@
+apply from: 'buildsystem/library.gradle'
+apply from: 'buildsystem/ci.gradle'
+apply from: 'buildsystem/signing.gradle'
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.5.0'
+        classpath "io.realm:realm-gradle-plugin:2.3.1"
+        classpath "com.fernandocejas.frodo:frodo-plugin:0.8.3"
+        classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.3.1'//0.4
+    }
+}
+
+allprojects {
+    ext {
+        androidApplicationId = 'com.toan_itc.mobifone'
+        androidVersionCode = 1
+        androidVersionName = "1.0"
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
