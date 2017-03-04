@@ -44,7 +44,6 @@
                 android:value=".ui.activity.MainActivity" />
         </activity>
         <receiver android:name=".libs.customtabclient.broadcast.ShareBroadcastReceiver" />
-
     </application>
 
 </manifest>

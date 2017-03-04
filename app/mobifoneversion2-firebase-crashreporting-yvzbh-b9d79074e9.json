@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mobifoneversion2",
+  "private_key_id": "b9d79074e968d1786c41280ef5ed4f791d3daacf",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC55EhS2lG0ViuJ\n/9IZnsx2b4akN57gdMppkkK2zYksvch1jei3rE+Eab7yoGyYYm1djpYIelF0zUYL\n/Vp0+6YVcQlrHhaQJyHRi9ibo3lvkYllKW9cMcrTD4KnSQKF32SHbG7oBvuqT1QP\nh/2NCH/NNQwo9z+xvnMHO/XhP6RfSSUrKELG1lAiHpM0ux9L63cMgXqghxzxPv6K\nuNPCHA//ZShiRMFX9smnSC8sJjC9247xe4CRDmteqwI8rMgZrIFkAL55on5cfygZ\nZnRjqT/xQhmQBiRR6Ok9tp6gNL7YxwRGnqmoqv4nbTExVDmrPVHxptQ4mkPb2vcb\nic/rUdfLAgMBAAECggEAaNlW5cyYSxRTaHnvol3MS30qP1PT/BxD0voZQQx7M84z\n1AJf4cGB9FjEyAsuVWEm+J8lBtEfQrdJrBeRvuv1yKBCRLXq2hIIZC3x1g+FviUj\njvipBCJdmWBlPD/U+XeAN1Y01BCkQHKQIlZ87+B8XV1vZ2fV+EZIkSsDy7He35Lm\noiqie2gUkBlbj2Pu1M++KVskgsr13YMNwk0AWLHibjcxIsyHY11jYD2dsw3BAlDp\nym+bJAeDCMOxjSb3XleTwBVNU9fCmSK1dCGI0Vqgh00C+NSpUXICs5ToCepIARW+\niy++kteLWhk58Ps2x37wfGlIlVOgVkDQkLQvIEuZAQKBgQDoDSKD8X75CMcOvzQw\n9s81muQNz3oCUkgGU0sXZPs3XUdIn8v3+GfOqjo7aHYRFaCxD5XzTiO1PSgwQ1yd\n8LEOvSyjebLPJ/lerytKgiba7uEyOi47XoiK2Bl29koPk/rFLXiZyKbspOYHKgNV\nHK5Hob/lqpRSdcc4ZyApZByAgQKBgQDNE5kGYU7WAcn0zIO1iBIokuH+vJjVqu64\nMCbSSPWxWCmG9hqAgRRPtdjMtQC6kMmrT2nPeK6CBZGRu/pDtL0TkTwMCGYJobps\nVndFJbHHidgKZmsohNKopAr0NzU85iRqzivqawXqiSpemS+javwMHD1a1lLcDGCc\nq1zjVl8ySwKBgCyRUT68JCHaYLjhWjnJPVTTUdehMJK/kNu+JZ7xoxooDSfSoQ8Y\nI3/ay+JbFsoDOGCpWKhpKoyFmXFjjqc68hadmLQxDHmi+M8Jn6vowWOtG41VBUob\nxue7x3BEr0a8qh4ytIX8tqqepRtdI1S2dHaHh16p22DXBBM+Izwv4RWBAoGBAMYg\nbPLxCA1R5R+Qhp7XO1PftF87Lh0f60ofmyIGQvh3SIePNMN58XmhIjeDl5SnVW8g\nZgV/fnk3kA/QIFVRRGqnIfAuHQapLUaFsu0nIb65ufMyR8z5pdwvwDV5MQIJBp35\nWgw8IZcZtcl3DcNAFQpOLiiYb60QeDZkiHVKeOZJAoGAIzjQDnMnW9bin0v2BzP9\nFtqablu4DgRq8sdo9EIN4+VTbcquhropHnR+jF+qcy0IZ8wncaEVfVIHm6NrfdXo\nCacvuTMKCUC2OLh1IqJAABujr6rzKFyWf6hOH6QmZDG/IT96uy/rA2ftmh29Cp56\nYc/mAk6X/ePeHLDZO2p3Cr4=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-crashreporting-yvzbh@mobifoneversion2.iam.gserviceaccount.com",
+  "client_id": "112859623049081436612",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-crashreporting-yvzbh%40mobifoneversion2.iam.gserviceaccount.com"
+}

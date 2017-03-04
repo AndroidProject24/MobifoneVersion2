@@ -35,7 +35,7 @@ android {
     }
     buildTypes {
         release {
-            //signingConfig signingConfigs.Key
+            signingConfig signingConfigs.Key
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -46,7 +46,7 @@ android {
             versionNameSuffix '-DEBUG'
         }
         applicationVariants.all { variant ->
-            //configApkFileName(variant, defaultConfig)
+           // configApkFileName(variant, defaultConfig)
         }
     }
     packagingOptions {
@@ -64,12 +64,13 @@ android {
         ignoreWarnings true
         disable 'MissingTranslation'
         disable 'InvalidPackage'            //Some libraries have issues with this.
-        disable 'OldTargetApi'              //Lint gives this warning but SDK 20 would be Android L Beta.
+        disable 'OldTargetApi'
+        //Lint gives this warning but SDK 20 would be Android L Beta.
         disable 'IconDensities'             //For testing purpose. This is safe to remove.
         disable 'IconMissingDensityFolder'  //For testing purpose. This is safe to remove.
     }
     dexOptions {
-        javaMaxHeapSize "2048M" // used by the out-of-process Jack, ignored if running in-process
+        javaMaxHeapSize "4g" // used by the out-of-process Jack, ignored if running in-process
     }
     sourceSets {
         main {
@@ -97,18 +98,18 @@ dependencies {
     def networkDependencies = rootProject.ext.networkDependencies
     def appDependencies = rootProject.ext.appDependencies
 
-    compile    supportDependencies.supportCompat
-    compile    supportDependencies.supportDesign
-    compile    supportDependencies.supportRecyclerView
-    compile    supportDependencies.supportCardView
-    compile    supportDependencies.customtabs
+    compile supportDependencies.supportCompat
+    compile supportDependencies.supportDesign
+    compile supportDependencies.supportRecyclerView
+    compile supportDependencies.supportCardView
+    compile supportDependencies.customtabs
 
     //----- Butterknife
-    compile              supportDependencies.butterKnife
-    annotationProcessor  supportDependencies.butterknifeCompiler
+    compile supportDependencies.butterKnife
+    annotationProcessor supportDependencies.butterknifeCompiler
 
     //----- Dagger
-    compile             injectDependencies.dagger
+    compile injectDependencies.dagger
     annotationProcessor injectDependencies.daggerCompiler
 
     //----- Rx
@@ -131,10 +132,12 @@ dependencies {
     compile appDependencies.coordinatortab
     compile appDependencies.bottomTab
     compile appDependencies.fabButton
-    compile (appDependencies.drawer){
-        transitive=true;
+    compile(appDependencies.drawer) {
+        transitive = true;
     }
+    compile 'com.google.firebase:firebase-crash:10.0.1'
 }
+
 @SuppressWarnings("GroovyAssignabilityCheck")
 static def configApkFileName(variant, defaultConfig) {
     variant.outputs.each { output ->
@@ -157,3 +160,5 @@ static def configApkFileName(variant, defaultConfig) {
         }
     }
 }
+
+apply plugin: 'com.google.gms.google-services'
