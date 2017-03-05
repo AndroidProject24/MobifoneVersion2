@@ -25,6 +25,7 @@ import com.toan_itc.mobifone.ui.fragment.MainFragment;
 import com.toan_itc.mobifone.ui.fragment.congno.CongnoFragment;
 import com.toan_itc.mobifone.ui.fragment.contact.LienHeFragment;
 import com.toan_itc.mobifone.ui.fragment.khoso.KhosoFragment;
+import com.toan_itc.mobifone.ui.fragment.khoso.UIKhosoFragment;
 import com.toan_itc.mobifone.ui.fragment.km.KhuyenmaiFragment;
 import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
 import com.toan_itc.mobifone.ui.fragment.thutuc.ThutucFragment;
@@ -85,7 +86,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
                         if (drawerItem.getIdentifier() == 1) {
                             replaceFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
                         } else if (drawerItem.getIdentifier() == 2) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, KhosoFragment.newInstance());
+                            replaceFagment(getSupportFragmentManager(), R.id.fragment, UIKhosoFragment.newInstance());
                         } else if (drawerItem.getIdentifier() == 3) {
                             replaceFagment(getSupportFragmentManager(), R.id.fragment, KhuyenmaiFragment.newInstance());
                         } else if (drawerItem.getIdentifier() == 4) {

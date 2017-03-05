@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.interfaces.OnBackListener;
 import com.toan_itc.mobifone.interfaces.ToolbarTitleListener;
+import com.toan_itc.mobifone.libs.view.FadeViewAnimProvider;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.view.base.BaseView;
 import com.toan_itc.mobifone.ui.fragment.congno.CongnoFragment;
@@ -108,8 +109,13 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   }
 
   private void initProgress(){
-    if (null != getLoadingTargetView()) {
-      mStateLayout = getLoadingTargetView();
+    try {
+      if (null != getLoadingTargetView()) {
+        mStateLayout = getLoadingTargetView();
+        mStateLayout.setViewSwitchAnimProvider(new FadeViewAnimProvider());
+      }
+    }catch (Exception e){
+      e.printStackTrace();
     }
   }
 
@@ -153,32 +159,41 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
     Glide.get(mContext).clearMemory();
   }
   protected void toggleShowLoading(boolean toggle) {
-    if (null == mStateLayout) {
-      throw new IllegalArgumentException("You must return a right target view for loading");
+    try {
+      if (mStateLayout != null) {
+        if (toggle)
+          mStateLayout.showProgressView();
+        else
+          mStateLayout.showContentView();
+      }
+    }catch (Exception e){
+      e.printStackTrace();
     }
-    if (toggle)
-      mStateLayout.showProgressView();
-    else
-      mStateLayout.showContentView();
   }
 
   protected void toggleShowEmpty(String msg, View.OnClickListener onClickListener) {
-    if (null == mStateLayout) {
-      throw new IllegalArgumentException("You must return a right target view for Empty");
-    }
-    mStateLayout.showEmptyView(msg);
-    if (onClickListener != null) {
-      mStateLayout.setEmptyAction(onClickListener);
+    try {
+      if (mStateLayout != null) {
+        mStateLayout.showEmptyView(msg);
+        if (onClickListener != null) {
+          mStateLayout.setEmptyAction(onClickListener);
+        }
+      }
+    }catch (Exception e){
+      e.printStackTrace();
     }
   }
 
   protected void toggleShowError(String msg, View.OnClickListener onClickListener) {
-    if (null == mStateLayout) {
-      throw new IllegalArgumentException("You must return a right target view for Error");
-    }
-    mStateLayout.showErrorView(msg);
-    if (onClickListener != null) {
-      mStateLayout.setErrorAction(onClickListener);
+    try {
+      if (mStateLayout != null) {
+        mStateLayout.showErrorView(msg);
+        if (onClickListener != null) {
+          mStateLayout.setErrorAction(onClickListener);
+        }
+      }
+    }catch (Exception e){
+      e.printStackTrace();
     }
   }
 

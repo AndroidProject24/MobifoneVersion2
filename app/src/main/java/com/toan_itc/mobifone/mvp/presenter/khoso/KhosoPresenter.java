@@ -10,6 +10,7 @@ import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
 import com.toan_itc.mobifone.mvp.presenter.base.BasePresenter;
 import com.toan_itc.mobifone.mvp.view.khoso.KhosoView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,6 +22,7 @@ import javax.inject.Inject;
 public class KhosoPresenter extends BasePresenter<KhosoView> {
   private RestData mRestData;
   private PreferencesHelper mPreferencesHelper;
+  private List<Khoso.Data> dataList=new ArrayList<>();
   @Inject
   KhosoPresenter(RestData restData, PreferencesHelper preferencesHelper){
     this.mRestData=restData;
@@ -29,7 +31,7 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
   public void searchSim(View.OnClickListener onClickListener,String search, String kho, String dau, String dang){
     getMvpView().showLoading();
     addSubscribe(mRestData.getKhoSim(search,kho,dau,dang)
-            .subscribe(new DefaultObserver<List<Khoso>>() {
+            .subscribe(new DefaultObserver<Khoso>() {
               @Override
               public void onError(Throwable e) {
                 e.printStackTrace();
@@ -38,11 +40,11 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
               }
 
               @Override
-              public void onNext(List<Khoso> listKhoso) {
+              public void onNext(Khoso khoso) {
                 try {
                   getMvpView().hideLoading();
-                  if(listKhoso!=null&&!listKhoso.isEmpty()) {
-                    getMvpView().listSim(listKhoso);
+                  if(khoso!=null&&!khoso.getData().isEmpty()) {
+                    getMvpView().listSim(khoso);
                   }else
                     getMvpView().showEmptyViewAction("no sim found!",onClickListener);
                 }catch (Exception e){
@@ -50,6 +52,32 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
                 }
               }
             }));
+  }
+  public List<Khoso.Data> loadMore(View.OnClickListener onClickListener, String url){
+    getMvpView().showLoading();
+    addSubscribe(mRestData.getLoadmore(url)
+            .subscribe(new DefaultObserver<Khoso>() {
+              @Override
+              public void onError(Throwable e) {
+                e.printStackTrace();
+                getMvpView().hideLoading();
+                getMvpView().showError(e.getMessage());
+              }
+
+              @Override
+              public void onNext(Khoso khoso) {
+                try {
+                  getMvpView().hideLoading();
+                  if(khoso!=null&&!khoso.getData().isEmpty()) {
+                   dataList=khoso.getData();
+                  }else
+                    getMvpView().showEmptyViewAction("no sim found!",onClickListener);
+                }catch (Exception e){
+                  e.printStackTrace();
+                }
+              }
+            }));
+    return dataList;
   }
   public void dangSim(String noibat){
     getMvpView().showLoading();

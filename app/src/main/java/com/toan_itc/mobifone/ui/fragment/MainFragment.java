@@ -5,7 +5,7 @@ import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.ui.activity.MainActivity;
 import com.toan_itc.mobifone.ui.fragment.congno.CongnoFragment;
-import com.toan_itc.mobifone.ui.fragment.khoso.KhosoFragment;
+import com.toan_itc.mobifone.ui.fragment.khoso.UIKhosoFragment;
 import com.toan_itc.mobifone.ui.fragment.km.KhuyenmaiFragment;
 import com.toan_itc.mobifone.ui.fragment.thutuc.ThutucFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.UpanhFragment;
@@ -58,7 +58,7 @@ public class MainFragment extends BaseFragment {
 
     @OnClick(R.id.layout_khoso)
     public void click_khoso(){
-        replaceFagment(getFragmentManager(),R.id.fragment, KhosoFragment.newInstance());
+        replaceFagment(getFragmentManager(),R.id.fragment, UIKhosoFragment.newInstance());
     }
 
     @OnClick(R.id.layout_thutuc)

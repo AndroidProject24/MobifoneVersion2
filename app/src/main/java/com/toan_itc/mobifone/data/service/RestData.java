@@ -32,9 +32,13 @@ public class RestData {
   }
 
   //Khoso
-  public Observable<List<Khoso>> getKhoSim(String search, String kho, String dau,String dang) {
+  public Observable<Khoso> getKhoSim(String search, String kho, String dau,String dang) {
     return mRestApi.getKhoso(search,kho,dau,dang)
-            .map(data->data.data)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread());
+  }
+  public Observable<Khoso> getLoadmore(String url) {
+    return mRestApi.getLoadmore(url)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
   }

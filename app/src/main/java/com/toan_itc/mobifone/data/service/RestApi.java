@@ -18,6 +18,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -30,7 +31,10 @@ public interface RestApi {
 
     /*Khoso*/
     @GET("timsim")
-    Observable<JsonArray<Khoso>> getKhoso(@Query("search") String search, @Query("kho") String kho, @Query("dau") String dau,@Query("dang") String dang);
+    Observable<Khoso> getKhoso(@Query("search") String search, @Query("kho") String kho, @Query("dau") String dau,@Query("dang") String dang);
+
+    @GET
+    Observable<Khoso> getLoadmore(@Url String url);
 
     @GET("dangsim")
     Observable<JsonArray<Dangsim>> getDangSim(@Query("noibat") String noibat);

@@ -1,12 +1,15 @@
 package com.toan_itc.mobifone.ui.fragment.khoso;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.toan_itc.mobifone.R;
+import com.toan_itc.mobifone.intdef.KhoSimIndexDef;
 import com.toan_itc.mobifone.intdef.KhosimDef;
+import com.toan_itc.mobifone.intdef.StringDef;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.ui.adapter.khoso.MyPagerAdapter;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
@@ -28,8 +31,12 @@ public class KhosoFragment extends BaseFragment {
   private String[] mTitles=new String[4];
   private Context mContext;
 
-  public static KhosoFragment newInstance() {
-    return new KhosoFragment();
+  public static KhosoFragment newInstance(String type) {
+    KhosoFragment fragment=new KhosoFragment();
+    Bundle bundle=new Bundle();
+    bundle.putString(StringDef.BUNDLE_DATA, type);
+    fragment.setArguments(bundle);
+    return fragment;
   }
 
   @Override
@@ -87,6 +94,7 @@ public class KhosoFragment extends BaseFragment {
   private void initViewPager() {
     mViewPager.setOffscreenPageLimit(4);
     mViewPager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager(), mFragments, mTitles));
+    showScreen();
   }
 
   @Override
@@ -97,6 +105,20 @@ public class KhosoFragment extends BaseFragment {
   }
   public void removePages() {
     mFragments.clear();
+  }
+
+  private void showScreen(){
+    String type=getArguments().getString(StringDef.BUNDLE_DATA);
+    if(type!=null) {
+      if (type.equalsIgnoreCase(KhoSimIndexDef.SIM_TRA_TRUOC_DEP))
+          mViewPager.setCurrentItem(1);
+      else if(type.equalsIgnoreCase(KhoSimIndexDef.SIM_TRA_SAU))
+        mViewPager.setCurrentItem(2);
+      else if(type.equalsIgnoreCase(KhoSimIndexDef.SIM_DEP))
+        mViewPager.setCurrentItem(3);
+      else
+        mViewPager.setCurrentItem(0);
+    }
   }
 }
 

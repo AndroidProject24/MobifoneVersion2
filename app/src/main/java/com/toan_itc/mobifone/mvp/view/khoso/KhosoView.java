@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface KhosoView extends BaseView {
 
-    void listSim(List<Khoso> listkhoso);
+    void listSim(Khoso khoso);
 
     void listDangSim(List<Dangsim> dangsimList);
 }

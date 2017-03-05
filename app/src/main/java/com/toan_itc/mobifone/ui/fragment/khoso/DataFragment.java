@@ -2,6 +2,7 @@ package com.toan_itc.mobifone.ui.fragment.khoso;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jakewharton.rxbinding.internal.Preconditions;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
@@ -61,7 +63,9 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   Spinner mSpinner;
   private KhosoAdapter mKhosoAdapter;
   private Context mContext;
-
+  private boolean isErr=false;
+  private int mCurrentCounter=0;
+  private Khoso mKhoso;
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
@@ -99,6 +103,35 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   protected void initData() {
     mKhosoPresenter.dangSim("0");
     search_sim("",mRad090.getText().toString(),"");
+    mKhosoAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+      @Override public void onLoadMoreRequested() {
+        if (mKhoso != null && !mKhoso.getData().isEmpty()) {
+          mRecyclerview.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+              if (mCurrentCounter >= Integer.parseInt(mKhoso.getTotalrows())) {
+                //Data are all loaded.
+                mKhosoAdapter.loadMoreEnd();
+              } else {
+                if (isErr) {
+                  //Successfully get more data
+                  mKhosoAdapter.addData(mKhosoPresenter.loadMore(DataFragment.this,mKhoso.getPage().getNextLink()));
+                  mCurrentCounter = mKhosoAdapter.getData().size();
+                  mKhosoAdapter.loadMoreComplete();
+                } else {
+                  //Get more data failed
+                  isErr = true;
+                  Snackbar.make(mRecyclerview, getString(R.string.retry), Snackbar.LENGTH_LONG).show();
+                  mKhosoAdapter.loadMoreFail();
+
+                }
+              }
+            }
+
+          }, 500);
+        }
+      }
+    });
   }
 
   @Override
@@ -107,8 +140,9 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   }
 
   @Override
-  public void listSim(List<Khoso> listkhoso) {
-    mKhosoAdapter = new KhosoAdapter(listkhoso);
+  public void listSim(Khoso khoso) {
+    mKhoso=khoso;
+    mKhosoAdapter = new KhosoAdapter(khoso.getData());
     mRecyclerview.setAdapter(mKhosoAdapter);
   }
 
