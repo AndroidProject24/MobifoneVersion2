@@ -9,8 +9,10 @@ import com.toan_itc.mobifone.ui.fragment.khoso.KhosoFragment;
 import com.toan_itc.mobifone.ui.fragment.km.CTKMSodepFragment;
 import com.toan_itc.mobifone.ui.fragment.km.CTKMTrasauFragment;
 import com.toan_itc.mobifone.ui.fragment.km.KMNaptheFragment;
+import com.toan_itc.mobifone.ui.fragment.login.ChangePasswordFragment;
 import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
 import com.toan_itc.mobifone.ui.fragment.login.RegisterFragment;
+import com.toan_itc.mobifone.ui.fragment.login.UpdateProfileFragment;
 import com.toan_itc.mobifone.ui.fragment.thutuc.ThutucFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.TraSauCanhanFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.TraSauDoanhnghiepFragment;
@@ -30,6 +32,10 @@ public interface ActivityComponent {
   void inject(LoginFragment loginFragment);
 
   void inject(RegisterFragment registerFragment);
+
+  void inject(ChangePasswordFragment changePasswordFragment);
+
+  void inject(UpdateProfileFragment updateProfileFragment);
 
   /*KHOSO*/
   void inject(KhosoFragment khosoFragment);

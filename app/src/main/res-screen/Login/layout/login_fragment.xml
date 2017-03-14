@@ -27,6 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_et_email"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:inputType="textEmailAddress"
                 android:textSize="@dimen/text_medium" />
 
@@ -42,6 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_et_pass"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:inputType="textPassword"
                 android:textSize="@dimen/text_medium" />
 
@@ -62,6 +66,7 @@
             android:layout_marginBottom="6dp"
             android:layout_marginTop="2dp"
             android:background="@drawable/my_button"
+            android:textColor="@color/white"
             android:text="@string/btn_login"
             android:textSize="@dimen/text_medium" />
 
@@ -72,6 +77,7 @@
             android:layout_gravity="center_horizontal"
             android:clickable="true"
             android:linksClickable="false"
+            android:textColor="@color/white"
             android:text="@string/tv_restore"
             android:textSize="@dimen/text_small"
             android:textStyle="bold" />
@@ -88,6 +94,7 @@
         android:layout_gravity="center_horizontal"
         android:clickable="true"
         android:gravity="bottom"
+        android:textColor="@color/white"
         android:text="@string/tv_register"
         android:textSize="@dimen/text_small"
         android:textStyle="bold" />

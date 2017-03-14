@@ -61,6 +61,8 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   RadioGroup mRadioGroup;
   @BindView(R.id.spinner)
   Spinner mSpinner;
+  @BindView(R.id.spinner_dauso)
+  Spinner mSpinner_dauso;
   private KhosoAdapter mKhosoAdapter;
   private Context mContext;
   private boolean isErr=false;
@@ -103,6 +105,18 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   protected void initData() {
     mKhosoPresenter.dangSim("0");
     search_sim("",mRad090.getText().toString(),"");
+  }
+
+  @Override
+  protected StateLayout getLoadingTargetView() {
+    return ButterKnife.findById(getActivity(),R.id.stateLayout);
+  }
+
+  @Override
+  public void listSim(Khoso khoso) {
+    mKhoso=khoso;
+    mKhosoAdapter = new KhosoAdapter(khoso.getData());
+    mRecyclerview.setAdapter(mKhosoAdapter);
     mKhosoAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
       @Override public void onLoadMoreRequested() {
         if (mKhoso != null && !mKhoso.getData().isEmpty()) {
@@ -135,19 +149,8 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   }
 
   @Override
-  protected StateLayout getLoadingTargetView() {
-    return ButterKnife.findById(getActivity(),R.id.stateLayout);
-  }
-
-  @Override
-  public void listSim(Khoso khoso) {
-    mKhoso=khoso;
-    mKhosoAdapter = new KhosoAdapter(khoso.getData());
-    mRecyclerview.setAdapter(mKhosoAdapter);
-  }
-
-  @Override
   public void listDangSim(List<Dangsim> dangsimList) {
+
     mSpinner.setAdapter(new DangsimAdapter(mContext,dangsimList));
   }
 

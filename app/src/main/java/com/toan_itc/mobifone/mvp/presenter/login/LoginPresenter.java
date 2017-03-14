@@ -22,9 +22,9 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         this.mRestData=restData;
         this.mPreferencesHelper=preferencesHelper;
     }
-    public void login(String email,String password,String shopId){
+    public void login(String email,String password){
         getMvpView().showLoading();
-        mRestData.getLogin(email,password,shopId)
+        mRestData.getLogin(email,password)
                 .subscribe(new Subscriber<Login>() {
                     @Override
                     public void onCompleted() {
@@ -54,10 +54,10 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                 });
     }
 
-   /* public void forgetPass(){
+    public void changePassword(String passOld,String passNew){
         getMvpView().showLoading();
-        mRestData.getShops()
-                .subscribe(new Subscriber<List<Shops>>() {
+        mRestData.changePassword(passOld,passNew)
+                .subscribe(new Subscriber<Login>() {
                     @Override
                     public void onCompleted() {
                         getMvpView().hideLoading();
@@ -67,11 +67,11 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                     public void onError(Throwable e) {
                         e.printStackTrace();
                         getMvpView().hideLoading();
-                        getMvpView().showError();
+                        getMvpView().showError("");
                     }
 
                     @Override
-                    public void onNext(List<Shops> shopses) {
+                    public void onNext(Login shopses) {
                         try {
                             getMvpView().login(null);
                         }catch (Exception e){
@@ -80,7 +80,33 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                     }
                 });
     }
-    public void send_token(String device_id,String token_id,String Os,String version,String model,String lat,String lng){
-        mRestData.sendToken(mPreferencesHelper.getUserId(),device_id,token_id,Os,version,model,lat,lng);
-    }*/
+
+  public void updateProfile(String auth_code,String username, String id,String email,
+                            String phone, String first_name,String last_name){
+    getMvpView().showLoading();
+    mRestData.updateProfile(auth_code,username,id,email,phone,first_name,last_name)
+            .subscribe(new Subscriber<Login>() {
+              @Override
+              public void onCompleted() {
+                getMvpView().hideLoading();
+              }
+
+              @Override
+              public void onError(Throwable e) {
+                e.printStackTrace();
+                getMvpView().hideLoading();
+                getMvpView().showError("");
+              }
+
+              @Override
+              public void onNext(Login shopses) {
+                try {
+                  getMvpView().login(null);
+                }catch (Exception e){
+                  e.printStackTrace();
+                }
+              }
+            });
+  }
+
 }

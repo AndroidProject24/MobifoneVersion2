@@ -51,27 +51,27 @@ public class MainFragment extends BaseFragment {
         ((MainActivity)getActivity()).getActivityComponent().inject(this);
     }
 
-    @OnClick(R.id.layout_congno)
+    @OnClick(R.id.card_congno)
     public void click_congno(){
         replaceFagment(getFragmentManager(),R.id.fragment, CongnoFragment.newInstance());
     }
 
-    @OnClick(R.id.layout_khoso)
+    @OnClick(R.id.card_khoso)
     public void click_khoso(){
         replaceFagment(getFragmentManager(),R.id.fragment, UIKhosoFragment.newInstance());
     }
 
-    @OnClick(R.id.layout_thutuc)
+    @OnClick(R.id.card_thutuc)
     public void click_thutuc(){
         replaceFagment(getFragmentManager(),R.id.fragment, ThutucFragment.newInstance());
     }
 
-    @OnClick(R.id.layout_ctkm)
+    @OnClick(R.id.card_km)
     public void click_ctkm(){
         replaceFagment(getFragmentManager(),R.id.fragment, KhuyenmaiFragment.newInstance());
     }
 
-    @OnClick(R.id.layout_upanh)
+    @OnClick(R.id.card_upanh)
     public void click_upanh(){
         replaceFagment(getFragmentManager(),R.id.fragment, UpanhFragment.newInstance());
     }

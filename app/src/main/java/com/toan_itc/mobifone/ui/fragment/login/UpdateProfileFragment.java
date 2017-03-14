@@ -29,7 +29,7 @@ import static com.toan_itc.mobifone.utils.Utils.isPasswordValid;
  * Date: 11/06/2016
  */
 
-public class RegisterFragment extends BaseFragment implements RegisterView {
+public class UpdateProfileFragment extends BaseFragment implements RegisterView {
     @Inject
     RegisterPresenter
     mRegisterPresenter;
@@ -48,8 +48,8 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
     @BindView(R.id.stateLayout)
     ViewGroup stateLayout;
     private Context mContext;
-    public static RegisterFragment newInstance() {
-        return new RegisterFragment();
+    public static UpdateProfileFragment newInstance() {
+        return new UpdateProfileFragment();
     }
 
     @Override

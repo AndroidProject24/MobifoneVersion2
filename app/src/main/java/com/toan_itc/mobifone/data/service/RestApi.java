@@ -11,7 +11,6 @@ import com.toan_itc.mobifone.mvp.model.upanh.Upanh;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -40,15 +39,17 @@ public interface RestApi {
     Observable<JsonArray<Dangsim>> getDangSim(@Query("noibat") String noibat);
 
     /*LOGIN*/
-    @POST("login")
-    Observable<JsonObject<Login>> getLogin(@Query("email") String email, @Query("password") String password, @Query("shop_id") String shop_id);
+    @POST("dangnhap")
+    Observable<JsonObject<Login>> getLogin(@Query("user") String user, @Query("pass") String pass);
 
-    @POST("request-password")
-    Observable<ResponseBody> forgotPassword(@Query("email") String email, @Query("shop_id") String shop_id);
+    @POST("edituser")
+    Observable<Login> changePassword(@Query("old") String passOld, @Query("new") String passNew);
 
     /*REGISTER*/
-    @POST("validate")
-    Observable<ResponseBody> checkEmail(@Query("email") String email, @Query("shop_id") String shop_id);
+    @POST("edituser")
+    Observable<Login> updateProfile(@Query("auth_code") String auth_code, @Query("username") String username,
+                                           @Query("id") String id, @Query("email") String email,@Query("phone") String phone,
+                                           @Query("first_name") String first_name, @Query("last_name") String last_name);
 
     @GET("register")
     Observable<JsonObject<Register>> getRegister(@Query("email") String email, @Query("password") String password, @Query("shop_id") String shop_id);

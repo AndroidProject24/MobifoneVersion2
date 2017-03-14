@@ -1,6 +1,7 @@
 package com.toan_itc.mobifone.mvp.view.login;
 
 import com.toan_itc.mobifone.mvp.model.login.Login;
+import com.toan_itc.mobifone.mvp.model.register.Register;
 import com.toan_itc.mobifone.mvp.view.base.BaseView;
 
 /**
@@ -10,6 +11,8 @@ import com.toan_itc.mobifone.mvp.view.base.BaseView;
 public interface LoginView extends BaseView {
 
     void login(Login login);
+
+    void register(Register register);
 
     void login_error();
 }

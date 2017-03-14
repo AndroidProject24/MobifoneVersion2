@@ -14,7 +14,6 @@ import javax.inject.Singleton;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -49,20 +48,21 @@ public class RestData {
             .observeOn(AndroidSchedulers.mainThread());
   }
   //Login
-  public Observable<Login> getLogin(String email, String password, String shopId) {
-    return mRestApi.getLogin(email,password,shopId)
+  public Observable<Login> getLogin(String email, String password) {
+    return mRestApi.getLogin(email,password)
             .map(data->data.data)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
   }
-  public Observable<ResponseBody> forgotPassword(String email,String shopId) {
-    return mRestApi.forgotPassword(email,shopId)
+  public Observable<Login> changePassword(String passOld,String passNew) {
+    return mRestApi.changePassword(passOld,passNew)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
   }
   //Register
-  public Observable<ResponseBody> checkEmail(String email, String shopId) {
-    return mRestApi.checkEmail(email,shopId)
+  public Observable<Login> updateProfile(String auth_code,String username, String id,String email,
+                                                String phone, String first_name,String last_name) {
+    return mRestApi.updateProfile(auth_code,username,id,email,phone,first_name,last_name)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
   }

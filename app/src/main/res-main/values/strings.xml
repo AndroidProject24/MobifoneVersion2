@@ -68,6 +68,9 @@
     <string name="btn_register">Đăng ký</string>
     <string name="hint_et_email">Email</string>
     <string name="hint_et_pass">Password</string>
+    <string name="pass_old">Mật khẩu cũ</string>
+    <string name="pass_new">Mật khẩu mới</string>
+    <string name="pass_change">Đổi mật khẩu</string>
     <string name="checkbox_remember">Ghi nhớ</string>
     <string name="btn_login">Đăng nhập</string>
     <string name="tv_restore">Quên mật khẩu?</string>
