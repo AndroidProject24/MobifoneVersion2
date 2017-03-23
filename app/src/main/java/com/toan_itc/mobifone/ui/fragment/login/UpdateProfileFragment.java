@@ -1,7 +1,6 @@
 package com.toan_itc.mobifone.ui.fragment.login;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
@@ -11,7 +10,10 @@ import android.widget.Button;
 
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.libs.view.StateLayout;
+import com.toan_itc.mobifone.mvp.model.login.Login;
 import com.toan_itc.mobifone.mvp.model.register.Register;
+import com.toan_itc.mobifone.mvp.presenter.login.LoginPresenter;
+import com.toan_itc.mobifone.mvp.view.login.LoginView;
 import com.toan_itc.mobifone.ui.activity.BaseActivity;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
 
@@ -29,9 +31,9 @@ import static com.toan_itc.mobifone.utils.Utils.isPasswordValid;
  * Date: 11/06/2016
  */
 
-public class UpdateProfileFragment extends BaseFragment implements RegisterView {
+public class UpdateProfileFragment extends BaseFragment implements LoginView {
     @Inject
-    RegisterPresenter
+    LoginPresenter
     mRegisterPresenter;
     @BindView(R.id.etEmail)
     TextInputEditText mEtEmail;
@@ -72,7 +74,7 @@ public class UpdateProfileFragment extends BaseFragment implements RegisterView 
     protected void initData() {
         mEtPassword.setOnFocusChangeListener((v, hasFocus) -> {
             if(hasFocus){
-                mRegisterPresenter.checkEmail(mEtEmail.getText().toString());
+               // mRegisterPresenter.checkEmail(mEtEmail.getText().toString());
             }
         });
     }
@@ -89,6 +91,22 @@ public class UpdateProfileFragment extends BaseFragment implements RegisterView 
     }
 
     @Override
+    public void login(Login login) {
+
+    }
+
+    @Override
+    public void register(Register register) {
+
+    }
+
+
+    @Override
+    public void login_error() {
+
+    }
+
+    /*@Override
     public void register(Register register) {
         mRegisterPresenter.getPreferencesHelper().putUserId(register.getId());
     }
@@ -96,7 +114,7 @@ public class UpdateProfileFragment extends BaseFragment implements RegisterView 
     @Override
     public void checkEmail() {
         Snackbar.make(mEtEmail,"Email emty or exist!",Snackbar.LENGTH_LONG).show();
-    }
+    }*/
 
     @OnClick(R.id.btnRegister)
     void user_signup_button(){

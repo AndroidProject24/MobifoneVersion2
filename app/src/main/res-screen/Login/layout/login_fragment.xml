@@ -29,7 +29,7 @@
                 android:hint="@string/hint_et_email"
                 android:textColorHint="@color/white"
                 android:textColor="@color/white"
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:textSize="@dimen/text_medium" />
 
         </android.support.design.widget.TextInputLayout>
@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/my_button"
             android:textColor="@color/white"
             android:text="@string/btn_login"
@@ -77,25 +77,25 @@
             android:layout_gravity="center_horizontal"
             android:clickable="true"
             android:linksClickable="false"
+            android:layout_marginTop="20dp"
             android:textColor="@color/white"
             android:text="@string/tv_restore"
             android:textSize="@dimen/text_small"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tvRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:gravity="bottom"
+            android:textColor="@color/white"
+            android:text="@string/tv_register"
+            android:textSize="@dimen/text_small"
+            android:textStyle="bold" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:clickable="true"
-        android:gravity="bottom"
-        android:textColor="@color/white"
-        android:text="@string/tv_register"
-        android:textSize="@dimen/text_small"
-        android:textStyle="bold" />
+
 </com.toan_itc.mobifone.libs.view.StateLayout>

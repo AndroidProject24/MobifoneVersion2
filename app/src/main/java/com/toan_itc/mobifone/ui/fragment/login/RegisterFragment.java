@@ -1,7 +1,6 @@
 package com.toan_itc.mobifone.ui.fragment.login;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
@@ -12,8 +11,11 @@ import android.widget.Button;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.model.register.Register;
+import com.toan_itc.mobifone.mvp.presenter.login.RegisterPresenter;
+import com.toan_itc.mobifone.mvp.view.login.RegisterView;
 import com.toan_itc.mobifone.ui.activity.BaseActivity;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
+import com.toan_itc.mobifone.ui.fragment.MainFragment;
 
 import javax.inject.Inject;
 
@@ -21,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.toan_itc.mobifone.R.id.etName;
 import static com.toan_itc.mobifone.utils.Utils.isEmailValid;
 import static com.toan_itc.mobifone.utils.Utils.isPasswordValid;
 
@@ -35,7 +38,7 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
     mRegisterPresenter;
     @BindView(R.id.etEmail)
     TextInputEditText mEtEmail;
-    @BindView(R.id.etName)
+    @BindView(etName)
     TextInputEditText mEtName;
     @BindView(R.id.etPassword)
     TextInputEditText mEtPassword;
@@ -45,6 +48,8 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
     TextInputLayout mLayoutEmail;
     @BindView(R.id.layout_pass)
     TextInputLayout mLayoutPass;
+    @BindView(R.id.layout_name)
+    TextInputLayout mLayoutName;
     @BindView(R.id.stateLayout)
     ViewGroup stateLayout;
     private Context mContext;
@@ -70,11 +75,7 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
 
     @Override
     protected void initData() {
-        mEtPassword.setOnFocusChangeListener((v, hasFocus) -> {
-            if(hasFocus){
-                mRegisterPresenter.checkEmail(mEtEmail.getText().toString());
-            }
-        });
+
     }
 
     @Override
@@ -90,14 +91,8 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
 
     @Override
     public void register(Register register) {
-        mRegisterPresenter.getPreferencesHelper().putUserId(register.getId());
+        replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
     }
-
-    @Override
-    public void checkEmail() {
-        Snackbar.make(mEtEmail,"Email emty or exist!",Snackbar.LENGTH_LONG).show();
-    }
-
     @OnClick(R.id.btnRegister)
     void user_signup_button(){
         check_Register();
@@ -107,6 +102,7 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
         mLayoutEmail.setError(null);
         mLayoutPass.setError(null);
         String email = mEtEmail.getText().toString();
+        String user = mEtName.getText().toString();
         String password = mEtPassword.getText().toString();
 
         boolean cancel = false;
@@ -117,10 +113,16 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
             focusView = mLayoutPass;
             cancel = true;
         }
+        if (!TextUtils.isEmpty(user) && !isPasswordValid(user)) {
+            mLayoutPass.setErrorEnabled(true);
+            mLayoutPass.setError(getString(R.string.error_field_required));
+            focusView = mLayoutPass;
+            cancel = true;
+        }
         if (TextUtils.isEmpty(email)) {
-            mLayoutEmail.setErrorEnabled(true);
-            mLayoutEmail.setError(getString(R.string.error_field_required));
-            focusView = mLayoutEmail;
+            mLayoutName.setErrorEnabled(true);
+            mLayoutName.setError(getString(R.string.error_field_required));
+            focusView = mLayoutName;
             cancel = true;
         } else if (!isEmailValid(email)) {
             mLayoutEmail.setErrorEnabled(true);
@@ -134,7 +136,8 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
         } else {
             mLayoutEmail.setErrorEnabled(false);
             mLayoutPass.setErrorEnabled(false);
-            //mRegisterPresenter.register(mEmailSignUp.getText().toString(), mPasswordSignUp.getText().toString(), Constant.SHOP_ID);
+            mLayoutName.setErrorEnabled(false);
+            mRegisterPresenter.register(email, user, password);
         }
     }
 }

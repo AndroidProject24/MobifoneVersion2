@@ -1,7 +1,6 @@
 package com.toan_itc.mobifone.data.service;
 
 import com.toan_itc.mobifone.mvp.model.JsonArray;
-import com.toan_itc.mobifone.mvp.model.JsonObject;
 import com.toan_itc.mobifone.mvp.model.khoso.Dangsim;
 import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
 import com.toan_itc.mobifone.mvp.model.login.Login;
@@ -40,7 +39,7 @@ public interface RestApi {
 
     /*LOGIN*/
     @POST("dangnhap")
-    Observable<JsonObject<Login>> getLogin(@Query("user") String user, @Query("pass") String pass);
+    Observable<Login> getLogin(@Query("user") String user, @Query("pass") String pass);
 
     @POST("edituser")
     Observable<Login> changePassword(@Query("old") String passOld, @Query("new") String passNew);
@@ -51,8 +50,8 @@ public interface RestApi {
                                            @Query("id") String id, @Query("email") String email,@Query("phone") String phone,
                                            @Query("first_name") String first_name, @Query("last_name") String last_name);
 
-    @GET("register")
-    Observable<JsonObject<Register>> getRegister(@Query("email") String email, @Query("password") String password, @Query("shop_id") String shop_id);
+    @GET("dangkyuser")
+    Observable<Register> getRegister(@Query("email") String email, @Query("user") String user, @Query("password") String password);
 
     /*UPANH*/
     @Multipart

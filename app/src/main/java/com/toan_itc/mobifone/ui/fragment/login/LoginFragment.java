@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.model.login.Login;
+import com.toan_itc.mobifone.mvp.model.register.Register;
 import com.toan_itc.mobifone.mvp.presenter.login.LoginPresenter;
 import com.toan_itc.mobifone.mvp.view.login.LoginView;
 import com.toan_itc.mobifone.ui.activity.BaseActivity;
@@ -31,7 +32,6 @@ import butterknife.OnClick;
 
 import static com.toan_itc.mobifone.R.id.layout_email;
 import static com.toan_itc.mobifone.R.id.layout_pass;
-import static com.toan_itc.mobifone.utils.Utils.isEmailValid;
 import static com.toan_itc.mobifone.utils.Utils.isPasswordValid;
 
 
@@ -77,10 +77,15 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
   @Override
   protected void initViews() {
-    ((BaseActivity) getActivity()).getActivityComponent().inject(this);
-    mLoginPresenter.attachView(this);
-    mTxtEmail.addTextChangedListener(textWatcher);
-    mPassword.addTextChangedListener(textWatcher);
+    try {
+      ((BaseActivity) getActivity()).getActivityComponent().inject(this);
+      mLoginPresenter.attachView(this);
+      mTxtEmail.addTextChangedListener(textWatcher);
+      mPassword.addTextChangedListener(textWatcher);
+      toolbarTitleListener.hideToolBar(true);
+    }catch (Exception e){
+      e.printStackTrace();
+    }
   }
 
   @Override
@@ -125,45 +130,49 @@ public class LoginFragment extends BaseFragment implements LoginView {
   }
 
   private void checkLogin() {
-    mTxtEmail.setError(null);
-    mPassword.setError(null);
-    String email = mTxtEmail.getText().toString();
-    String password = mPassword.getText().toString();
+    try {
+      mTxtEmail.setError(null);
+      mPassword.setError(null);
+      String email = mTxtEmail.getText().toString();
+      String password = mPassword.getText().toString();
 
-    boolean cancel = false;
-    View focusView = null;
-    if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-      layoutPass.setErrorEnabled(true);
-      layoutPass.setError(getString(R.string.error_invalid_password));
-      focusView = layoutPass;
-      cancel = true;
-    }
-    if (TextUtils.isEmpty(email)) {
-      layoutEmail.setError(getString(R.string.error_field_required));
-      focusView = layoutEmail;
-      cancel = true;
-    } else if (!isEmailValid(email)) {
-      layoutEmail.setErrorEnabled(true);
-      layoutEmail.setError(getString(R.string.error_invalid_email));
-      focusView = layoutEmail;
-      cancel = true;
-    }
-    if (cancel) {
-      focusView.requestFocus();
-    } else {
-      layoutEmail.setErrorEnabled(false);
-      layoutPass.setErrorEnabled(false);
-      // mLoginPresenter.login(mTxtEmail.getText().toString(), mPassword.getText().toString(), Constant.SHOP_ID);
+      boolean cancel = false;
+      View focusView = null;
+      if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        layoutPass.setErrorEnabled(true);
+        layoutPass.setError(getString(R.string.error_invalid_password));
+        focusView = layoutPass;
+        cancel = true;
+      }
+      if (TextUtils.isEmpty(email)) {
+        layoutEmail.setErrorEnabled(true);
+        layoutEmail.setError(getString(R.string.error_field_required));
+        focusView = layoutEmail;
+        cancel = true;
+      }
+      if (cancel) {
+        focusView.requestFocus();
+      } else {
+        layoutEmail.setErrorEnabled(false);
+        layoutPass.setErrorEnabled(false);
+        mLoginPresenter.login(email, password);
+      }
+    }catch (Exception e){
+      e.printStackTrace();
     }
   }
 
   @Override
   public void login(Login login) {
-    //mLoginPresenter.send_token(Utils.getDeviceIMEI(mContext),"",Constant.ANDROID_OS,Utils.getDeviceName(),Utils.getDeviceVersion(),"0","0");
-    if(login.getFirst_name()!=null&&login.getLast_name()!=null){
-      Snackbar.make(mLoginLayout,"Welcome "+login.getFirst_name()+" "+login.getLast_name(),Snackbar.LENGTH_LONG).show();
+    if(login.get_$0().getUsername()!=null){
+      Snackbar.make(mLoginLayout,"Xin chào  "+login.get_$0().getUsername() +" đã đăng nhập thành công!",Snackbar.LENGTH_LONG).show();
     }
     replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
+  }
+
+  @Override
+  public void register(Register register) {
+
   }
 
   @Override
@@ -174,6 +183,16 @@ public class LoginFragment extends BaseFragment implements LoginView {
   @OnClick(R.id.tvRegister)
   void signUp(){
     replaceFagment(getFragmentManager(),R.id.fragment,RegisterFragment.newInstance());
+  }
+
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    try{
+      toolbarTitleListener.hideToolBar(false);
+    }catch (Exception e){
+      e.printStackTrace();
+    }
   }
 }
 

@@ -7,6 +7,7 @@ import com.toan_itc.mobifone.mvp.model.register.Register;
 import com.toan_itc.mobifone.mvp.model.theloai.Theloai;
 import com.toan_itc.mobifone.mvp.model.upanh.Upanh;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,13 +45,26 @@ public class RestData {
   public Observable<List<Dangsim>> getDangSim(String noibat) {
     return mRestApi.getDangSim(noibat)
             .map(data->data.data)
+            .map(dangsims -> {
+              List<Dangsim> listSim=new ArrayList<Dangsim>();
+              Dangsim dangsim=new Dangsim();
+              dangsim.setTenkey("1000");
+              dangsim.setTends("Tất cả");
+              listSim.add(0,dangsim);
+              for(Dangsim old: dangsims){
+                Dangsim simOld=new Dangsim();
+                simOld.setTenkey(old.getTenkey());
+                simOld.setTends(old.getTends());
+                listSim.add(simOld);
+              }
+              return listSim;
+            })
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
   }
   //Login
   public Observable<Login> getLogin(String email, String password) {
     return mRestApi.getLogin(email,password)
-            .map(data->data.data)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
   }
@@ -66,9 +80,8 @@ public class RestData {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
   }
-  public Observable<Register> getRegister(String email, String password, String shopId) {
-    return mRestApi.getRegister(email,password,shopId)
-            .map(data->data.data)
+  public Observable<Register> getRegister(String email,String user, String password) {
+    return mRestApi.getRegister(email,user,password)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
   }

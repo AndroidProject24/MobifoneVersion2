@@ -41,10 +41,10 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                     @Override
                     public void onNext(Login login) {
                         try {
-                            if(login.getId()!=null&&!login.getId().equalsIgnoreCase("")) {
+                            if(login.getError()==0) {
                                 getMvpView().login(login);
-                                mPreferencesHelper.putUserId(login.getId());
-                                mPreferencesHelper.putEmail(login.getEmail());
+                                mPreferencesHelper.putUserId(login.get_$0().getId());
+                                mPreferencesHelper.putEmail(login.get_$0().getUsername());
                             }else
                                 getMvpView().login_error();
                         }catch (Exception e){

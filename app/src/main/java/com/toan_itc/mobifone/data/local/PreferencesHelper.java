@@ -11,6 +11,7 @@ import javax.inject.Singleton;
 public class PreferencesHelper {
     private static SharedPreferences mPref;
     private static final String PREF_FILE_NAME = "Salon_pref_file";
+    private static final String PREF_FINISH_APP = "PREF_FINISH_APP";
     private static final String PREF_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN";
     private static final String PREF_KEY_USER_ID = "PREF_KEY_USER_ID";
     private static final String PREF_service_id = "PREF_service_id";
@@ -168,4 +169,11 @@ public class PreferencesHelper {
     public String getPostcode() {
         return mPref.getString(PREF_PostCode,"");
     }
+
+  public void putfinshApp(@NonNull String day) {
+    mPref.edit().putString(PREF_FINISH_APP, day).apply();
+  }
+  public String getfinishApp() {
+    return mPref.getString(PREF_FINISH_APP,null);
+  }
 }

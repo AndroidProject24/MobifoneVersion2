@@ -21,14 +21,17 @@ import com.toan_itc.mobifone.intdef.KhosimDef;
 import com.toan_itc.mobifone.intdef.StringDef;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.model.khoso.Dangsim;
+import com.toan_itc.mobifone.mvp.model.khoso.Dauso;
 import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
 import com.toan_itc.mobifone.mvp.presenter.khoso.KhosoPresenter;
 import com.toan_itc.mobifone.mvp.view.khoso.KhosoView;
 import com.toan_itc.mobifone.ui.activity.BaseActivity;
 import com.toan_itc.mobifone.ui.adapter.khoso.DangsimAdapter;
+import com.toan_itc.mobifone.ui.adapter.khoso.DausoAdapter;
 import com.toan_itc.mobifone.ui.adapter.khoso.KhosoAdapter;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -94,6 +97,13 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
     mRecyclerview.setLayoutManager(new LinearLayoutManager(mContext));
     subscribeToEditText();
     mRadioGroup.setOnCheckedChangeListener(this);
+    List<Dauso> dausoList=new ArrayList<>();
+    dausoList.add(0,new Dauso("0120"));
+    dausoList.add(1,new Dauso("0121"));
+    dausoList.add(2,new Dauso("0122"));
+    dausoList.add(3,new Dauso("0126"));
+    dausoList.add(4,new Dauso("0128"));
+    mSpinner_dauso.setAdapter(new DausoAdapter(mContext,dausoList));
   }
 
   @Override
@@ -150,7 +160,6 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
 
   @Override
   public void listDangSim(List<Dangsim> dangsimList) {
-
     mSpinner.setAdapter(new DangsimAdapter(mContext,dangsimList));
   }
 

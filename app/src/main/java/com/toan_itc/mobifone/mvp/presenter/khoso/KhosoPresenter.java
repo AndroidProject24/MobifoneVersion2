@@ -5,6 +5,7 @@ import android.view.View;
 import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.data.rxjava.DefaultObserver;
 import com.toan_itc.mobifone.data.service.RestData;
+import com.toan_itc.mobifone.libs.logger.Logger;
 import com.toan_itc.mobifone.mvp.model.khoso.Dangsim;
 import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
 import com.toan_itc.mobifone.mvp.presenter.base.BasePresenter;
@@ -54,6 +55,7 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
             }));
   }
   public List<Khoso.Data> loadMore(View.OnClickListener onClickListener, String url){
+    Logger.e("loadMore="+url);
     getMvpView().showLoading();
     addSubscribe(mRestData.getLoadmore(url)
             .subscribe(new DefaultObserver<Khoso>() {

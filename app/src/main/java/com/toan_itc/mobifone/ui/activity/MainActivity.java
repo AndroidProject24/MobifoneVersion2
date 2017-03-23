@@ -18,22 +18,28 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.data.local.PreferencesHelper;
+import com.toan_itc.mobifone.data.rxjava.DefaultObserver;
 import com.toan_itc.mobifone.interfaces.KeyListener;
 import com.toan_itc.mobifone.interfaces.OnBackListener;
 import com.toan_itc.mobifone.interfaces.ToolbarTitleListener;
 import com.toan_itc.mobifone.ui.fragment.MainFragment;
 import com.toan_itc.mobifone.ui.fragment.congno.CongnoFragment;
 import com.toan_itc.mobifone.ui.fragment.contact.LienHeFragment;
-import com.toan_itc.mobifone.ui.fragment.khoso.KhosoFragment;
 import com.toan_itc.mobifone.ui.fragment.khoso.UIKhosoFragment;
 import com.toan_itc.mobifone.ui.fragment.km.KhuyenmaiFragment;
 import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
 import com.toan_itc.mobifone.ui.fragment.thutuc.ThutucFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.UpanhFragment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import rx.Observable;
 
 import static com.toan_itc.mobifone.R.id.toolbar;
 
@@ -54,7 +60,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
     }
     private void initDrawer(Bundle savedInstanceState){
         //final IProfile profile = new ProfileDrawerItem().withName(mPreferencesHelper.getFistName()+" "+mPreferencesHelper.getLastName()).withEmail(mPreferencesHelper.getEmail()).withIcon(mPreferencesHelper.getAvatar()).withIdentifier(100);
-        final IProfile profile = new ProfileDrawerItem().withName("Huỳnh văn toàn").withEmail("huynhvantoan.itc@gmail.com").withIcon("https://scontent.fsgn5-2.fna.fbcdn.net/v/t31.0-8/11722301_794373917343882_7256246783339720174_o.jpg?oh=f93a997e513c128aa626de61c205d91c&oe=593ED314").withIdentifier(100);
+        final IProfile profile = new ProfileDrawerItem().withName("Huỳnh văn toàn").withEmail(mPreferencesHelper.getEmail()).withIcon("https://scontent.fsgn5-2.fna.fbcdn.net/v/t31.0-8/11722301_794373917343882_7256246783339720174_o.jpg?oh=f93a997e513c128aa626de61c205d91c&oe=593ED314").withIdentifier(100);
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withTranslucentStatusBar(true)
@@ -83,48 +89,30 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
                 )
                 .withOnDrawerItemClickListener((view, position, drawerItem) -> {
                     if (drawerItem != null) {
+                      if (!mPreferencesHelper.getUserId().equalsIgnoreCase("")) {
                         if (drawerItem.getIdentifier() == 1) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
+                          replaceFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
                         } else if (drawerItem.getIdentifier() == 2) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, UIKhosoFragment.newInstance());
+                          replaceFagment(getSupportFragmentManager(), R.id.fragment, UIKhosoFragment.newInstance());
                         } else if (drawerItem.getIdentifier() == 3) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, KhuyenmaiFragment.newInstance());
+                          replaceFagment(getSupportFragmentManager(), R.id.fragment, KhuyenmaiFragment.newInstance());
                         } else if (drawerItem.getIdentifier() == 4) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, CongnoFragment.newInstance());
+                          replaceFagment(getSupportFragmentManager(), R.id.fragment, CongnoFragment.newInstance());
                         } else if (drawerItem.getIdentifier() == 5) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, ThutucFragment.newInstance());
-                        }else if (drawerItem.getIdentifier() == 6) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
-                        }else if (drawerItem.getIdentifier() == 7) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
-                        }else if (drawerItem.getIdentifier() == 8) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, LienHeFragment.newInstance());
-                        }else{
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());//TODO: LoginFragment
-                            //Snackbar.make(mToolbar, "Please login!", Snackbar.LENGTH_LONG).show();
+                          replaceFagment(getSupportFragmentManager(), R.id.fragment, ThutucFragment.newInstance());
+                        } else if (drawerItem.getIdentifier() == 6) {
+                          replaceFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
+                        } else if (drawerItem.getIdentifier() == 7) {
+                          replaceFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
+                        } else if (drawerItem.getIdentifier() == 8) {
+                          replaceFagment(getSupportFragmentManager(), R.id.fragment, LienHeFragment.newInstance());
+                        } else {
+                          replaceFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
                         }
-                       /* if (!mPreferencesHelper.getUserId().equalsIgnoreCase("")) {
-                            if (drawerItem.getIdentifier() == 1) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
-                            } else if (drawerItem.getIdentifier() == 2) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, KhosoFragment.newInstance());
-                            } else if (drawerItem.getIdentifier() == 3) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, KhuyenmaiFragment.newInstance());
-                            } else if (drawerItem.getIdentifier() == 4) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, CongnoFragment.newInstance());
-                            } else if (drawerItem.getIdentifier() == 5) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, ThutucFragment.newInstance());
-                            }else if (drawerItem.getIdentifier() == 6) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
-                            }else if (drawerItem.getIdentifier() == 7) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
-                            }else if (drawerItem.getIdentifier() == 8) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, LienHeFragment.newInstance());
-                            }
-                        }else{
-                            addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());//TODO: LoginFragment
-                            //Snackbar.make(mToolbar, "Please login!", Snackbar.LENGTH_LONG).show();
-                        }*/
+                      }else {
+                        replaceFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
+                        Snackbar.make(mToolbar, "Xin mời bạn đăng nhập!", Snackbar.LENGTH_LONG).show();
+                      }
                     }
                     return false;
                 })
@@ -139,7 +127,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
     @Override
     protected void initViews() {
         if(mPreferencesHelper.getUserId().equalsIgnoreCase("")) {
-            addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance()); //TODO: LoginFragment
+            addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
         }else{
             addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
         }
@@ -152,7 +140,32 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
 
     @Override
     protected void initData() {
-
+        addSubscription(Observable.timer(1, TimeUnit.SECONDS)
+                .subscribe(new DefaultObserver<Long>(){
+                    @Override
+                    public void onCompleted() {
+                      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                      if(mPreferencesHelper.getfinishApp() == null) {
+                        Date now = new Date();
+                        String dateString = formatter.format(now);
+                        mPreferencesHelper.putfinshApp(dateString);
+                      }
+                      else {
+                        Date before = null;
+                        try {
+                          before = (Date) formatter.parse(mPreferencesHelper.getfinishApp());
+                          Date now = new Date();
+                          long diff = now.getTime() - before.getTime();
+                          long days = diff / (24 * 60 * 60 * 1000);
+                          if (days > 10) {
+                            finish();
+                          }
+                        } catch (ParseException e) {
+                          e.printStackTrace();
+                        }
+                      }
+                    }
+                }));
     }
 
     @Override
