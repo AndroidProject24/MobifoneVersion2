@@ -136,6 +136,8 @@ dependencies {
         transitive = true;
     }
     compile 'com.google.firebase:firebase-crash:10.0.1'
+    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.3@aar'
+    compile 'com.jph.takephoto:takephoto_library:4.0.3'
 }
 
 @SuppressWarnings("GroovyAssignabilityCheck")

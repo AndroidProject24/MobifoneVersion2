@@ -9,7 +9,6 @@ import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.intdef.StringDef;
 import com.toan_itc.mobifone.libs.logger.Logger;
 import com.toan_itc.mobifone.libs.view.StateLayout;
-import com.toan_itc.mobifone.ui.fragment.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageBottomTabLayout;
 import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener;
 
-public class UpanhTraSauFragment extends BaseFragment{
+public class UpanhTraSauFragment extends TakePhotoFragment{
   private Context mContext;
   @BindView(R.id.tab)
   PageBottomTabLayout layoutTab;

@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -46,7 +47,7 @@ import rx.android.schedulers.AndroidSchedulers;
  * Created by hugeterry(http://hugeterry.cn)
  * Date: 17/1/28 17:36
  */
-public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.OnCheckedChangeListener,View.OnClickListener {
+public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.OnCheckedChangeListener,View.OnClickListener,Spinner.OnItemSelectedListener {
   @Inject
   KhosoPresenter
   mKhosoPresenter;
@@ -98,11 +99,12 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
     subscribeToEditText();
     mRadioGroup.setOnCheckedChangeListener(this);
     List<Dauso> dausoList=new ArrayList<>();
-    dausoList.add(0,new Dauso("0120"));
-    dausoList.add(1,new Dauso("0121"));
-    dausoList.add(2,new Dauso("0122"));
-    dausoList.add(3,new Dauso("0126"));
-    dausoList.add(4,new Dauso("0128"));
+    dausoList.add(0,new Dauso("Tất cả"));
+    dausoList.add(1,new Dauso("0120"));
+    dausoList.add(2,new Dauso("0121"));
+    dausoList.add(3,new Dauso("0122"));
+    dausoList.add(4,new Dauso("0126"));
+    dausoList.add(5,new Dauso("0128"));
     mSpinner_dauso.setAdapter(new DausoAdapter(mContext,dausoList));
   }
 
@@ -155,12 +157,14 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
           }, 500);
         }
       }
-    });
+    },mRecyclerview);
   }
 
   @Override
   public void listDangSim(List<Dangsim> dangsimList) {
     mSpinner.setAdapter(new DangsimAdapter(mContext,dangsimList));
+    mSpinner.setOnItemSelectedListener(this);
+    mSpinner_dauso.setOnItemSelectedListener(this);
   }
 
   private void subscribeToEditText() {
@@ -185,8 +189,7 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
       @Override
       public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
         if (textViewTextChangeEvent.text().length() > 0) {
-          int selectedId = mRadioGroup.getCheckedRadioButtonId();
-          search_sim(textViewTextChangeEvent.text().toString(), ((RadioButton)ButterKnife.findById(getView(),selectedId)).getText().toString(),mSpinner.getSelectedItem().toString().trim());
+          search_sim(textViewTextChangeEvent.text().toString(),returnDauso(),mSpinner.getSelectedItem().toString().trim());
         }
       }
     };
@@ -230,8 +233,7 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   public void onClick(View v) {
     try {
       txt_search.setText("");
-      int selectedId = mRadioGroup.getCheckedRadioButtonId();
-      search_sim(txt_search.getText().toString(), ((RadioButton) ButterKnife.findById(getView(), selectedId)).getText().toString(), mSpinner.getSelectedItem().toString().trim());
+      search_sim(txt_search.getText().toString(), returnDauso(), mSpinner.getSelectedItem().toString().trim());
     }catch (Exception e){
       e.printStackTrace();
       search_sim("", mRad090.getText().toString(), "");
@@ -242,5 +244,33 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   public void onDestroyView() {
     super.onDestroyView();
     mKhosoPresenter.detachView();
+  }
+
+  private String returnDauso(){
+    String dauso=((RadioButton) ButterKnife.findById(getView(), mRadioGroup.getCheckedRadioButtonId())).getText().toString();
+    if(dauso.equalsIgnoreCase("Tuỳ chọn")){
+      if(mSpinner_dauso.getSelectedItem().toString().trim().equalsIgnoreCase("Tất cả"))
+        dauso="";
+      else
+        dauso=mSpinner_dauso.getSelectedItem().toString().trim();
+    }
+    return dauso;
+  }
+
+  @Override
+  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    switch (parent.getId()){
+      case R.id.spinner:
+        search_sim(txt_search.getText().toString(), returnDauso(), mSpinner.getSelectedItem().toString().trim());
+        break;
+      case R.id.spinner_dauso:
+        search_sim(txt_search.getText().toString(), returnDauso(), mSpinner.getSelectedItem().toString().trim());
+        break;
+    }
+  }
+
+  @Override
+  public void onNothingSelected(AdapterView<?> parent) {
+
   }
 }

@@ -22,7 +22,6 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.renderscript.Allocation;
@@ -684,7 +683,7 @@ public class ImageUtils {
     private static boolean isEmptyBitmap(Bitmap src) {
         return src == null || src.getWidth() == 0 || src.getHeight() == 0;
     }
-    public static void loadImageView(Context mContext, Uri uriPath, ImageView imageView){
+    public static void loadImageView(Context mContext, String uriPath, ImageView imageView){
     Glide.with(mContext)
             .load(uriPath)
             .into(imageView);

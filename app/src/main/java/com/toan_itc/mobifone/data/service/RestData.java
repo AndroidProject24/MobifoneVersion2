@@ -68,8 +68,8 @@ public class RestData {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
   }
-  public Observable<Login> changePassword(String passOld,String passNew) {
-    return mRestApi.changePassword(passOld,passNew)
+  public Observable<Login> changePassword(String auth_code,String user,String id,String passOld,String passNew) {
+    return mRestApi.changePassword(auth_code,user,id,passOld,passNew)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
   }

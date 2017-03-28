@@ -1,6 +1,7 @@
 package com.toan_itc.mobifone.data.service;
 
 
+import android.content.Context;
 import android.util.Log;
 
 import com.ihsanbal.logging.Level;
@@ -19,8 +20,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Date: 28/05/2016
  */
 public class RestClient {
-    public static RestApi sRestClient() {
-        OkHttpClient okHttpClient = makeOkHttpClient(makeLoggingInterceptor());
+    public static RestApi sRestClient(Context context) {
+        OkHttpClient okHttpClient = makeOkHttpClient(context,makeLoggingInterceptor());
         return sRestClient(okHttpClient);
     }
 
@@ -34,7 +35,7 @@ public class RestClient {
         return retrofit.create(RestApi.class);
     }
 
-    private static OkHttpClient makeOkHttpClient(LoggingInterceptor httpLoggingInterceptor) {
+    private static OkHttpClient makeOkHttpClient(Context context,LoggingInterceptor httpLoggingInterceptor) {
        // File cacheFile= new File(context.getCacheDir(), Constant.HTTP_CACHE);
        // Cache cache = new Cache(cacheFile, 1024 * 1024 * 100);
         return new OkHttpClient.Builder()

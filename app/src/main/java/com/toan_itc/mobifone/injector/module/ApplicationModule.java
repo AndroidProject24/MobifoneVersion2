@@ -5,8 +5,6 @@ import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.data.rxjava.RxBus;
 import com.toan_itc.mobifone.data.service.RestApi;
 import com.toan_itc.mobifone.data.service.RestClient;
-import com.toan_itc.mobifone.data.service.executor.CountingRequestBody;
-import com.toan_itc.mobifone.data.service.executor.ProgressListener;
 
 import javax.inject.Singleton;
 
@@ -30,7 +28,7 @@ public class ApplicationModule {
   @Provides
   @Singleton
   RestApi mRestApi() {
-    return RestClient.sRestClient();
+    return RestClient.sRestClient(application);
   }
 
   @Provides

@@ -67,6 +67,9 @@
     <string name="a_ch1">Địa chỉ:</string>
     <string name="btn_register">Đăng ký</string>
     <string name="hint_et_email">Email</string>
+    <string name="hint_et_phone">Phone</string>
+    <string name="hint_et_name_fist">Tên </string>
+    <string name="hint_et_name_last">Họ và tên đệm</string>
     <string name="hint_et_pass">Password</string>
     <string name="pass_old">Mật khẩu cũ</string>
     <string name="pass_new">Mật khẩu mới</string>
@@ -74,8 +77,9 @@
     <string name="checkbox_remember">Ghi nhớ</string>
     <string name="btn_login">Đăng nhập</string>
     <string name="tv_restore">Quên mật khẩu?</string>
-    <string name="hint_et_name">Tên</string>
+    <string name="hint_et_name">Tên đăng nhập</string>
     <string name="tv_register">Đăng ký</string>
+    <string name="btn_updateProfile">Cập nhật Profile</string>
     <string name="btn_restore">Lấy lại mật khẩu</string>
     <string name="chupthuvien">Thư viện</string>
     <string name="chupcamera">Máy ảnh</string>
@@ -83,10 +87,10 @@
     <string name="no_internet">No Internet!</string>
     <string name="are_you_online_please_check_your_device_connection_settings">Are you online? Please check your device connection settings.</string>
     <string name="msg_exit">Bấm Back lần nữa để thoát ứng dụng!</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_email">Mời bạn nhập đúng Email</string>
+    <string name="error_invalid_password">Mật khẩu không được để trống</string>
+    <string name="error_incorrect_password">Mật khẩu quá ngắn </string>
+    <string name="error_field_required">Không được để trống</string>
     <string name="home_txt_hint_search">Nhập số sim bạn cần</string>
 
     <string name="common_empty_msg">Oops, failed to resolve data\nPlease hit the screen and try again~</string>
@@ -100,4 +104,10 @@
     <string name="up_anh">Úp ảnh</string>
 
     <string name="All">Tất cả</string>
+
+    <string name="album_view">Album</string>
+    <string name="image_view">Danh sách ảnh</string>
+    <string name="add">Chọn</string>
+    <string name="selected">đã chọn</string>
+    <string name="limit_exceeded"> %d ảnh</string>
 </resources>

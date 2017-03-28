@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.fernandocejas.frodo.core.checks.Preconditions;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.model.login.Login;
@@ -22,9 +23,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 import static com.toan_itc.mobifone.utils.Utils.isEmailValid;
-import static com.toan_itc.mobifone.utils.Utils.isPasswordValid;
 
 /**
  * Created by Toan.IT
@@ -32,79 +33,94 @@ import static com.toan_itc.mobifone.utils.Utils.isPasswordValid;
  */
 
 public class UpdateProfileFragment extends BaseFragment implements LoginView {
-    @Inject
-    LoginPresenter
-    mRegisterPresenter;
-    @BindView(R.id.etEmail)
-    TextInputEditText mEtEmail;
-    @BindView(R.id.etName)
-    TextInputEditText mEtName;
-    @BindView(R.id.etPassword)
-    TextInputEditText mEtPassword;
-    @BindView(R.id.btnRegister)
-    Button mBtnRegister;
-    @BindView(R.id.layout_email)
-    TextInputLayout mLayoutEmail;
-    @BindView(R.id.layout_pass)
-    TextInputLayout mLayoutPass;
-    @BindView(R.id.stateLayout)
-    ViewGroup stateLayout;
-    private Context mContext;
-    public static UpdateProfileFragment newInstance() {
-        return new UpdateProfileFragment();
-    }
+  @Inject
+  LoginPresenter
+          mLoginPresenter;
+  @BindView(R.id.stateLayout)
+  ViewGroup stateLayout;
+  @BindView(R.id.etName)
+  TextInputEditText mEtName;
+  @BindView(R.id.layout_name)
+  TextInputLayout mLayoutName;
+  @BindView(R.id.etEmail)
+  TextInputEditText mEtEmail;
+  @BindView(R.id.layout_email)
+  TextInputLayout mLayoutEmail;
+  @BindView(R.id.etPhone)
+  TextInputEditText mEtPhone;
+  @BindView(R.id.layout_phone)
+  TextInputLayout mLayoutPhone;
+  @BindView(R.id.etNameFist)
+  TextInputEditText mEtNameFist;
+  @BindView(R.id.layout_nameFist)
+  TextInputLayout mLayoutNameFist;
+  @BindView(R.id.etNameLast)
+  TextInputEditText mEtNameLast;
+  @BindView(R.id.btnUpdateProfile)
+  Button mBtnUpdateProfile;
+  Unbinder unbinder;
+  private Context mContext;
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext=context;
-    }
+  public static UpdateProfileFragment newInstance() {
+    return new UpdateProfileFragment();
+  }
 
-    @Override
-    protected String getTAG() {
-        return this.getClass().getSimpleName();
-    }
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    mContext = context;
+  }
 
-    @Override
-    protected int setLayoutResourceID() {
-        return R.layout.register_fragment;
-    }
+  @Override
+  protected String getTAG() {
+    return this.getClass().getSimpleName();
+  }
 
-    @Override
-    protected void initData() {
-        mEtPassword.setOnFocusChangeListener((v, hasFocus) -> {
-            if(hasFocus){
-               // mRegisterPresenter.checkEmail(mEtEmail.getText().toString());
-            }
-        });
-    }
+  @Override
+  protected int setLayoutResourceID() {
+    return R.layout.update_profile_fragment;
+  }
 
-    @Override
-    protected StateLayout getLoadingTargetView() {
-        return ButterKnife.findById(getActivity(),R.id.stateLayout);
-    }
+  @Override
+  protected void initData() {
 
-    @Override
-    protected void initViews() {
-        ((BaseActivity) getActivity()).getActivityComponent().inject(this);
-        mRegisterPresenter.attachView(this);
-    }
+  }
 
-    @Override
-    public void login(Login login) {
+  @Override
+  protected StateLayout getLoadingTargetView() {
+    return ButterKnife.findById(getActivity(), R.id.stateLayout);
+  }
 
-    }
+  @Override
+  protected void initViews() {
+    ((BaseActivity) getActivity()).getActivityComponent().inject(this);
+    mLoginPresenter.attachView(this);
+  }
 
-    @Override
-    public void register(Register register) {
+  @Override
+  public void login(Login login) {
 
-    }
+  }
 
+  @Override
+  public void register(Register register) {
 
-    @Override
-    public void login_error() {
+  }
 
-    }
+  @Override
+  public void login_error(String error) {
+
+  }
+
+  @Override
+  public void changePass(String data) {
+
+  }
+
+  @Override
+  public void updateProfile(boolean ok) {
+
+  }
 
     /*@Override
     public void register(Register register) {
@@ -116,43 +132,48 @@ public class UpdateProfileFragment extends BaseFragment implements LoginView {
         Snackbar.make(mEtEmail,"Email emty or exist!",Snackbar.LENGTH_LONG).show();
     }*/
 
-    @OnClick(R.id.btnRegister)
-    void user_signup_button(){
-        check_Register();
+  @OnClick(R.id.btnUpdateProfile)
+  void btnUpdateProfile() {
+    check_Update();
+  }
+
+  @SuppressWarnings("ConstantConditions")
+  private void check_Update() {
+    try {
+      mLayoutEmail.setError(null);
+      mLayoutName.setError(null);
+      String email = mEtEmail.getText().toString();
+      String name = mEtName.getText().toString();
+
+      boolean cancel = false;
+      View focusView = null;
+      if (TextUtils.isEmpty(email)) {
+        mLayoutEmail.setErrorEnabled(true);
+        mLayoutEmail.setError(getString(R.string.error_field_required));
+        focusView = mLayoutEmail;
+        cancel = true;
+      } else if (!isEmailValid(email)) {
+        mLayoutEmail.setErrorEnabled(true);
+        mLayoutEmail.setError(getString(R.string.error_invalid_email));
+        focusView = mLayoutEmail;
+        cancel = true;
+      }
+      if (TextUtils.isEmpty(name)) {
+        mLayoutName.setErrorEnabled(true);
+        mLayoutName.setError(getString(R.string.error_field_required));
+        focusView = mLayoutName;
+        cancel = true;
+      }
+      if (cancel) {
+        focusView.requestFocus();
+      } else {
+        mLayoutName.setErrorEnabled(false);
+        mLayoutEmail.setErrorEnabled(false);
+        mLoginPresenter.updateProfile(Preconditions.checkNotNull(mLoginPresenter.getPreferencesHelper().getJsonLogin()).get_$0().getAuth_code(),name, Preconditions.checkNotNull(mLoginPresenter.getPreferencesHelper().getJsonLogin()).get_$0().getId(), email,mEtPhone.getText().toString(),mEtNameFist.getText().toString(),mEtNameLast.getText().toString());
+      }
+    }catch (Exception e){
+      e.printStackTrace();
     }
+  }
 
-    private void check_Register() {
-        mLayoutEmail.setError(null);
-        mLayoutPass.setError(null);
-        String email = mEtEmail.getText().toString();
-        String password = mEtPassword.getText().toString();
-
-        boolean cancel = false;
-        View focusView = null;
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mLayoutPass.setErrorEnabled(true);
-            mLayoutPass.setError(getString(R.string.error_invalid_password));
-            focusView = mLayoutPass;
-            cancel = true;
-        }
-        if (TextUtils.isEmpty(email)) {
-            mLayoutEmail.setErrorEnabled(true);
-            mLayoutEmail.setError(getString(R.string.error_field_required));
-            focusView = mLayoutEmail;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mLayoutEmail.setErrorEnabled(true);
-            mLayoutEmail.setError(getString(R.string.error_invalid_email));
-            focusView = mLayoutEmail;
-            cancel = true;
-        }
-
-        if (cancel) {
-            focusView.requestFocus();
-        } else {
-            mLayoutEmail.setErrorEnabled(false);
-            mLayoutPass.setErrorEnabled(false);
-            //mRegisterPresenter.register(mEmailSignUp.getText().toString(), mPasswordSignUp.getText().toString(), Constant.SHOP_ID);
-        }
-    }
 }

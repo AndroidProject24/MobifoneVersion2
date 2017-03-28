@@ -23,9 +23,9 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
         this.mPreferencesHelper=preferencesHelper;
     }
 
-    public void register(String email,String password,String shopId){
+    public void register(String email,String user,String password){
         getMvpView().showLoading();
-        mRestData.getRegister(email,password,shopId)
+        mRestData.getRegister(email, user, password)
                 .subscribe(new Subscriber<Register>() {
                     @Override
                     public void onCompleted() {
@@ -42,10 +42,10 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
                     @Override
                     public void onNext(Register register) {
                         try {
-                          if(register.getError()==0)
+                          if(register.getError()==0) {
                             getMvpView().register(register);
-                          else
-                            getMvpView().showError("Đăng ký lỗi!");
+                          }else
+                            getMvpView().registerError(register.getReason());
                         }catch (Exception e){
                             e.printStackTrace();
                         }

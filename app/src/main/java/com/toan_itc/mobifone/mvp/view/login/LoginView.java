@@ -10,9 +10,13 @@ import com.toan_itc.mobifone.mvp.view.base.BaseView;
  */
 public interface LoginView extends BaseView {
 
-    void login(Login login);
+  void login(Login login);
 
-    void register(Register register);
+  void register(Register register);
 
-    void login_error();
+  void login_error(String error);
+
+  void changePass(String data);
+
+  void updateProfile(boolean OK);
 }

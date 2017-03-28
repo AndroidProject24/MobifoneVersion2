@@ -43,10 +43,9 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                         try {
                             if(login.getError()==0) {
                                 getMvpView().login(login);
-                                mPreferencesHelper.putUserId(login.get_$0().getId());
-                                mPreferencesHelper.putEmail(login.get_$0().getUsername());
+                                mPreferencesHelper.putJsonLogin(login);
                             }else
-                                getMvpView().login_error();
+                                getMvpView().login_error(login.getReason());
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -54,9 +53,9 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                 });
     }
 
-    public void changePassword(String passOld,String passNew){
+    public void changePassword(String authCode,String user,String id,String passOld,String passNew){
         getMvpView().showLoading();
-        mRestData.changePassword(passOld,passNew)
+        mRestData.changePassword(authCode,user,id,passOld,passNew)
                 .subscribe(new Subscriber<Login>() {
                     @Override
                     public void onCompleted() {
@@ -73,7 +72,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                     @Override
                     public void onNext(Login shopses) {
                         try {
-                            getMvpView().login(null);
+                            getMvpView().changePass(null);
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -99,9 +98,13 @@ public class LoginPresenter extends BasePresenter<LoginView> {
               }
 
               @Override
-              public void onNext(Login shopses) {
+              public void onNext(Login login) {
                 try {
-                  getMvpView().login(null);
+                  if(login.getError()==0) {
+                    mPreferencesHelper.putJsonLogin(login);
+                    getMvpView().updateProfile(true);
+                  }else
+                    getMvpView().updateProfile(false);
                 }catch (Exception e){
                   e.printStackTrace();
                 }
@@ -109,4 +112,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
             });
   }
 
+  public PreferencesHelper getPreferencesHelper(){
+    return mPreferencesHelper;
+  }
 }

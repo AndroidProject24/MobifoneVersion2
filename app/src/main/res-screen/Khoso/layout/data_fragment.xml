@@ -23,17 +23,24 @@
         android:spinnerMode="dropdown"/>
     <RadioGroup
         android:id="@+id/radio_group"
-        android:layout_width="400dp"
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_search"
         android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rad_opition"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:checked="true"
+            android:text="Tuỳ chọn"/>
 
         <RadioButton
             android:id="@+id/rad_090"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:checked="true"
             android:text="090"/>
 
         <RadioButton
@@ -52,7 +59,7 @@
         <Spinner
             android:id="@+id/spinner_dauso"
             android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:layout_height="40dp"
             android:spinnerMode="dropdown"/>
     </RadioGroup>

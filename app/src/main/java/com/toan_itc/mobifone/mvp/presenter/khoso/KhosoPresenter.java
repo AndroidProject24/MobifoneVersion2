@@ -44,7 +44,7 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
               public void onNext(Khoso khoso) {
                 try {
                   getMvpView().hideLoading();
-                  if(khoso!=null&&!khoso.getData().isEmpty()) {
+                  if(khoso!=null) {
                     getMvpView().listSim(khoso);
                   }else
                     getMvpView().showEmptyViewAction("no sim found!",onClickListener);

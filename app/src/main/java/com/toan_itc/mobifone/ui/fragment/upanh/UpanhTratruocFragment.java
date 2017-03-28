@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.view.Gravity;
@@ -16,18 +17,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.github.clans.fab.FloatingActionButton;
+import com.jph.takephoto.app.TakePhoto;
+import com.jph.takephoto.compress.CompressConfig;
+import com.jph.takephoto.model.CropOptions;
+import com.jph.takephoto.model.TResult;
+import com.jph.takephoto.model.TakePhotoOptions;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.intdef.BitmapDef;
 import com.toan_itc.mobifone.intdef.StringDef;
 import com.toan_itc.mobifone.libs.logger.Logger;
-import com.toan_itc.mobifone.libs.takephoto.RxPhoto;
-import com.toan_itc.mobifone.libs.takephoto.shared.TypeRequest;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.presenter.upanh.UpanhPresenter;
 import com.toan_itc.mobifone.mvp.view.upanh.UpanhView;
 import com.toan_itc.mobifone.ui.activity.BaseActivity;
-import com.toan_itc.mobifone.ui.fragment.BaseFragment;
-import com.toan_itc.mobifone.utils.UploadUtils;
+import com.toan_itc.mobifone.utils.FileUtils;
 
 import java.io.File;
 
@@ -39,7 +42,7 @@ import butterknife.OnClick;
 
 import static com.toan_itc.mobifone.utils.ImageUtils.loadImageView;
 
-public class UpanhTratruocFragment extends BaseFragment implements UpanhView {
+public class UpanhTratruocFragment extends TakePhotoFragment implements UpanhView{
   @Inject
   UpanhPresenter
   mUpanhPresenter;
@@ -55,6 +58,9 @@ public class UpanhTratruocFragment extends BaseFragment implements UpanhView {
   @BindView(R.id.fab)
   FloatingActionButton mFloatingActionButton;
   private File requestBody=null,requestBody1=null,requestBody2=null;
+  private TakePhoto mTakePhoto;
+  private Uri imageUri;
+  private int index=0;
   public static UpanhTratruocFragment newInstance(int type) {
     UpanhTratruocFragment fra = new UpanhTratruocFragment();
     Bundle bundle = new Bundle();
@@ -87,7 +93,7 @@ public class UpanhTratruocFragment extends BaseFragment implements UpanhView {
 
   @Override
   protected void initData() {
-
+    mTakePhoto=getTakePhoto();
   }
 
   @Override
@@ -127,29 +133,49 @@ public class UpanhTratruocFragment extends BaseFragment implements UpanhView {
     Button huy = (Button) dialog.findViewById(R.id.huy);
     camera.setOnClickListener(v -> {
       dialog.dismiss();
-      subscription.unsubscribe();
-      subscription=RxPhoto.requestUri(mContext, TypeRequest.CAMERA)
-              .doOnNext((uri) -> returnUri(index,uri))
-              .subscribe();
+      this.index=index;
+      initTakePhoto();
+      mTakePhoto.onPickFromCaptureWithCrop(imageUri,getCropOptions());
     });
     thuvien.setOnClickListener(v -> {
       dialog.dismiss();
-      subscription.unsubscribe();
-      subscription=RxPhoto.requestUri(mContext, TypeRequest.GALLERY)
-              .doOnNext((uri) -> returnUri(index,uri))
-              .subscribe();
-
+      this.index=index;
+      initTakePhoto();
+      mTakePhoto.onPickFromGalleryWithCrop(imageUri,getCropOptions());
     });
     huy.setOnClickListener(v -> dialog.dismiss());
     dialog.show();
   }
 
-  private void returnUri(int index, Uri image){
+  private void initTakePhoto(){
+    File file=new File(Environment.getExternalStorageDirectory(), "/temp/"+System.currentTimeMillis() + ".jpg");
+    if (!file.getParentFile().exists())file.getParentFile().mkdirs();
+    imageUri = Uri.fromFile(file);
+    configCompress(mTakePhoto);
+    TakePhotoOptions.Builder builder=new TakePhotoOptions.Builder();
+    builder.setWithOwnGallery(true);
+    mTakePhoto.setTakePhotoOptions(builder.create());
+  }
+  private void configCompress(TakePhoto takePhoto){
+    CompressConfig config=new CompressConfig.Builder()
+            .setMaxSize(102400)
+            .setMaxPixel(800)
+            .enableReserveRaw(false)
+            .create();
+    takePhoto.onEnableCompress(config,true);
+  }
+  private CropOptions getCropOptions(){
+    CropOptions.Builder builder=new CropOptions.Builder();
+    builder.setOutputX(800).setOutputY(600);
+    builder.setWithOwnCrop(true);
+    return builder.create();
+  }
+  private void returnData(String image){
     switch (index){
       case BitmapDef.CMND1:
         try {
           loadImageView(mContext,image,imgCmndMattruoc);
-          requestBody = UploadUtils.prepareFilePart(mContext,image);
+          requestBody = FileUtils.getFileByPath(image);
         }catch (Exception e){
           e.printStackTrace();
         }
@@ -157,7 +183,7 @@ public class UpanhTratruocFragment extends BaseFragment implements UpanhView {
       case BitmapDef.CMND2:
         try {
           loadImageView(mContext,image,imgCmndMatsau);
-          requestBody1 = UploadUtils.prepareFilePart(mContext,image);
+          requestBody1 = FileUtils.getFileByPath(image);
         }catch (Exception e){
           e.printStackTrace();
         }
@@ -165,7 +191,7 @@ public class UpanhTratruocFragment extends BaseFragment implements UpanhView {
       case BitmapDef.PL4:
         try {
           loadImageView(mContext,image,imgPhuluc);
-          requestBody2 = UploadUtils.prepareFilePart(mContext,image);
+          requestBody2 = FileUtils.getFileByPath(image);
         }catch (Exception e){
           e.printStackTrace();
         }
@@ -201,6 +227,13 @@ public class UpanhTratruocFragment extends BaseFragment implements UpanhView {
   public void onDestroyView() {
     super.onDestroyView();
     mUpanhPresenter.detachView();
+  }
+
+  @Override
+  public void takeSuccess(TResult result) {
+    super.takeSuccess(result);
+    Logger.e("takeSuccess：" + result.getImage().getCompressPath());
+    returnData(result.getImage().getCompressPath());
   }
 }
 

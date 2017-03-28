@@ -10,4 +10,5 @@ import com.toan_itc.mobifone.mvp.view.base.BaseView;
  */
 public interface RegisterView extends BaseView {
     void register(Register register);
+     void registerError(String error);
 }

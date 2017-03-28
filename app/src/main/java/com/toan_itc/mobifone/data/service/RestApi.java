@@ -10,6 +10,8 @@ import com.toan_itc.mobifone.mvp.model.upanh.Upanh;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -38,20 +40,24 @@ public interface RestApi {
     Observable<JsonArray<Dangsim>> getDangSim(@Query("noibat") String noibat);
 
     /*LOGIN*/
+    @FormUrlEncoded
     @POST("dangnhap")
-    Observable<Login> getLogin(@Query("user") String user, @Query("pass") String pass);
+    Observable<Login> getLogin(@Field("user") String user, @Field("pass") String pass);
 
+    @FormUrlEncoded
     @POST("edituser")
-    Observable<Login> changePassword(@Query("old") String passOld, @Query("new") String passNew);
+    Observable<Login> changePassword(@Field("auth_code") String auth_code,@Field("username") String username,@Field("id") String id,@Field("old") String passOld, @Field("new") String passNew);
 
     /*REGISTER*/
+    @FormUrlEncoded
     @POST("edituser")
-    Observable<Login> updateProfile(@Query("auth_code") String auth_code, @Query("username") String username,
-                                           @Query("id") String id, @Query("email") String email,@Query("phone") String phone,
-                                           @Query("first_name") String first_name, @Query("last_name") String last_name);
+    Observable<Login> updateProfile(@Field("auth_code") String auth_code, @Field("username") String username,
+                                           @Field("id") String id, @Query("email") String email,@Field("phone") String phone,
+                                           @Field("first_name") String first_name, @Field("last_name") String last_name);
 
-    @GET("dangkyuser")
-    Observable<Register> getRegister(@Query("email") String email, @Query("user") String user, @Query("password") String password);
+    @FormUrlEncoded
+    @POST("dangkyuser")
+    Observable<Register> getRegister(@Field("email") String email, @Field("user") String user, @Field("pass") String password);
 
     /*UPANH*/
     @Multipart

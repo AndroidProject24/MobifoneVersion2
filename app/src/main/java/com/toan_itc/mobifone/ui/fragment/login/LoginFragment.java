@@ -10,7 +10,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -43,8 +42,6 @@ public class LoginFragment extends BaseFragment implements LoginView {
   TextInputEditText mTxtEmail;
   @BindView(R.id.etPassword)
   TextInputEditText mPassword;
-  @BindView(R.id.checkboxRemember)
-  CheckBox checkboxRemember;
   @BindView(R.id.btnLogin)
   Button btnLogin;
   @BindView(R.id.tvRestore)
@@ -138,9 +135,14 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
       boolean cancel = false;
       View focusView = null;
-      if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+      if (TextUtils.isEmpty(password)) {
         layoutPass.setErrorEnabled(true);
         layoutPass.setError(getString(R.string.error_invalid_password));
+        focusView = layoutPass;
+        cancel = true;
+      }else if(!isPasswordValid(password)){
+        layoutPass.setErrorEnabled(true);
+        layoutPass.setError(getString(R.string.error_incorrect_password));
         focusView = layoutPass;
         cancel = true;
       }
@@ -165,7 +167,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
   @Override
   public void login(Login login) {
     if(login.get_$0().getUsername()!=null){
-      Snackbar.make(mLoginLayout,"Xin chào  "+login.get_$0().getUsername() +" đã đăng nhập thành công!",Snackbar.LENGTH_LONG).show();
+      Snackbar.make(mLoginLayout,"Xin chào "+login.get_$0().getUsername() +" đã đăng nhập thành công!",Snackbar.LENGTH_LONG).show();
     }
     replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
   }
@@ -176,9 +178,20 @@ public class LoginFragment extends BaseFragment implements LoginView {
   }
 
   @Override
-  public void login_error() {
-    Snackbar.make(mLoginLayout,"Login Fail!",Snackbar.LENGTH_LONG).show();
+  public void login_error(String error) {
+    Snackbar.make(mLoginLayout,error,Snackbar.LENGTH_LONG).show();
   }
+
+  @Override
+  public void changePass(String data) {
+
+  }
+
+  @Override
+  public void updateProfile(boolean OK) {
+
+  }
+
 
   @OnClick(R.id.tvRegister)
   void signUp(){

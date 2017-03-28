@@ -80,7 +80,7 @@ public class MainFragment extends BaseFragment {
       checkLogin(UpanhFragment.newInstance());
     }
     private void checkLogin(Fragment fragment){
-      if (!mPreferencesHelper.getUserId().equalsIgnoreCase(""))
+      if (mPreferencesHelper.getJsonLogin()!=null)
         replaceFagment(getFragmentManager(),R.id.fragment, fragment);
       else {
         replaceFagment(getFragmentManager(),R.id.fragment, LoginFragment.newInstance());
