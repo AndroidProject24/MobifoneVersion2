@@ -15,4 +15,7 @@ public interface KhosoView extends BaseView {
     void listSim(Khoso khoso);
 
     void listDangSim(List<Dangsim> dangsimList);
+
+    void emty(String message);
+
 }

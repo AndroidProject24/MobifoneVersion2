@@ -81,8 +81,7 @@ public class KhuyenmaiFragment extends BaseFragment{
   }
 
   private void initViewPager() {
-    mViewPager.setOffscreenPageLimit(3);
-    mViewPager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager(), mFragments, mTitles));
+    mViewPager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager(), mTitles));
   }
 
   @Override

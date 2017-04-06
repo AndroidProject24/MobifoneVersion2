@@ -1,18 +1,19 @@
 package com.toan_itc.mobifone.data.service;
 
+import com.toan_itc.mobifone.mvp.model.congno.Congno;
 import com.toan_itc.mobifone.mvp.model.khoso.Dangsim;
 import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
+import com.toan_itc.mobifone.mvp.model.login.Exit;
 import com.toan_itc.mobifone.mvp.model.login.Login;
 import com.toan_itc.mobifone.mvp.model.register.Register;
 import com.toan_itc.mobifone.mvp.model.theloai.Theloai;
 import com.toan_itc.mobifone.mvp.model.upanh.Upanh;
-
+import com.toan_itc.mobifone.mvp.model.vas.Goicuoc;
+import com.toan_itc.mobifone.mvp.model.vas.Vas;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import rx.Observable;
@@ -48,7 +49,7 @@ public class RestData {
             .map(dangsims -> {
               List<Dangsim> listSim=new ArrayList<Dangsim>();
               Dangsim dangsim=new Dangsim();
-              dangsim.setTenkey("1000");
+              dangsim.setTenkey("");
               dangsim.setTends("Tất cả");
               listSim.add(0,dangsim);
               for(Dangsim old: dangsims){
@@ -72,6 +73,12 @@ public class RestData {
     return mRestApi.changePassword(auth_code,user,id,passOld,passNew)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
+  }
+  //Exit
+  public Observable<Exit> exitApp(String auth_code, String idUser) {
+    return mRestApi.exit(auth_code,idUser)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
   }
   //Register
   public Observable<Login> updateProfile(String auth_code,String username, String id,String email,
@@ -109,5 +116,24 @@ public class RestData {
             .map(data->data.data)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
+  }
+  //Congno
+  public Observable<Congno> getCongno(String auth_code, String idUser) {
+    return mRestApi.getCongno(auth_code,idUser)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+  //Vas
+  public Observable<List<Goicuoc>> getGoicuoc() {
+    return mRestApi.getGoiCuoc()
+        .map(data->data.data)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<Vas> registerVas(String sdt,String captcha,String magoi,String auth,String idUser) {
+    return mRestApi.getVas(auth,idUser,sdt,captcha,magoi)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
   }
 }

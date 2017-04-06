@@ -5,28 +5,29 @@
     android:id="@+id/stateLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal|bottom"
+    android:gravity="center"
     android:paddingBottom="20dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_khoso"
         android:layout_width="140dp"
         android:layout_height="130dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:elevation="100dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
         card_view:cardCornerRadius="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <ImageView
                 style="@style/style_image_main"
-                android:src="@mipmap/ic_sim"/>
+                android:src="@drawable/ic_sim"/>
 
             <TextView
                 style="@style/style_text_main"
@@ -48,11 +49,12 @@
             android:id="@+id/layout_thutuc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <ImageView
                 style="@style/style_image_main"
-                android:src="@mipmap/ic_thutuc2"/>
+                android:src="@drawable/ic_thutuc"/>
 
             <TextView
                 style="@style/style_text_main"
@@ -65,22 +67,23 @@
         android:layout_width="140dp"
         android:layout_height="130dp"
         android:layout_below="@+id/card_khoso"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:elevation="100dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
         card_view:cardCornerRadius="8dp">
 
         <LinearLayout
             android:id="@+id/layout_congno"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <ImageView
                 style="@style/style_image_main"
-                android:src="@mipmap/ic_congno"/>
+                android:src="@drawable/ic_congno"/>
 
             <TextView
                 style="@style/style_text_main"
@@ -104,13 +107,12 @@
             android:id="@+id/layout_ctkm"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/layout_khoso"
-            android:layout_toRightOf="@+id/layout_congno"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <ImageView
                 style="@style/style_image_main"
-                android:src="@mipmap/ic_khuyenmai2"/>
+                android:src="@drawable/ic_khuyenmai"/>
 
             <TextView
                 style="@style/style_text_main"
@@ -133,21 +135,51 @@
             android:id="@+id/layout_upanh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/layout_ctkm"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <ImageView
                 style="@style/style_image_main"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
                 android:adjustViewBounds="true"
-                android:src="@mipmap/ic_upload"/>
+                android:src="@drawable/ic_upload"/>
 
             <TextView
                 style="@style/style_text_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/up_anh"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_vas"
+        android:layout_width="140dp"
+        android:layout_height="130dp"
+        android:layout_alignRight="@+id/card_km"
+        android:layout_alignTop="@+id/card_upanh"
+        android:layout_below="@+id/card_km"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:elevation="100dp"
+        card_view:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:id="@+id/layout_vas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                style="@style/style_image_main"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_banvas"/>
+
+            <TextView
+                style="@style/style_text_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ban_vas"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </com.toan_itc.mobifone.libs.view.StateLayout>

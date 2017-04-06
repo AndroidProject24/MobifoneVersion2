@@ -43,6 +43,8 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                         try {
                             if(login.getError()==0) {
                                 getMvpView().login(login);
+                                mPreferencesHelper.putUserId(email);
+                                mPreferencesHelper.putUserPass(password);
                                 mPreferencesHelper.putJsonLogin(login);
                             }else
                                 getMvpView().login_error(login.getReason());

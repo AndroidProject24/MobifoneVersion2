@@ -8,7 +8,7 @@ public class Constant {
     public static final String SENDER_ID = "1087328519859";
     public static String SHOP_ID = "5";
     public static final String ANDROID_OS = "2";
-    public static final String URL_IMAGE="http://3.1m.yt/M3fP1zi.png";
+    public static final String URL_IMAGE="https://www.imageupload.co.uk/images/2017/04/04/logo_mobi.png";
     public static final String Package_type_Cash="2";
     public static final String Package_type_Prepaid="1";
     public static final String Prepaid_id="0";

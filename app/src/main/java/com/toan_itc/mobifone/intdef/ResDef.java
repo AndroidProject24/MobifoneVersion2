@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
 @android.support.annotation.IntDef({ResDef.MOBILE, ResDef.TABLET, ResDef.WEB})
 @Retention(RetentionPolicy.SOURCE)
 public @interface ResDef {
-  int MOBILE= R.mipmap.ic_upload;
+  int MOBILE= R.drawable.ic_upload;
   int TABLET= R.drawable.ic_arrow_white_24dp;
-  int WEB= R.drawable.ic_menu_camera;
+  int WEB= R.drawable.ic_banvas;
 }

@@ -14,6 +14,7 @@ import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
 import com.toan_itc.mobifone.ui.fragment.thutuc.ThutucFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.UpanhFragment;
 
+import com.toan_itc.mobifone.ui.fragment.vas.VasFragment;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
@@ -74,6 +75,12 @@ public class MainFragment extends BaseFragment {
     public void click_ctkm(){
       checkLogin(KhuyenmaiFragment.newInstance());
     }
+
+    @OnClick(R.id.card_vas)
+    public void click_vas(){
+      checkLogin(VasFragment.newInstance());
+    }
+
 
     @OnClick(R.id.card_upanh)
     public void click_upanh(){

@@ -3,8 +3,10 @@ package com.toan_itc.mobifone.ui.fragment.khoso;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -12,7 +14,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jakewharton.rxbinding.internal.Preconditions;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
@@ -20,6 +21,7 @@ import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.intdef.KhoSimIndexDef;
 import com.toan_itc.mobifone.intdef.KhosimDef;
 import com.toan_itc.mobifone.intdef.StringDef;
+import com.toan_itc.mobifone.libs.logger.Logger;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.model.khoso.Dangsim;
 import com.toan_itc.mobifone.mvp.model.khoso.Dauso;
@@ -47,7 +49,7 @@ import rx.android.schedulers.AndroidSchedulers;
  * Created by hugeterry(http://hugeterry.cn)
  * Date: 17/1/28 17:36
  */
-public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.OnCheckedChangeListener,View.OnClickListener,Spinner.OnItemSelectedListener {
+public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.OnCheckedChangeListener,Spinner.OnItemSelectedListener {
   @Inject
   KhosoPresenter
   mKhosoPresenter;
@@ -63,15 +65,16 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   RadioButton mRad089;
   @BindView(R.id.radio_group)
   RadioGroup mRadioGroup;
-  @BindView(R.id.spinner)
-  Spinner mSpinner;
+  @BindView(R.id.spinner) AppCompatSpinner mSpinner;
   @BindView(R.id.spinner_dauso)
-  Spinner mSpinner_dauso;
+  AppCompatSpinner mSpinner_dauso;
+  @BindView(R.id.stateLayout)
+  StateLayout mViewGroup;
   private KhosoAdapter mKhosoAdapter;
   private Context mContext;
-  private boolean isErr=false;
   private int mCurrentCounter=0;
   private Khoso mKhoso;
+  private boolean isFist=true;
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
@@ -98,14 +101,14 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
     mRecyclerview.setLayoutManager(new LinearLayoutManager(mContext));
     subscribeToEditText();
     mRadioGroup.setOnCheckedChangeListener(this);
-    List<Dauso> dausoList=new ArrayList<>();
-    dausoList.add(0,new Dauso("Tất cả"));
-    dausoList.add(1,new Dauso("0120"));
-    dausoList.add(2,new Dauso("0121"));
-    dausoList.add(3,new Dauso("0122"));
-    dausoList.add(4,new Dauso("0126"));
-    dausoList.add(5,new Dauso("0128"));
-    mSpinner_dauso.setAdapter(new DausoAdapter(mContext,dausoList));
+    List<Dauso> dausoList = new ArrayList<>();
+    dausoList.add(0, new Dauso("Tất cả"));
+    dausoList.add(1, new Dauso("0120"));
+    dausoList.add(2, new Dauso("0121"));
+    dausoList.add(3, new Dauso("0122"));
+    dausoList.add(4, new Dauso("0126"));
+    dausoList.add(5, new Dauso("0128"));
+    mSpinner_dauso.setAdapter(new DausoAdapter(mContext, dausoList));
   }
 
   @Override
@@ -115,49 +118,43 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
 
   @Override
   protected void initData() {
+    Logger.e(KhosimDef.SIM_DEP+"");
     mKhosoPresenter.dangSim("0");
-    search_sim("",mRad090.getText().toString(),"");
+    search_sim("", mRad090.getText().toString(), "");
   }
 
   @Override
   protected StateLayout getLoadingTargetView() {
-    return ButterKnife.findById(getActivity(),R.id.stateLayout);
+    return mViewGroup;
   }
 
   @Override
   public void listSim(Khoso khoso) {
-    mKhoso=khoso;
-    mKhosoAdapter = new KhosoAdapter(khoso.getData());
-    mRecyclerview.setAdapter(mKhosoAdapter);
-    mKhosoAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-      @Override public void onLoadMoreRequested() {
-        if (mKhoso != null && !mKhoso.getData().isEmpty()) {
-          mRecyclerview.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-              if (mCurrentCounter >= Integer.parseInt(mKhoso.getTotalrows())) {
-                //Data are all loaded.
-                mKhosoAdapter.loadMoreEnd();
-              } else {
-                if (isErr) {
-                  //Successfully get more data
-                  mKhosoAdapter.addData(mKhosoPresenter.loadMore(DataFragment.this,mKhoso.getPage().getNextLink()));
-                  mCurrentCounter = mKhosoAdapter.getData().size();
-                  mKhosoAdapter.loadMoreComplete();
-                } else {
-                  //Get more data failed
-                  isErr = true;
-                  Snackbar.make(mRecyclerview, getString(R.string.retry), Snackbar.LENGTH_LONG).show();
-                  mKhosoAdapter.loadMoreFail();
-
-                }
-              }
+    try {
+      isFist = false;
+      mKhoso = Preconditions.checkNotNull(khoso, "khoso not null!");
+      mKhosoAdapter = new KhosoAdapter(khoso.getData());
+      mRecyclerview.setAdapter(mKhosoAdapter);
+      mKhosoAdapter.setOnLoadMoreListener(() -> {
+        if (mKhoso.getData() != null) {
+          mRecyclerview.postDelayed(() -> {
+            if (mCurrentCounter >= Integer.parseInt(mKhoso.getTotalrows())) {
+              //Data are all loaded.
+              mKhosoAdapter.loadMoreEnd();
+            } else {
+              mKhosoAdapter.addData(mKhosoPresenter.loadMore(mKhoso.getPage().getNextLink()));
+              mCurrentCounter = mKhosoAdapter.getData().size();
+              mKhosoAdapter.loadMoreComplete();
             }
-
           }, 500);
+        } else {
+          Snackbar.make(mRecyclerview, getString(R.string.retry), Snackbar.LENGTH_LONG).show();
+          mKhosoAdapter.loadMoreFail();
         }
-      }
-    },mRecyclerview);
+      }, mRecyclerview);
+    }catch (Exception e){
+      e.printStackTrace();
+    }
   }
 
   @Override
@@ -165,6 +162,13 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
     mSpinner.setAdapter(new DangsimAdapter(mContext,dangsimList));
     mSpinner.setOnItemSelectedListener(this);
     mSpinner_dauso.setOnItemSelectedListener(this);
+  }
+
+  @Override
+  public void emty(String message) {
+    /*mKhosoAdapter.setNewData(null);
+    mRecyclerview.setAdapter(mKhosoAdapter);*/
+    Snackbar.make(mRecyclerview,message,Snackbar.LENGTH_LONG).show();
   }
 
   private void subscribeToEditText() {
@@ -189,25 +193,28 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
       @Override
       public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
         if (textViewTextChangeEvent.text().length() > 0) {
-          search_sim(textViewTextChangeEvent.text().toString(),returnDauso(),mSpinner.getSelectedItem().toString().trim());
+          search_sim(textViewTextChangeEvent.text().toString(),returnDauso(),returnDangSo());
         }
       }
     };
   }
 
   private void search_sim(String textSearch, String dauso,String dang) {
+    Preconditions.checkNotNull(textSearch,"textSearch not null!");
+    Preconditions.checkNotNull(dauso,"dauso not null!");
+    Preconditions.checkNotNull(dang,"dang not null!");
     switch (Preconditions.checkNotNull(getArguments().getInt(StringDef.BUNDLE_TITLE), "data not null!")) {
       case KhosimDef.SIM_TRA_TRUOC:
-        mKhosoPresenter.searchSim(this,textSearch, KhoSimIndexDef.SIM_TRA_TRUOC, dauso,dang);
+        mKhosoPresenter.searchSim(textSearch, KhoSimIndexDef.SIM_TRA_TRUOC, dauso,dang);
         break;
       case KhosimDef.SIM_TRA_SAU:
-        mKhosoPresenter.searchSim(this,textSearch, KhoSimIndexDef.SIM_TRA_SAU, dauso,dang);
+        mKhosoPresenter.searchSim(textSearch, KhoSimIndexDef.SIM_TRA_SAU, dauso,dang);
         break;
       case KhosimDef.SIM_TRA_TRUOC_DEP:
-        mKhosoPresenter.searchSim(this,textSearch, KhoSimIndexDef.SIM_TRA_TRUOC_DEP, dauso,dang);
+        mKhosoPresenter.searchSim(textSearch, KhoSimIndexDef.SIM_TRA_TRUOC_DEP, dauso,dang);
         break;
       case KhosimDef.SIM_DEP:
-        mKhosoPresenter.searchSim(this,textSearch, KhoSimIndexDef.SIM_DEP, dauso,dang);
+        mKhosoPresenter.searchSim(textSearch, KhoSimIndexDef.SIM_DEP, dauso,dang);
         break;
       default:
         break;
@@ -218,25 +225,14 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   public void onCheckedChanged(RadioGroup group, int checkedId) {
     switch (checkedId){
       case R.id.rad_089:
-        search_sim(txt_search.getText().toString(),mRad089.getText().toString(), mSpinner.getSelectedItem().toString().trim());
+        search_sim(returnSearch(),returnRadio(0), returnDangSo());
         break;
       case R.id.rad_090:
-        search_sim(txt_search.getText().toString(),mRad090.getText().toString(),mSpinner.getSelectedItem().toString().trim());
+        search_sim(returnSearch(),returnRadio(1),returnDangSo());
         break;
       case R.id.rad_093:
-        search_sim(txt_search.getText().toString(),mRad093.getText().toString(),mSpinner.getSelectedItem().toString().trim());
+        search_sim(returnSearch(),returnRadio(2),returnDangSo());
         break;
-    }
-  }
-
-  @Override
-  public void onClick(View v) {
-    try {
-      txt_search.setText("");
-      search_sim(txt_search.getText().toString(), returnDauso(), mSpinner.getSelectedItem().toString().trim());
-    }catch (Exception e){
-      e.printStackTrace();
-      search_sim("", mRad090.getText().toString(), "");
     }
   }
 
@@ -246,31 +242,75 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
     mKhosoPresenter.detachView();
   }
 
-  private String returnDauso(){
-    String dauso=((RadioButton) ButterKnife.findById(getView(), mRadioGroup.getCheckedRadioButtonId())).getText().toString();
-    if(dauso.equalsIgnoreCase("Tuỳ chọn")){
-      if(mSpinner_dauso.getSelectedItem().toString().trim().equalsIgnoreCase("Tất cả"))
-        dauso="";
-      else
-        dauso=mSpinner_dauso.getSelectedItem().toString().trim();
+  private String returnSearch(){
+    if(!TextUtils.isEmpty(txt_search.getText()))
+      return txt_search.getText().toString();
+    else
+      return "";
+  }
+  private String returnRadio(int index){
+    String select = "";
+    try {
+      switch (index) {
+        case 0:
+          select = mRad089.getText().toString();
+          break;
+        case 1:
+          select = mRad090.getText().toString();
+          break;
+        case 2:
+          select = mRad093.getText().toString();
+          break;
+      }
+    }catch (Exception e){
+      e.printStackTrace();
     }
-    return dauso;
+    return select;
+  }
+  private String returnDauso(){
+    try {
+      String dauso = ((RadioButton) ButterKnife.findById(getView(), mRadioGroup.getCheckedRadioButtonId())).getText().toString();
+      if (dauso.equalsIgnoreCase("Tuỳ chọn")) {
+        if (mSpinner_dauso.getSelectedItem().toString().trim().equalsIgnoreCase("Tất cả"))
+          dauso = "";
+        else
+          dauso = mSpinner_dauso.getSelectedItem().toString().trim();
+      }
+      return dauso;
+    }catch (Exception e){
+      e.printStackTrace();
+    }
+    return "";
   }
 
   @Override
   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-    switch (parent.getId()){
-      case R.id.spinner:
-        search_sim(txt_search.getText().toString(), returnDauso(), mSpinner.getSelectedItem().toString().trim());
-        break;
-      case R.id.spinner_dauso:
-        search_sim(txt_search.getText().toString(), returnDauso(), mSpinner.getSelectedItem().toString().trim());
-        break;
+    try {
+      switch (parent.getId()) {
+        case R.id.spinner:
+          if (!isFist)
+            search_sim(txt_search.getText().toString(), returnDauso(), returnDangSo());
+          break;
+        case R.id.spinner_dauso:
+          if (!isFist)
+            search_sim(txt_search.getText().toString(), returnDauso(), returnDangSo());
+          break;
+      }
+    }catch (Exception e){
+      e.printStackTrace();
     }
   }
 
   @Override
   public void onNothingSelected(AdapterView<?> parent) {
 
+  }
+  private String returnDangSo(){
+    try {
+      return ((Dangsim) mSpinner.getSelectedItem()).getTenkey();
+    }catch (Exception e){
+      e.printStackTrace();
+    }
+    return "";
   }
 }

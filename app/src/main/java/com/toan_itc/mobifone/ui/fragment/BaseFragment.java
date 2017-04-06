@@ -76,6 +76,7 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
     initData();
     setTitle();
   }
+
   private void setTitle(){
     String currenttag=getFragmentManager().findFragmentById(R.id.fragment).getTag();
     if(currenttag.equalsIgnoreCase(KhosoFragment.class.getName())) {

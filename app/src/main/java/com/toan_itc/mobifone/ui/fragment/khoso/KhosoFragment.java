@@ -2,9 +2,10 @@ package com.toan_itc.mobifone.ui.fragment.khoso;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import cn.hugeterry.coordinatortablayout.CoordinatorTabLayout;
 import com.bumptech.glide.Glide;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.intdef.KhoSimIndexDef;
@@ -15,19 +16,12 @@ import com.toan_itc.mobifone.ui.adapter.khoso.MyPagerAdapter;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
 import com.toan_itc.mobifone.utils.Constant;
 
-import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import cn.hugeterry.coordinatortablayout.CoordinatorTabLayout;
-
 
 public class KhosoFragment extends BaseFragment {
   @BindView(R.id.viewPager)
   ViewPager mViewPager;
   @BindView(R.id.coordinatortablayout)
   CoordinatorTabLayout mCoordinatortablayout;
-  private ArrayList<Fragment> mFragments;
   private String[] mTitles=new String[4];
   private Context mContext;
 
@@ -83,17 +77,11 @@ public class KhosoFragment extends BaseFragment {
   }
 
   private void initFragments() {
-    mFragments = new ArrayList<>();
     mTitles= new String[]{getString(KhosimDef.SIM_TRA_TRUOC), getString(KhosimDef.SIM_TRA_SAU), getString(KhosimDef.SIM_TRA_TRUOC_DEP), getString(KhosimDef.SIM_DEP)};
-    mFragments.add(DataFragment.newInstance(KhosimDef.SIM_TRA_TRUOC));
-    mFragments.add(DataFragment.newInstance(KhosimDef.SIM_TRA_SAU));
-    mFragments.add(DataFragment.newInstance(KhosimDef.SIM_TRA_TRUOC_DEP));
-    mFragments.add(DataFragment.newInstance(KhosimDef.SIM_DEP));
   }
 
   private void initViewPager() {
-    mViewPager.setOffscreenPageLimit(4);
-    mViewPager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager(), mFragments, mTitles));
+    mViewPager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager(), mTitles));
     showScreen();
   }
 
@@ -101,21 +89,17 @@ public class KhosoFragment extends BaseFragment {
   public void onDestroyView() {
     super.onDestroyView();
     toolbarTitleListener.hideToolBar(false);
-    removePages();
-  }
-  public void removePages() {
-    mFragments.clear();
   }
 
   private void showScreen(){
     String type=getArguments().getString(StringDef.BUNDLE_DATA);
     if(type!=null) {
-      if (type.equalsIgnoreCase(KhoSimIndexDef.SIM_TRA_TRUOC_DEP))
-          mViewPager.setCurrentItem(1);
-      else if(type.equalsIgnoreCase(KhoSimIndexDef.SIM_TRA_SAU))
-        mViewPager.setCurrentItem(2);
-      else if(type.equalsIgnoreCase(KhoSimIndexDef.SIM_DEP))
+      if(type.equalsIgnoreCase(KhoSimIndexDef.SIM_DEP))
         mViewPager.setCurrentItem(3);
+      else if (type.equalsIgnoreCase(KhoSimIndexDef.SIM_TRA_TRUOC_DEP))
+          mViewPager.setCurrentItem(2);
+      else if(type.equalsIgnoreCase(KhoSimIndexDef.SIM_TRA_SAU))
+        mViewPager.setCurrentItem(1);
       else
         mViewPager.setCurrentItem(0);
     }

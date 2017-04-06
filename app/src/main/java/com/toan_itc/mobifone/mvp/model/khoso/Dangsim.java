@@ -1,6 +1,14 @@
 package com.toan_itc.mobifone.mvp.model.khoso;
 
 public class Dangsim{
+	@Override
+	public String toString() {
+		return "Dangsim{" +
+						"tenkey='" + tenkey + '\'' +
+						", tends='" + tends + '\'' +
+						'}';
+	}
+
 	private String tenkey;
 	private String tends;
 

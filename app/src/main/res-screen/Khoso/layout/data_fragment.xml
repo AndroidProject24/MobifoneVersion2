@@ -15,7 +15,7 @@
         android:digits="*?012345789"
         android:textColor="@color/md_black_1000"
         android:textSize="14sp"/>
-    <Spinner
+    <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/spinner"
         android:layout_toRightOf="@+id/txt_search"
         android:layout_width="match_parent"
@@ -32,34 +32,35 @@
             android:id="@+id/rad_opition"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:checked="true"
+            android:layout_weight="1.2"
             android:text="Tuỳ chọn"/>
 
         <RadioButton
             android:id="@+id/rad_090"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
+            android:checked="true"
             android:text="090"/>
 
         <RadioButton
             android:id="@+id/rad_093"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:text="093"/>
 
         <RadioButton
             android:id="@+id/rad_089"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:text="089"/>
-        <Spinner
+
+        <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_dauso"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.3"
             android:layout_height="40dp"
             android:spinnerMode="dropdown"/>
     </RadioGroup>
@@ -69,4 +70,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/radio_group"/>
+
 </com.toan_itc.mobifone.libs.view.StateLayout>

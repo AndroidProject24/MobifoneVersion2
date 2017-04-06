@@ -1,13 +1,16 @@
 package com.toan_itc.mobifone.data.service;
 
 import com.toan_itc.mobifone.mvp.model.JsonArray;
+import com.toan_itc.mobifone.mvp.model.congno.Congno;
 import com.toan_itc.mobifone.mvp.model.khoso.Dangsim;
 import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
+import com.toan_itc.mobifone.mvp.model.login.Exit;
 import com.toan_itc.mobifone.mvp.model.login.Login;
 import com.toan_itc.mobifone.mvp.model.register.Register;
 import com.toan_itc.mobifone.mvp.model.theloai.Theloai;
 import com.toan_itc.mobifone.mvp.model.upanh.Upanh;
-
+import com.toan_itc.mobifone.mvp.model.vas.Goicuoc;
+import com.toan_itc.mobifone.mvp.model.vas.Vas;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Field;
@@ -29,16 +32,6 @@ import rx.Observable;
 public interface RestApi {
     String BASE_URL = "http://n3t.top/test/api/";
 
-    /*Khoso*/
-    @GET("timsim")
-    Observable<Khoso> getKhoso(@Query("search") String search, @Query("kho") String kho, @Query("dau") String dau,@Query("dang") String dang);
-
-    @GET
-    Observable<Khoso> getLoadmore(@Url String url);
-
-    @GET("dangsim")
-    Observable<JsonArray<Dangsim>> getDangSim(@Query("noibat") String noibat);
-
     /*LOGIN*/
     @FormUrlEncoded
     @POST("dangnhap")
@@ -47,6 +40,11 @@ public interface RestApi {
     @FormUrlEncoded
     @POST("edituser")
     Observable<Login> changePassword(@Field("auth_code") String auth_code,@Field("username") String username,@Field("id") String id,@Field("old") String passOld, @Field("new") String passNew);
+
+    /*EXIT*/
+    @FormUrlEncoded
+    @POST("dangxuat")
+    Observable<Exit> exit(@Field("auth_code") String auth_code, @Field("iduser") String iduser);
 
     /*REGISTER*/
     @FormUrlEncoded
@@ -81,4 +79,30 @@ public interface RestApi {
     @GET("theloai/{IDtheloai}")
     Observable<JsonArray<Theloai>> getThutuc(@Path("IDtheloai") int IDtheloai);
 
+    /*Khoso*/
+    @GET("timsim")
+    Observable<Khoso> getKhoso(@Query("search") String search, @Query("kho") String kho, @Query("dau") String dau,@Query("dang") String dang);
+
+    @GET
+    Observable<Khoso> getLoadmore(@Url String url);
+
+    @GET("dangsim")
+    Observable<JsonArray<Dangsim>> getDangSim(@Query("noibat") String noibat);
+
+
+    /*CONGNO*/
+    @FormUrlEncoded
+    @POST("congno")
+    Observable<Congno> getCongno(@Field("auth_code") String auth_code, @Field("iduser") String iduser);
+
+    /*VAS*/
+    @GET("captcha")
+    Observable<Vas> getCaptcha(@Query("auth_code") String auth_code, @Query("iduser") String iduser);
+
+    @GET("thongtingoicuoc")
+    Observable<JsonArray<Goicuoc>> getGoiCuoc();
+
+    @FormUrlEncoded
+    @POST("banvas")
+    Observable<Vas> getVas(@Field("auth_code") String auth_code, @Field("iduser") String iduser, @Field("sdt") String sdt, @Field("captcha") String captcha, @Field("magoi") String magoi);
 }

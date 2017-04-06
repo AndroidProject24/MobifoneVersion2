@@ -18,8 +18,7 @@ public class TheloaiAdapter extends BaseQuickAdapter<Theloai, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, Theloai theloai) {
         helper.setText(R.id.txt_thutuc, theloai.getTenloai())
-                .addOnClickListener(R.id.txt_thutuc)
-                .addOnClickListener(R.id.img_theloai);
+                .addOnClickListener(R.id.layout_item);
         Glide.with(mContext).load(theloai.getImage()).crossFade().into((ImageView) helper.getView(R.id.img_theloai));
     }
 }

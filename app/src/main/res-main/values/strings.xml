@@ -78,6 +78,7 @@
     <string name="btn_login">Đăng nhập</string>
     <string name="tv_restore">Quên mật khẩu?</string>
     <string name="hint_et_name">Tên đăng nhập</string>
+    <string name="hint_et_captcha">Mã captcha</string>
     <string name="tv_register">Đăng ký</string>
     <string name="btn_updateProfile">Cập nhật Profile</string>
     <string name="btn_restore">Lấy lại mật khẩu</string>
@@ -102,6 +103,7 @@
     <string name="cong_no">Công nợ</string>
     <string name="ct_km">Chương trình khuyến mãi</string>
     <string name="up_anh">Úp ảnh</string>
+    <string name="ban_vas">Vas</string>
 
     <string name="All">Tất cả</string>
 
@@ -110,4 +112,8 @@
     <string name="add">Chọn</string>
     <string name="selected">đã chọn</string>
     <string name="limit_exceeded"> %d ảnh</string>
+
+    <string name="load_end">Không có dữ liệu!</string>
+    <string name="load_failed">Không lấy được dữ liệu!</string>
+    <string name="loading">Đang lấy dữ liệu!</string>
 </resources>

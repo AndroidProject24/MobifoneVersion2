@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 
+import android.view.View;
 import com.google.firebase.crash.FirebaseCrash;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -25,6 +26,8 @@ import com.toan_itc.mobifone.interfaces.KeyListener;
 import com.toan_itc.mobifone.interfaces.OnBackListener;
 import com.toan_itc.mobifone.interfaces.ToolbarTitleListener;
 import com.toan_itc.mobifone.libs.logger.Logger;
+import com.toan_itc.mobifone.mvp.presenter.main.MainPresenter;
+import com.toan_itc.mobifone.mvp.view.main.MainView;
 import com.toan_itc.mobifone.ui.fragment.MainFragment;
 import com.toan_itc.mobifone.ui.fragment.congno.CongnoFragment;
 import com.toan_itc.mobifone.ui.fragment.contact.LienHeFragment;
@@ -46,14 +49,14 @@ import rx.Observable;
 
 import static com.toan_itc.mobifone.R.id.toolbar;
 
-public class MainActivity extends BaseActivity implements ToolbarTitleListener {
+public class MainActivity extends BaseActivity implements ToolbarTitleListener,MainView {
   @BindView(toolbar)
   Toolbar mToolbar;
   private AccountHeader headerResult = null;
   private Drawer result = null;
   private boolean doubleBackToExitPressedOnce;
-  @Inject
-  PreferencesHelper mPreferencesHelper;
+  @Inject PreferencesHelper mPreferencesHelper;
+  @Inject MainPresenter mainPresenter;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -84,15 +87,16 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
             .withDisplayBelowStatusBar(false)
             .withActionBarDrawerToggleAnimated(true)
             .addDrawerItems(
-                    new PrimaryDrawerItem().withName("Home").withIcon(R.mipmap.ic_profile).withIdentifier(1).withSetSelected(true),
-                    new PrimaryDrawerItem().withName("Kho số").withIcon(R.mipmap.ic_sim).withIdentifier(2).withSetSelected(true),
-                    new PrimaryDrawerItem().withName("khuyến mãi").withIcon(R.mipmap.ic_khuyenmai2).withIdentifier(3).withSetSelected(true),
-                    new PrimaryDrawerItem().withName("Công nợ").withIcon(R.mipmap.ic_congno).withIdentifier(4).withSetSelected(true),
-                    new PrimaryDrawerItem().withName("Thủ tục").withIcon(R.mipmap.ic_thutuc2).withIdentifier(5).withSetSelected(true).withEnabled(true),
-                    new PrimaryDrawerItem().withName("Úp ảnh").withIcon(R.mipmap.ic_upload).withIdentifier(6).withSetSelected(true),
-                    new PrimaryDrawerItem().withName("Profile").withIcon(R.mipmap.ic_profile).withIdentifier(7).withSetSelected(true),
+                    new PrimaryDrawerItem().withName("Trang chủ").withIcon(R.drawable.ic_profile).withIdentifier(1).withSetSelected(true),
+                    new PrimaryDrawerItem().withName("Kho số").withIcon(R.drawable.ic_sim).withIdentifier(2).withSetSelected(true),
+                    new PrimaryDrawerItem().withName("khuyến mãi").withIcon(R.drawable.ic_khuyenmai).withIdentifier(3).withSetSelected(true),
+                    new PrimaryDrawerItem().withName("Công nợ").withIcon(R.drawable.ic_congno).withIdentifier(4).withSetSelected(true),
+                    new PrimaryDrawerItem().withName("Thủ tục").withIcon(R.drawable.ic_thutuc).withIdentifier(5).withSetSelected(true).withEnabled(true),
+                    new PrimaryDrawerItem().withName("Úp ảnh").withIcon(R.drawable.ic_upload).withIdentifier(6).withSetSelected(true),
+                    new PrimaryDrawerItem().withName("Profile").withIcon(R.drawable.ic_profile).withIdentifier(7).withSetSelected(true),
                     new SectionDrawerItem().withName("Help"),
-                    new PrimaryDrawerItem().withName("Contact").withIcon(R.mipmap.ic_call).withIdentifier(8).withSetSelected(true)
+                    new PrimaryDrawerItem().withName("Liên hệ").withIcon(R.drawable.ic_call).withIdentifier(8).withSetSelected(true),
+                    new PrimaryDrawerItem().withName("Thoát").withIcon(R.drawable.ic_exit_to_app_black_24dp).withIdentifier(9).withSetSelected(true)
             )
             .withOnDrawerItemClickListener((view, position, drawerItem) -> {
               if (drawerItem != null) {
@@ -113,7 +117,9 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
                     replaceFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
                   } else if (drawerItem.getIdentifier() == 8) {
                     replaceFagment(getSupportFragmentManager(), R.id.fragment, LienHeFragment.newInstance());
-                  } else {
+                  } else if (drawerItem.getIdentifier() == 9) {
+                    mainPresenter.exit();
+                  }else {
                     replaceFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
                   }
                 }else {
@@ -133,9 +139,11 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
 
   @Override
   protected void initViews() {
+    mainPresenter.attachView(this);
     if(mPreferencesHelper.getJsonLogin()==null) {
       addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
     }else{
+      mainPresenter.checkLogin();
       addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
     }
   }
@@ -254,5 +262,29 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
     }catch (Exception e){
       e.printStackTrace();
     }
+  }
+
+  @Override public void exit() {
+    finish();
+  }
+
+  @Override public void showLoading() {
+
+  }
+
+  @Override public void hideLoading() {
+
+  }
+
+  @Override public void showError(String message) {
+
+  }
+
+  @Override public void showEmptyView(String message) {
+
+  }
+
+  @Override public void showEmptyViewAction(String message, View.OnClickListener onClickListener) {
+
   }
 }

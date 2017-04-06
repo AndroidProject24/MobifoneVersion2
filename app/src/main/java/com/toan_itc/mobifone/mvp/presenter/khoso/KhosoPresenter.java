@@ -1,7 +1,5 @@
 package com.toan_itc.mobifone.mvp.presenter.khoso;
 
-import android.view.View;
-
 import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.data.rxjava.DefaultObserver;
 import com.toan_itc.mobifone.data.service.RestData;
@@ -29,7 +27,7 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
     this.mRestData=restData;
     this.mPreferencesHelper=preferencesHelper;
   }
-  public void searchSim(View.OnClickListener onClickListener,String search, String kho, String dau, String dang){
+  public void searchSim(String search, String kho, String dau, String dang){
     getMvpView().showLoading();
     addSubscribe(mRestData.getKhoSim(search,kho,dau,dang)
             .subscribe(new DefaultObserver<Khoso>() {
@@ -44,17 +42,17 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
               public void onNext(Khoso khoso) {
                 try {
                   getMvpView().hideLoading();
-                  if(khoso!=null) {
+                  if(khoso.getData()!=null) {
                     getMvpView().listSim(khoso);
                   }else
-                    getMvpView().showEmptyViewAction("no sim found!",onClickListener);
+                    getMvpView().emty("Sim chưa có bạn có thể chọn kho số khác!");
                 }catch (Exception e){
                   e.printStackTrace();
                 }
               }
             }));
   }
-  public List<Khoso.Data> loadMore(View.OnClickListener onClickListener, String url){
+  public List<Khoso.Data> loadMore(String url){
     Logger.e("loadMore="+url);
     getMvpView().showLoading();
     addSubscribe(mRestData.getLoadmore(url)
@@ -73,7 +71,7 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
                   if(khoso!=null&&!khoso.getData().isEmpty()) {
                    dataList=khoso.getData();
                   }else
-                    getMvpView().showEmptyViewAction("no sim found!",onClickListener);
+                    getMvpView().emty("Hết dữ liệu!");
                 }catch (Exception e){
                   e.printStackTrace();
                 }

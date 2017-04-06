@@ -5,6 +5,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.androidnetworking.interfaces.UploadProgressListener;
+import com.fernandocejas.frodo.core.checks.Preconditions;
 import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.data.rxjava.DefaultObserver;
 import com.toan_itc.mobifone.data.service.RestData;
@@ -41,6 +42,8 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
             .addMultipartFile("phieu",phieu)
             .addMultipartParameter("sdt",sdt)
             .addMultipartParameter("dichvu",theloai)
+            .addMultipartParameter("auth_code", Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin().get_$0().getAuth_code()))
+            .addMultipartParameter("iduser",Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin().get_$0().getId()))
             .setTag("uploadTraTruoc")
             .setPriority(Priority.HIGH)
             .build()
@@ -97,6 +100,8 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
             .addMultipartFile("phuluc4",hd)
             .addMultipartParameter("sdt",sdt)
             .addMultipartParameter("dichvu",theloai)
+            .addMultipartParameter("auth_code", Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin().get_$0().getAuth_code()))
+            .addMultipartParameter("iduser",Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin().get_$0().getId()))
             .setTag("uploadTraSauCanhan")
             .setPriority(Priority.HIGH)
             .build()
@@ -153,6 +158,8 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
             .addMultipartFile("gpkd",gpkd)
             .addMultipartParameter("sdt",sdt)
             .addMultipartParameter("dichvu",theloai)
+            .addMultipartParameter("auth_code", Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin().get_$0().getAuth_code()))
+            .addMultipartParameter("iduser",Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin().get_$0().getId()))
             .setTag("uploadDoanhnghiep")
             .setPriority(Priority.HIGH)
             .build()

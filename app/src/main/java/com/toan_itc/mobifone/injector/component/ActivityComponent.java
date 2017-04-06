@@ -4,6 +4,7 @@ import com.toan_itc.mobifone.injector.module.ActivityModule;
 import com.toan_itc.mobifone.injector.qualifier.PerActivity;
 import com.toan_itc.mobifone.ui.activity.MainActivity;
 import com.toan_itc.mobifone.ui.fragment.MainFragment;
+import com.toan_itc.mobifone.ui.fragment.congno.CongnoFragment;
 import com.toan_itc.mobifone.ui.fragment.khoso.DataFragment;
 import com.toan_itc.mobifone.ui.fragment.khoso.KhosoFragment;
 import com.toan_itc.mobifone.ui.fragment.km.CTKMSodepFragment;
@@ -18,6 +19,7 @@ import com.toan_itc.mobifone.ui.fragment.upanh.TraSauCanhanFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.TraSauDoanhnghiepFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.UpanhTratruocFragment;
 
+import com.toan_itc.mobifone.ui.fragment.vas.VasFragment;
 import dagger.Component;
 
 @PerActivity
@@ -59,4 +61,9 @@ public interface ActivityComponent {
 
   void inject(CTKMTrasauFragment ctkmTrasauFragment);
 
+  /*CONGNO*/
+  void inject(CongnoFragment congnoFragment);
+
+  /*VAS*/
+  void inject(VasFragment vasFragment);
 }

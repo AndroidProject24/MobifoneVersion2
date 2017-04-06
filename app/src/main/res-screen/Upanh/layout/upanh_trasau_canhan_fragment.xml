@@ -95,6 +95,8 @@
                 <ImageView
                     android:id="@+id/img_phuluc"
                     style="@style/style_img_upanh"/>
+                <ImageView
+                    style="@style/style_img_upanh"/>
             </TableRow>
         </TableLayout>
 

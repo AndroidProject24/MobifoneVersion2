@@ -110,8 +110,8 @@ public class ThutucFragment extends BaseFragment implements TheloaiView {
   }
   private void initBottomTab() {
     NavigationController navigationController = layoutTab.material()
-            .addItem(R.drawable.ic_person_black_24dp, getString(R.string.upload_ca_nhan), getResources().getColor(R.color.md_teal_A700))
-            .addItem(R.drawable.ic_location_city_black_24dp, getString(R.string.upload_doanhnghiep), getResources().getColor(R.color.md_red_500))
+            .addItem(R.drawable.ic_home, getString(R.string.upload_tratruoc), getResources().getColor(R.color.md_teal_A700))
+            .addItem(R.drawable.ic_business, getString(R.string.upload_trasau), getResources().getColor(R.color.md_red_500))
             .setMode(MaterialMode.CHANGE_BACKGROUND_COLOR)
             .build();
     navigationController.addTabItemSelectedListener(listener);
