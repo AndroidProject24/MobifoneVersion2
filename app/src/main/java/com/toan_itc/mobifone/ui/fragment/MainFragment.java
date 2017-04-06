@@ -81,7 +81,6 @@ public class MainFragment extends BaseFragment {
       checkLogin(VasFragment.newInstance());
     }
 
-
     @OnClick(R.id.card_upanh)
     public void click_upanh(){
       checkLogin(UpanhFragment.newInstance());
