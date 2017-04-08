@@ -8,12 +8,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.jakewharton.rxbinding.internal.Preconditions;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
@@ -33,15 +35,10 @@ import com.toan_itc.mobifone.ui.adapter.khoso.DangsimAdapter;
 import com.toan_itc.mobifone.ui.adapter.khoso.DausoAdapter;
 import com.toan_itc.mobifone.ui.adapter.khoso.KhosoAdapter;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 
@@ -166,8 +163,8 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
 
   @Override
   public void emty(String message) {
-    /*mKhosoAdapter.setNewData(null);
-    mRecyclerview.setAdapter(mKhosoAdapter);*/
+    mKhosoAdapter.setNewData(null);
+    mKhosoAdapter.setEmptyView(R.layout.view_empty, (ViewGroup) mRecyclerview.getParent());
     Snackbar.make(mRecyclerview,message,Snackbar.LENGTH_LONG).show();
   }
 

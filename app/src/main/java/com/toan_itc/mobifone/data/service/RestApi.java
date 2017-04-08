@@ -93,7 +93,7 @@ public interface RestApi {
     /*CONGNO*/
     @FormUrlEncoded
     @POST("congno")
-    Observable<Congno> getCongno(@Field("auth_code") String auth_code, @Field("iduser") String iduser);
+    Observable<JsonArray<Congno>> getCongno(@Field("auth_code") String auth_code, @Field("iduser") String iduser);
 
     /*VAS*/
     @GET("captcha")

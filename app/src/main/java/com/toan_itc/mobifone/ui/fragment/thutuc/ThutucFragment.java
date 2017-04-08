@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.intdef.StringDef;
 import com.toan_itc.mobifone.intdef.TheloaiDef;
@@ -21,13 +19,8 @@ import com.toan_itc.mobifone.ui.activity.BaseActivity;
 import com.toan_itc.mobifone.ui.activity.WebviewActivity;
 import com.toan_itc.mobifone.ui.adapter.theloai.TheloaiAdapter;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import me.majiajie.pagerbottomtabstrip.MaterialMode;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageBottomTabLayout;
@@ -88,6 +81,12 @@ public class ThutucFragment extends BaseFragment implements TheloaiView {
     TheloaiAdapter theloaiAdapter=new TheloaiAdapter(mTheloaiList);
     theloaiAdapter.openLoadAnimation();
     mRecyclerview.setAdapter(theloaiAdapter);
+    theloaiAdapter.setOnItemChildClickListener((baseQuickAdapter, view, i) -> {
+      Logger.e("onSimpleItemChildClick"+mTheloaiList.get(i).getUrl());
+      Intent intent = new Intent(mContext, WebviewActivity.class);
+      intent.putExtra(StringDef.BUNDLE_DATA, mTheloaiList.get(i).getUrl());
+      startActivity(intent);
+    });
   }
 
   @Override
@@ -98,15 +97,6 @@ public class ThutucFragment extends BaseFragment implements TheloaiView {
   private void initRecyclerview(){
     mRecyclerview.setLayoutManager(new LinearLayoutManager(mContext));
     mRecyclerview.setHasFixedSize(true);
-    mRecyclerview.addOnItemTouchListener(new OnItemChildClickListener( ) {
-      @Override
-      public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-        Logger.e("onSimpleItemChildClick"+mTheloaiList.get(position).getUrl());
-        Intent intent = new Intent(mContext, WebviewActivity.class);
-        intent.putExtra(StringDef.BUNDLE_DATA, mTheloaiList.get(position).getUrl());
-        startActivity(intent);
-      }
-    });
   }
   private void initBottomTab() {
     NavigationController navigationController = layoutTab.material()

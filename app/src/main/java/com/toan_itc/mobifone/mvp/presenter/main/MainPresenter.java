@@ -26,6 +26,7 @@ public class MainPresenter extends BasePresenter<MainView> {
                     @Override
                     public void onNext(Exit exit) {
                         try {
+                          mPreferencesHelper.clear();
                           getMvpView().exit();
                         }catch (Exception e){
                             e.printStackTrace();

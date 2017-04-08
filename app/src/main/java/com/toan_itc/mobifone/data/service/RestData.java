@@ -118,9 +118,10 @@ public class RestData {
             .observeOn(AndroidSchedulers.mainThread());
   }
   //Congno
-  public Observable<Congno> getCongno(String auth_code, String idUser) {
+  public Observable<List<Congno>> getCongno(String auth_code, String idUser) {
     return mRestApi.getCongno(auth_code,idUser)
         .subscribeOn(Schedulers.io())
+        .map(data->data.data)
         .observeOn(AndroidSchedulers.mainThread());
   }
   //Vas

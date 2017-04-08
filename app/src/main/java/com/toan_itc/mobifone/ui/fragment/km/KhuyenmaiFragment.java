@@ -1,22 +1,17 @@
 package com.toan_itc.mobifone.ui.fragment.km;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import cn.hugeterry.coordinatortablayout.CoordinatorTabLayout;
 import com.bumptech.glide.Glide;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.intdef.KhuyenmaiDef;
 import com.toan_itc.mobifone.libs.view.StateLayout;
-import com.toan_itc.mobifone.ui.adapter.khoso.MyPagerAdapter;
+import com.toan_itc.mobifone.ui.adapter.theloai.KMPagerAdapter;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
 import com.toan_itc.mobifone.utils.Constant;
-
-import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import cn.hugeterry.coordinatortablayout.CoordinatorTabLayout;
 
 
 public class KhuyenmaiFragment extends BaseFragment{
@@ -25,8 +20,7 @@ public class KhuyenmaiFragment extends BaseFragment{
   ViewPager mViewPager;
   @BindView(R.id.coordinatortablayout)
   CoordinatorTabLayout mCoordinatortablayout;
-  private ArrayList<Fragment> mFragments;
-  private String[] mTitles=new String[4];
+  private String[] mTitles=new String[3];
   public static KhuyenmaiFragment newInstance() {
     return new KhuyenmaiFragment();
   }
@@ -73,15 +67,11 @@ public class KhuyenmaiFragment extends BaseFragment{
 
 
   private void initFragments() {
-    mFragments = new ArrayList<>();
     mTitles= new String[]{getString(KhuyenmaiDef.KHUYEN_MAI_TRA_SAU), getString(KhuyenmaiDef.KHUYEN_MAI_SO_DEP), getString(KhuyenmaiDef.KHUYEN_MAI_TRONG_NGAY)};
-    mFragments.add(CTKMTrasauFragment.newInstance());
-    mFragments.add(CTKMSodepFragment.newInstance());
-    mFragments.add(KMNaptheFragment.newInstance());
   }
 
   private void initViewPager() {
-    mViewPager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager(), mTitles));
+    mViewPager.setAdapter(new KMPagerAdapter(getActivity().getSupportFragmentManager(), mTitles));
   }
 
   @Override

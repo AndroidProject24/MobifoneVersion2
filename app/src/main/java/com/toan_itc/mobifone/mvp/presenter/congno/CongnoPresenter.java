@@ -6,6 +6,7 @@ import com.toan_itc.mobifone.data.service.RestData;
 import com.toan_itc.mobifone.mvp.model.congno.Congno;
 import com.toan_itc.mobifone.mvp.presenter.base.BasePresenter;
 import com.toan_itc.mobifone.mvp.view.congno.CongnoView;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -22,15 +23,13 @@ public class CongnoPresenter extends BasePresenter<CongnoView> {
     public void getCongno(){
       getMvpView().showLoading();
       addSubscribe(mRestData.getCongno(mPreferencesHelper.getJsonLogin().get_$0().getAuth_code(),mPreferencesHelper.getJsonLogin().get_$0().getId())
-                .subscribe(new DefaultObserver<Congno>() {
+                .subscribe(new DefaultObserver<List<Congno>>() {
                     @Override
-                    public void onNext(Congno congno) {
+                    public void onNext(List<Congno> congnoList) {
                         try {
                           getMvpView().hideLoading();
-                          if(congno.getError().equalsIgnoreCase("0")) {
-                            getMvpView().showData(congno.getData());
-                          }else{
-                            getMvpView().showEmptyView(congno.getReason());
+                          if(!congnoList.isEmpty()) {
+                            getMvpView().showData(congnoList);
                           }
                         }catch (Exception e){
                             e.printStackTrace();

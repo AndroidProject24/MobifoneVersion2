@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.intdef.StringDef;
 import com.toan_itc.mobifone.intdef.TheloaiDef;
@@ -19,13 +19,8 @@ import com.toan_itc.mobifone.ui.activity.BaseActivity;
 import com.toan_itc.mobifone.ui.activity.WebviewActivity;
 import com.toan_itc.mobifone.ui.adapter.theloai.TheloaiAdapter;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 public class KMNaptheFragment extends BaseFragment implements TheloaiView{
@@ -79,6 +74,13 @@ public class KMNaptheFragment extends BaseFragment implements TheloaiView{
     TheloaiAdapter theloaiAdapter=new TheloaiAdapter(mTheloaiList);
     theloaiAdapter.openLoadAnimation();
     mRecyclerview.setAdapter(theloaiAdapter);
+    theloaiAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+      @Override public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+        Intent intent = new Intent(mContext, WebviewActivity.class);
+        intent.putExtra(StringDef.BUNDLE_DATA, mTheloaiList.get(i).getUrl());
+        startActivity(intent);
+      }
+    });
   }
 
   @Override
@@ -89,14 +91,6 @@ public class KMNaptheFragment extends BaseFragment implements TheloaiView{
   private void initRecyclerview(){
     mRecyclerview.setLayoutManager(new LinearLayoutManager(mContext));
     mRecyclerview.setHasFixedSize(true);
-    mRecyclerview.addOnItemTouchListener(new OnItemChildClickListener( ) {
-      @Override
-      public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-        Intent intent = new Intent(mContext, WebviewActivity.class);
-        intent.putExtra(StringDef.BUNDLE_DATA, mTheloaiList.get(position).getUrl());
-        startActivity(intent);
-      }
-    });
   }
 
   @Override

@@ -10,5 +10,5 @@ import java.util.List;
  * Date: 28/05/2016
  */
 public interface CongnoView extends BaseView {
-    void showData(List<Congno.DataBean> dataBeanList);
+    void showData(List<Congno> dataBeanList);
 }

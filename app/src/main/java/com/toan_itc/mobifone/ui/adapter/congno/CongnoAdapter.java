@@ -6,13 +6,13 @@ import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.mvp.model.congno.Congno;
 import java.util.List;
 
-public class CongnoAdapter extends BaseQuickAdapter<Congno.DataBean, BaseViewHolder> {
-    public CongnoAdapter(List<Congno.DataBean> datas) {
+public class CongnoAdapter extends BaseQuickAdapter<Congno, BaseViewHolder> {
+    public CongnoAdapter(List<Congno> datas) {
         super(R.layout.congno_item,datas);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, Congno.DataBean congno) {
+    protected void convert(BaseViewHolder helper, Congno congno) {
         helper.setText(R.id.txt_sdt, congno.getSdt())
             .setText(R.id.txt_tenloai,congno.getTenLoai())
             .setText(R.id.txt_check,congno.getThanhtoan())

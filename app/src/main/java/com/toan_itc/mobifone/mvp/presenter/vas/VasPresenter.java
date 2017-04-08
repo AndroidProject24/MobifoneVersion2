@@ -7,6 +7,7 @@ import com.toan_itc.mobifone.mvp.model.vas.Goicuoc;
 import com.toan_itc.mobifone.mvp.model.vas.Vas;
 import com.toan_itc.mobifone.mvp.presenter.base.BasePresenter;
 import com.toan_itc.mobifone.mvp.view.vas.VasView;
+import com.toan_itc.mobifone.utils.Constant;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -43,8 +44,8 @@ public class VasPresenter extends BasePresenter<VasView> {
     }
 
     public String imgCaptcha(){
-      return "http://n3t.top/test/api/captcha?auth_code="+mPreferencesHelper.getJsonLogin().get_$0().getAuth_code()+"&iduser="+
-          mPreferencesHelper.getJsonLogin().get_$0().getId();//88c7696e0a1c143ff8a03bf654d4e0be&iduser=2";
+      return Constant.LINK_CAPTCHA+mPreferencesHelper.getJsonLogin().get_$0().getAuth_code()+"&iduser="+
+          mPreferencesHelper.getJsonLogin().get_$0().getId();
     }
   public void registerGoiCuoc(String sdt,String captcha,String magoi){
     getMvpView().showLoading();
