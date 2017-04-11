@@ -2,7 +2,7 @@ package com.toan_itc.mobifone.ui.adapter.khoso;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import com.toan_itc.mobifone.intdef.KhosimDef;
 import com.toan_itc.mobifone.ui.fragment.khoso.DataFragment;
 
@@ -10,7 +10,7 @@ import com.toan_itc.mobifone.ui.fragment.khoso.DataFragment;
  * Created by hugeterry(http://hugeterry.cn)
  * Date: 16/1/28 17:24
  */
-public class MyPagerAdapter extends FragmentPagerAdapter{
+public class MyPagerAdapter extends FragmentStatePagerAdapter {
     private String[] mTitles;
 
     public MyPagerAdapter(FragmentManager fm, String[] mTitles) {

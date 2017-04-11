@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface CongnoView extends BaseView {
     void showData(List<Congno> dataBeanList);
+
+    void requestLogin();
 }

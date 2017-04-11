@@ -35,7 +35,7 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
               public void onError(Throwable e) {
                 e.printStackTrace();
                 getMvpView().hideLoading();
-                getMvpView().showError(e.getMessage());
+                //getMvpView().showError(e.getMessage());
               }
 
               @Override
@@ -61,7 +61,7 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
               public void onError(Throwable e) {
                 e.printStackTrace();
                 getMvpView().hideLoading();
-                getMvpView().showError(e.getMessage());
+                //getMvpView().showError(e.getMessage());
               }
 
               @Override
@@ -87,7 +87,7 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
               public void onError(Throwable e) {
                 e.printStackTrace();
                 getMvpView().hideLoading();
-                getMvpView().showError(e.getMessage());
+                //getMvpView().showError(e.getMessage());
               }
 
               @Override

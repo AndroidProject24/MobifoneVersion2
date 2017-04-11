@@ -3,10 +3,9 @@ package com.toan_itc.mobifone.mvp.presenter.congno;
 import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.data.rxjava.DefaultObserver;
 import com.toan_itc.mobifone.data.service.RestData;
-import com.toan_itc.mobifone.mvp.model.congno.Congno;
+import com.toan_itc.mobifone.mvp.model.congno.ListCongno;
 import com.toan_itc.mobifone.mvp.presenter.base.BasePresenter;
 import com.toan_itc.mobifone.mvp.view.congno.CongnoView;
-import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -23,14 +22,17 @@ public class CongnoPresenter extends BasePresenter<CongnoView> {
     public void getCongno(){
       getMvpView().showLoading();
       addSubscribe(mRestData.getCongno(mPreferencesHelper.getJsonLogin().get_$0().getAuth_code(),mPreferencesHelper.getJsonLogin().get_$0().getId())
-                .subscribe(new DefaultObserver<List<Congno>>() {
+                .subscribe(new DefaultObserver<ListCongno>() {
                     @Override
-                    public void onNext(List<Congno> congnoList) {
+                    public void onNext(ListCongno listCongno) {
                         try {
                           getMvpView().hideLoading();
-                          if(!congnoList.isEmpty()) {
-                            getMvpView().showData(congnoList);
-                          }
+                          if(listCongno.getError().equalsIgnoreCase("2"))
+                            getMvpView().requestLogin();
+                          else if(listCongno.getError().equalsIgnoreCase("0"))
+                            getMvpView().showData(listCongno.getData());
+                          else
+                            getMvpView().showError(listCongno.getReason());
                         }catch (Exception e){
                             e.printStackTrace();
                         }

@@ -7,7 +7,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.fernandocejas.frodo.core.checks.Preconditions;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.libs.view.StateLayout;
@@ -17,13 +19,7 @@ import com.toan_itc.mobifone.mvp.presenter.login.LoginPresenter;
 import com.toan_itc.mobifone.mvp.view.login.LoginView;
 import com.toan_itc.mobifone.ui.activity.BaseActivity;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
-
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
 import static com.toan_itc.mobifone.utils.Utils.isPasswordValid;
 
@@ -49,7 +45,6 @@ public class ChangePasswordFragment extends BaseFragment implements LoginView {
   TextInputLayout mLayoutPassNew;
   @BindView(R.id.btnChangePass)
   Button mBtnChangePass;
-  Unbinder unbinder;
   private Context mContext;
 
   public static ChangePasswordFragment newInstance() {
@@ -111,6 +106,10 @@ public class ChangePasswordFragment extends BaseFragment implements LoginView {
   @Override
   public void updateProfile(boolean OK) {
 
+  }
+
+  @Override public void requestLogin() {
+    replaceFagment(getFragmentManager(), R.id.fragment, LoginFragment.newInstance());
   }
 
   @OnClick(R.id.btnChangePass)

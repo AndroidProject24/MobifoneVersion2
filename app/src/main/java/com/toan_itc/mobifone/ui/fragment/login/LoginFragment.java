@@ -92,7 +92,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
   @Override
   protected void initData() {
-
+    mLoginPresenter.getPreferencesHelper().clear();
   }
 
   @Override
@@ -192,6 +192,9 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
   }
 
+  @Override public void requestLogin() {
+
+  }
 
   @OnClick(R.id.tvRegister)
   void signUp(){

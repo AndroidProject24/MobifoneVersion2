@@ -19,4 +19,6 @@ public interface LoginView extends BaseView {
   void changePass(String data);
 
   void updateProfile(boolean OK);
+
+  void requestLogin();
 }

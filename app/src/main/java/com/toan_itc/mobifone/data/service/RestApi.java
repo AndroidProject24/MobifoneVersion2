@@ -1,7 +1,7 @@
 package com.toan_itc.mobifone.data.service;
 
 import com.toan_itc.mobifone.mvp.model.JsonArray;
-import com.toan_itc.mobifone.mvp.model.congno.Congno;
+import com.toan_itc.mobifone.mvp.model.congno.ListCongno;
 import com.toan_itc.mobifone.mvp.model.khoso.Dangsim;
 import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
 import com.toan_itc.mobifone.mvp.model.login.Exit;
@@ -93,7 +93,7 @@ public interface RestApi {
     /*CONGNO*/
     @FormUrlEncoded
     @POST("congno")
-    Observable<JsonArray<Congno>> getCongno(@Field("auth_code") String auth_code, @Field("iduser") String iduser);
+    Observable<ListCongno> getCongno(@Field("auth_code") String auth_code, @Field("iduser") String iduser);
 
     /*VAS*/
     @GET("captcha")

@@ -143,7 +143,6 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,M
     if(mPreferencesHelper.getJsonLogin()==null) {
       addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
     }else{
-      mainPresenter.checkLogin();
       addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
     }
   }

@@ -14,4 +14,6 @@ public interface VasView extends BaseView {
     void getGoiCuoc(List<Goicuoc> goicuocList);
 
     void registerVas(Vas vas);
+
+    void requestLogin();
 }

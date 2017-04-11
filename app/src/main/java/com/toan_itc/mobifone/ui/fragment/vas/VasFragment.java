@@ -19,6 +19,7 @@ import com.toan_itc.mobifone.mvp.view.vas.VasView;
 import com.toan_itc.mobifone.ui.activity.BaseActivity;
 import com.toan_itc.mobifone.ui.adapter.vas.GoiCuocAdapter;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
+import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -71,6 +72,10 @@ public class VasFragment extends BaseFragment implements VasView {
   @Override
   public void registerVas(Vas vas) {
     Snackbar.make(getLoadingTargetView(),vas.getReason(),Snackbar.LENGTH_LONG).show();
+  }
+
+  @Override public void requestLogin() {
+    replaceFagment(getFragmentManager(), R.id.fragment, LoginFragment.newInstance());
   }
 
   @OnClick(R.id.btnRegister)

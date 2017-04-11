@@ -72,8 +72,11 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                     }
 
                     @Override
-                    public void onNext(Login shopses) {
+                    public void onNext(Login login) {
                         try {
+                          if(login.getError()==2)
+                            getMvpView().requestLogin();
+                          else
                             getMvpView().changePass(null);
                         }catch (Exception e){
                             e.printStackTrace();
@@ -105,7 +108,9 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                   if(login.getError()==0) {
                     mPreferencesHelper.putJsonLogin(login);
                     getMvpView().updateProfile(true);
-                  }else
+                  }else if (login.getError()==2)
+                    getMvpView().requestLogin();
+                  else
                     getMvpView().updateProfile(false);
                 }catch (Exception e){
                   e.printStackTrace();

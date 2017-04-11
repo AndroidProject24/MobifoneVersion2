@@ -1,6 +1,6 @@
 package com.toan_itc.mobifone.data.service;
 
-import com.toan_itc.mobifone.mvp.model.congno.Congno;
+import com.toan_itc.mobifone.mvp.model.congno.ListCongno;
 import com.toan_itc.mobifone.mvp.model.khoso.Dangsim;
 import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
 import com.toan_itc.mobifone.mvp.model.login.Exit;
@@ -118,10 +118,9 @@ public class RestData {
             .observeOn(AndroidSchedulers.mainThread());
   }
   //Congno
-  public Observable<List<Congno>> getCongno(String auth_code, String idUser) {
+  public Observable<ListCongno> getCongno(String auth_code, String idUser) {
     return mRestApi.getCongno(auth_code,idUser)
         .subscribeOn(Schedulers.io())
-        .map(data->data.data)
         .observeOn(AndroidSchedulers.mainThread());
   }
   //Vas

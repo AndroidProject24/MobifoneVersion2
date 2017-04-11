@@ -49,14 +49,19 @@ public class VasPresenter extends BasePresenter<VasView> {
     }
   public void registerGoiCuoc(String sdt,String captcha,String magoi){
     getMvpView().showLoading();
-    addSubscribe(mRestData.registerVas(mPreferencesHelper.getJsonLogin().get_$0().getAuth_code(),mPreferencesHelper.getJsonLogin().get_$0().getId(),
-                sdt,captcha,magoi)
+    addSubscribe(mRestData.registerVas(sdt,captcha,magoi,mPreferencesHelper.getJsonLogin().get_$0().getAuth_code(),
+                                      mPreferencesHelper.getJsonLogin().get_$0().getId())
         .subscribe(new DefaultObserver<Vas>() {
           @Override
           public void onNext(Vas vas) {
             try {
               getMvpView().hideLoading();
-              getMvpView().registerVas(vas);
+              if(vas.getError()==2)
+                getMvpView().requestLogin();
+              else if(vas.getError()==0)
+                getMvpView().registerVas(vas);
+              else
+                getMvpView().showError(vas.getReason());
             }catch (Exception e){
               e.printStackTrace();
             }
