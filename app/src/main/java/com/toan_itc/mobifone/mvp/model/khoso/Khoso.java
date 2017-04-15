@@ -5,19 +5,28 @@ import java.util.List;
 public class Khoso {
 
   /**
+   * idkm : 784,782
    * error : 0
    * reason : success
-   * data : [{"sdt":"903852409","sdtview":"0903.852.409","loai":"tudo","gia":"60000"},{"sdt":"903157209","sdtview":"0903.157.209","loai":"tudo","gia":"60000"},{"sdt":"902604409","sdtview":"0902.604.409","loai":"tudo","gia":"60000"},{"sdt":"902652409","sdtview":"0902.652.409","loai":"tudo","gia":"60000"},{"sdt":"902406809","sdtview":"0902.406.809","loai":"tudo","gia":"60000"},{"sdt":"902538509","sdtview":"0902.538.509","loai":"tudo","gia":"60000"},{"sdt":"906773809","sdtview":"0906.773.809","loai":"tudo","gia":"60000"},{"sdt":"906797309","sdtview":"0906.797.309","loai":"tudo","gia":"60000"},{"sdt":"906325509","sdtview":"0906.325.509","loai":"tudo","gia":"60000"},{"sdt":"906924109","sdtview":"0906.924.109","loai":"tudo","gia":"60000"},{"sdt":"909978309","sdtview":"0909.978.309","loai":"tudo","gia":"60000"},{"sdt":"901341809","sdtview":"0901.341.809","loai":"tudo","gia":"60000"},{"sdt":"901445209","sdtview":"0901.445.209","loai":"tudo","gia":"60000"},{"sdt":"903739809","sdtview":"0903.739.809","loai":"tudo","gia":"60000"},{"sdt":"903137109","sdtview":"0903.137.109","loai":"tudo","gia":"60000"},{"sdt":"909320109","sdtview":"0909.320.109","loai":"tudo","gia":"60000"},{"sdt":"909760409","sdtview":"0909.760.409","loai":"tudo","gia":"60000"},{"sdt":"909054309","sdtview":"0909.054.309","loai":"tudo","gia":"60000"},{"sdt":"909861709","sdtview":"0909.861.709","loai":"tudo","gia":"60000"},{"sdt":"902882109","sdtview":"0902.882.109","loai":"tudo","gia":"60000"},{"sdt":"906773509","sdtview":"0906.773.509","loai":"tudo","gia":"60000"},{"sdt":"901378909","sdtview":"0901.378.909","loai":"tudo","gia":"60000"},{"sdt":"901478809","sdtview":"0901.478.809","loai":"tudo","gia":"60000"},{"sdt":"903758009","sdtview":"0903.758.009","loai":"tudo","gia":"60000"},{"sdt":"903639709","sdtview":"0903.639.709","loai":"tudo","gia":"60000"},{"sdt":"903163109","sdtview":"0903.163.109","loai":"tudo","gia":"60000"},{"sdt":"909267209","sdtview":"0909.267.209","loai":"tudo","gia":"60000"},{"sdt":"909296809","sdtview":"0909.296.809","loai":"tudo","gia":"60000"},{"sdt":"909126209","sdtview":"0909.126.209","loai":"tudo","gia":"60000"},{"sdt":"902588909","sdtview":"0902.588.909","loai":"tudo","gia":"60000"},{"sdt":"906855009","sdtview":"0906.855.009","loai":"tudo","gia":"60000"},{"sdt":"901301609","sdtview":"0901.301.609","loai":"tudo","gia":"60000"},{"sdt":"903380209","sdtview":"0903.380.209","loai":"tudo","gia":"60000"},{"sdt":"901182809","sdtview":"0901.182.809","loai":"tudo","gia":"60000"},{"sdt":"909282509","sdtview":"0909.282.509","loai":"tudo","gia":"60000"},{"sdt":"909398409","sdtview":"0909.398.409","loai":"tudo","gia":"60000"},{"sdt":"909568409","sdtview":"0909.568.409","loai":"tudo","gia":"60000"},{"sdt":"909758309","sdtview":"0909.758.309","loai":"tudo","gia":"60000"},{"sdt":"909948509","sdtview":"0909.948.509","loai":"tudo","gia":"60000"},{"sdt":"906860409","sdtview":"0906.860.409","loai":"tudo","gia":"60000"},{"sdt":"901313809","sdtview":"0901.313.809","loai":"tudo","gia":"60000"},{"sdt":"902637909","sdtview":"0902.637.909","loai":"tudo","gia":"60000"},{"sdt":"902960309","sdtview":"0902.960.309","loai":"tudo","gia":"60000"},{"sdt":"909291409","sdtview":"0909.291.409","loai":"tudo","gia":"60000"},{"sdt":"902472209","sdtview":"0902.472.209","loai":"tudo","gia":"60000"},{"sdt":"906975509","sdtview":"0906.975.509","loai":"tudo","gia":"60000"},{"sdt":"906994709","sdtview":"0906.994.709","loai":"tudo","gia":"60000"},{"sdt":"903979309","sdtview":"0903.979.309","loai":"tudo","gia":"60000"},{"sdt":"903383509","sdtview":"0903.383.509","loai":"tudo","gia":"60000"},{"sdt":"903066509","sdtview":"0903.066.509","loai":"tudo","gia":"60000"}]
-   * totalrows : 378
-   * page : {"firstLink":"http://n3t.top/test/api/timsim?search=09&kho=trasau&dau=090","prevLink":"","nextLink":"http://n3t.top/test/api/timsim?search=09&kho=trasau&dau=090&page=2","lastLink":"http://n3t.top/test/api/timsim?search=09&kho=trasau&dau=090&page=8"}
-   * pagelist : {"1":"","2":"http://n3t.top/test/api/timsim?search=09&kho=trasau&dau=090&page=2","3":"http://n3t.top/test/api/timsim?search=09&kho=trasau&dau=090&page=3","4":"http://n3t.top/test/api/timsim?search=09&kho=trasau&dau=090&page=4"}
+   * data : [{"sdtview":"0901.304.254","goicuoc":"","gia":"60000"},{"sdtview":"0901.308.132","goicuoc":"","gia":"60000"},{"sdtview":"0901.308.346","goicuoc":"","gia":"60000"},{"sdtview":"0901.318.190","goicuoc":"","gia":"60000"},{"sdtview":"0901.319.471","goicuoc":"","gia":"60000"},{"sdtview":"0901.329.762","goicuoc":"","gia":"60000"},{"sdtview":"0901.341.076","goicuoc":"","gia":"60000"},{"sdtview":"0901.345.025","goicuoc":"","gia":"60000"},{"sdtview":"0901.347.512","goicuoc":"","gia":"60000"},{"sdtview":"0901.353.174","goicuoc":"","gia":"60000"},{"sdtview":"0901.353.861","goicuoc":"","gia":"60000"},{"sdtview":"0901.354.621","goicuoc":"","gia":"60000"},{"sdtview":"0901.362.147","goicuoc":"","gia":"60000"},{"sdtview":"0901.365.041","goicuoc":"","gia":"60000"},{"sdtview":"0901.372.483","goicuoc":"","gia":"60000"},{"sdtview":"0901.373.843","goicuoc":"","gia":"60000"},{"sdtview":"0901.375.106","goicuoc":"","gia":"60000"},{"sdtview":"0901.375.148","goicuoc":"","gia":"60000"},{"sdtview":"0901.377.413","goicuoc":"","gia":"60000"},{"sdtview":"0901.381.273","goicuoc":"","gia":"60000"},{"sdtview":"0901.381.564","goicuoc":"","gia":"60000"},{"sdtview":"0901.384.876","goicuoc":"","gia":"60000"},{"sdtview":"0901.389.752","goicuoc":"","gia":"60000"},{"sdtview":"0901.391.305","goicuoc":"","gia":"60000"},{"sdtview":"0901.392.807","goicuoc":"","gia":"60000"},{"sdtview":"0901.394.537","goicuoc":"","gia":"60000"},{"sdtview":"0901.399.823","goicuoc":"","gia":"60000"},{"sdtview":"0901.401.921","goicuoc":"","gia":"60000"},{"sdtview":"0901.402.381","goicuoc":"","gia":"60000"},{"sdtview":"0901.403.654","goicuoc":"","gia":"60000"},{"sdtview":"0901.404.783","goicuoc":"","gia":"60000"},{"sdtview":"0901.405.067","goicuoc":"","gia":"60000"},{"sdtview":"0901.406.182","goicuoc":"","gia":"60000"},{"sdtview":"0901.406.361","goicuoc":"","gia":"60000"},{"sdtview":"0901.406.581","goicuoc":"","gia":"60000"},{"sdtview":"0901.407.602","goicuoc":"","gia":"60000"},{"sdtview":"0901.408.143","goicuoc":"","gia":"60000"},{"sdtview":"0901.408.260","goicuoc":"","gia":"60000"},{"sdtview":"0901.409.654","goicuoc":"","gia":"60000"},{"sdtview":"0901.409.806","goicuoc":"","gia":"60000"},{"sdtview":"0901.409.924","goicuoc":"","gia":"60000"},{"sdtview":"0901.411.265","goicuoc":"","gia":"60000"},{"sdtview":"0901.411.306","goicuoc":"","gia":"60000"},{"sdtview":"0901.411.505","goicuoc":"","gia":"60000"},{"sdtview":"0901.411.875","goicuoc":"","gia":"60000"},{"sdtview":"0901.413.290","goicuoc":"","gia":"60000"},{"sdtview":"0901.413.405","goicuoc":"","gia":"60000"},{"sdtview":"0901.413.904","goicuoc":"","gia":"60000"},{"sdtview":"0901.413.934","goicuoc":"","gia":"60000"},{"sdtview":"0901.413.976","goicuoc":"","gia":"60000"}]
+   * totalrows : 391749
+   * page : {"nextLink":"http://n3t.top/test/api/timsim?search=&kho=trasau&dau=090&page=2"}
    */
 
+  private String idkm;
   private int error;
   private String reason;
   private String totalrows;
   private PageBean page;
-  private List<Data> data;
+  private List<DataBean> data;
+
+  public String getIdkm() {
+    return idkm;
+  }
+
+  public void setIdkm(String idkm) {
+    this.idkm = idkm;
+  }
 
   public int getError() {
     return error;
@@ -50,41 +59,41 @@ public class Khoso {
   public void setPage(PageBean page) {
     this.page = page;
   }
-  public List<Data> getData() {
+
+  public List<DataBean> getData() {
     return data;
   }
 
-  public void setData(List<Data> data) {
+  public void setData(List<DataBean> data) {
     this.data = data;
   }
-  public class Data{
-    private String sdt;
+
+  public static class PageBean {
+    /**
+     * nextLink : http://n3t.top/test/api/timsim?search=&kho=trasau&dau=090&page=2
+     */
+
+    private String nextLink;
+
+    public String getNextLink() {
+      return nextLink;
+    }
+
+    public void setNextLink(String nextLink) {
+      this.nextLink = nextLink;
+    }
+  }
+
+  public static class DataBean {
+    /**
+     * sdtview : 0901.304.254
+     * goicuoc :
+     * gia : 60000
+     */
+
     private String sdtview;
-    private String loai;
+    private String goicuoc;
     private String gia;
-    public void setSdt(String sdt){
-      this.sdt = sdt;
-    }
-
-    public String getSdt(){
-      return sdt;
-    }
-
-    public void setLoai(String loai){
-      this.loai = loai;
-    }
-
-    public String getLoai(){
-      return loai;
-    }
-
-    public void setGia(String gia){
-      this.gia = gia;
-    }
-
-    public String getGia(){
-      return gia;
-    }
 
     public String getSdtview() {
       return sdtview;
@@ -94,16 +103,20 @@ public class Khoso {
       this.sdtview = sdtview;
     }
 
-  }
-  public class PageBean {
-    private String nextLink;
-
-    public String getNextLink() {
-      return nextLink;
+    public String getGoicuoc() {
+      return goicuoc;
     }
 
-    public void setNextLink(String nextLink) {
-      this.nextLink = nextLink;
+    public void setGoicuoc(String goicuoc) {
+      this.goicuoc = goicuoc;
+    }
+
+    public String getGia() {
+      return gia;
+    }
+
+    public void setGia(String gia) {
+      this.gia = gia;
     }
   }
 }

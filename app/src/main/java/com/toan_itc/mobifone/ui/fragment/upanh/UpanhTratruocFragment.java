@@ -103,7 +103,7 @@ public class UpanhTratruocFragment extends TakePhotoFragment implements UpanhVie
 
   @OnClick(R.id.fab)
   public void btn_upload(){
-    mUpanhPresenter.uploadTratruoc("01676542546","125",requestBody,requestBody1,requestBody2);
+    mUpanhPresenter.uploadTratruoc(mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getName(),mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getDichvu(),requestBody,requestBody1,requestBody2);
   }
 
   @OnClick(R.id.btn_cmnd_mattruoc)

@@ -107,7 +107,7 @@ public class TraSauCanhanFragment extends TakePhotoFragment implements UpanhView
 
   @OnClick(R.id.fab)
   public void btn_upload(){
-    mUpanhPresenter.uploadTraSauCanhan("01676542546","125",requestBody,requestBody1,requestBody2,requestBody3,requestBody4);
+    mUpanhPresenter.uploadTraSauCanhan(mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getName(),mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getDichvu(),requestBody,requestBody1,requestBody2,requestBody3,requestBody4);
   }
   @OnClick(R.id.btn_cmnd_mattruoc)
   public void btn_cmnd_mattruoc(){

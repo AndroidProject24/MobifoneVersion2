@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
+import com.toan_itc.mobifone.mvp.model.khoso.Info;
 import com.toan_itc.mobifone.mvp.model.login.Login;
 
 import javax.inject.Inject;
@@ -19,6 +20,7 @@ public class PreferencesHelper {
   private static final String PREF_KEY_USER_ID = "PREF_KEY_USER_ID";
   private static final String PREF_KEY_USER_PASS = "PREF_KEY_USER_PASS";
   private static final String PREF_USER= "PREF_USER";
+  private static final String PREF_USER_INFO= "PREF_USER_INFO";
   @Inject
   public PreferencesHelper(Context context) {
     mPref = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
@@ -59,6 +61,19 @@ public class PreferencesHelper {
     String data = mPref.getString(PREF_USER, null);
     if (data != null) {
       return new Gson().fromJson(data, Login.class);
+    }
+    return null;
+  }
+
+  public void putJsonInfo(Info info) {
+    mPref.edit().putString(PREF_USER_INFO, new Gson().toJson(info)).apply();
+  }
+
+  @Nullable
+  public Info getJsonInfo() {
+    String data = mPref.getString(PREF_USER_INFO, null);
+    if (data != null) {
+      return new Gson().fromJson(data, Info.class);
     }
     return null;
   }

@@ -109,7 +109,7 @@ public class TraSauDoanhnghiepFragment extends TakePhotoFragment implements Upan
 
   @OnClick(R.id.fab)
   public void btn_upload(){
-    mUpanhPresenter.uploadDoanhnghiep("01676542546","125",requestBody,requestBody1,requestBody2,requestBody3,requestBody4,requestBody5);
+    mUpanhPresenter.uploadDoanhnghiep(mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getName(),mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getDichvu(),requestBody,requestBody1,requestBody2,requestBody3,requestBody4,requestBody5);
   }
   @OnClick(R.id.btn_cmnd_mattruoc)
   public void btn_cmnd_mattruoc(){

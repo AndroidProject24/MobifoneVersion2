@@ -64,8 +64,6 @@ public class KhosoFragment extends BaseFragment {
             android.R.color.holo_orange_light,
             android.R.color.holo_green_light};
     mCoordinatortablayout
-            .setTitle(getString(R.string.kho_so))
-            .setBackEnable(true)
             .setContentScrimColorArray(colorArray)
             .setLoadHeaderImagesListener((imageView, tab) -> Glide.with(mContext).load(Constant.URL_IMAGE).into(imageView))
             .setupWithViewPager(mViewPager);

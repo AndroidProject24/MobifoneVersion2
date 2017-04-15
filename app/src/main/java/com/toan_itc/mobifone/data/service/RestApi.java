@@ -79,6 +79,9 @@ public interface RestApi {
     @GET("theloai/{IDtheloai}")
     Observable<JsonArray<Theloai>> getThutuc(@Path("IDtheloai") int IDtheloai);
 
+    @GET("theloai/{IDtheloai}")
+    Observable<JsonArray<com.toan_itc.mobifone.mvp.model.khoso.Theloai>> getTheLoai(@Path("IDtheloai") int IDtheloai);
+
     /*Khoso*/
     @GET("timsim")
     Observable<Khoso> getKhoso(@Query("search") String search, @Query("kho") String kho, @Query("dau") String dau,@Query("dang") String dang);

@@ -1,8 +1,12 @@
 package com.toan_itc.mobifone.ui.fragment.khoso;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +24,7 @@ import com.jakewharton.rxbinding.internal.Preconditions;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
 import com.toan_itc.mobifone.R;
+import com.toan_itc.mobifone.intdef.IntDef;
 import com.toan_itc.mobifone.intdef.KhoSimIndexDef;
 import com.toan_itc.mobifone.intdef.KhosimDef;
 import com.toan_itc.mobifone.intdef.StringDef;
@@ -27,14 +32,18 @@ import com.toan_itc.mobifone.libs.logger.Logger;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.model.khoso.Dangsim;
 import com.toan_itc.mobifone.mvp.model.khoso.Dauso;
+import com.toan_itc.mobifone.mvp.model.khoso.Info;
 import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
 import com.toan_itc.mobifone.mvp.presenter.khoso.KhosoPresenter;
 import com.toan_itc.mobifone.mvp.view.khoso.KhosoView;
 import com.toan_itc.mobifone.ui.activity.BaseActivity;
+import com.toan_itc.mobifone.ui.activity.WebviewActivity;
 import com.toan_itc.mobifone.ui.adapter.khoso.DangsimAdapter;
 import com.toan_itc.mobifone.ui.adapter.khoso.DausoAdapter;
 import com.toan_itc.mobifone.ui.adapter.khoso.KhosoAdapter;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
+import com.toan_itc.mobifone.ui.fragment.upanh.UpanhTratruocFragment;
+import com.toan_itc.mobifone.utils.DialogUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -72,6 +81,10 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   private int mCurrentCounter=0;
   private Khoso mKhoso;
   private boolean isFist=true;
+  private TextInputEditText etName=null;
+  private TextInputEditText etEmail=null;
+  private TextInputEditText etPhone=null;
+  private AppCompatSpinner spinner=null ;
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
@@ -149,6 +162,74 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
           mKhosoAdapter.loadMoreFail();
         }
       }, mRecyclerview);
+      mKhosoAdapter.setOnItemChildClickListener((baseQuickAdapter, view, i) -> {
+        if(!TextUtils.isEmpty(khoso.getIdkm())) {
+          switch (view.getId()) {
+            case R.id.btn_goicuoc:
+              if(Preconditions.checkNotNull(getArguments().getInt(StringDef.BUNDLE_TITLE), "data not null!")==KhosimDef.SIM_TRA_SAU){
+                String[] listID=khoso.getIdkm().split(",");
+                DialogUtil.dialogBuilder(mContext, "Khuyến mãi", "Bạn có muốn xem chương trình khuyến mãi")
+                    .setNegativeButton("Cá nhân",
+                        (dialog, which) -> {
+                          dialog.dismiss();
+                          Intent intent = new Intent(mContext, WebviewActivity.class);
+                          intent.putExtra(StringDef.BUNDLE_DATA, "http://n3t.top/test/fire/viewbaiviet/"+listID[1]);
+                          startActivity(intent);
+                        }).setNeutralButton("Doanh nghiệp", (dialog, which) -> {
+                  dialog.dismiss();
+                  Intent intent = new Intent(mContext, WebviewActivity.class);
+                  intent.putExtra(StringDef.BUNDLE_DATA, "http://n3t.top/test/fire/viewbaiviet/"+listID[0]);
+                  startActivity(intent);
+                }).setPositiveButton("Không", (dialog, which) -> dialog.dismiss()).create().show();
+              }else {
+                DialogUtil.dialogBuilder(mContext, "Khuyến mãi",
+                    "Bạn có muốn xem chương trình khuyến mãi").setNegativeButton("Có", new DialogInterface.OnClickListener() {
+                  @Override public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    Intent intent = new Intent(mContext, WebviewActivity.class);
+                    intent.putExtra(StringDef.BUNDLE_DATA, "http://n3t.top/test/fire/viewbaiviet/"+khoso.getIdkm());
+                    startActivity(intent);
+                  }
+                }).setPositiveButton("Không", (dialog, which) -> dialog.dismiss()).create().show();
+              }
+              break;
+            case R.id.img_shop:
+              Dialog dialog=DialogUtil.dialogBuilder(mContext,"Nhập thông tin",R.layout.profile_layout).setNegativeButton("Có", new DialogInterface.OnClickListener() {
+                @Override public void onClick(DialogInterface dialog, int which) {
+                  try {
+                    if (!TextUtils.isEmpty(etName.getText().toString()) && !TextUtils.isEmpty(
+                        etEmail.getText().toString()) && !TextUtils.isEmpty(
+                        spinner.getSelectedItem().toString())) {
+                      Info info = new Info();
+                      info.setName(etName.getText().toString());
+                      info.setCmnd(etEmail.getText().toString());
+                      info.setDichvu(((com.toan_itc.mobifone.mvp.model.khoso.Theloai) spinner.getSelectedItem()).getIdloai());
+                      info.setHokhau(etPhone.getText().toString());
+                      mKhosoPresenter.getPreferencesHelper().putJsonInfo(info);
+                      dialog.dismiss();
+                      replaceFagment(getFragmentManager(), R.id.fragment, UpanhTratruocFragment.newInstance(IntDef.ONE));
+                    } else {
+                      Snackbar.make(mRecyclerview, "Vui lòng điền đầy đủ thông tin!", Snackbar.LENGTH_LONG).show();
+                    }
+                  }catch (Exception e){
+                    e.printStackTrace();
+                  }
+                }
+              }).setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                @Override public void onClick(DialogInterface dialog, int which) {
+                  dialog.dismiss();
+                }
+              }).create();
+              dialog.show();
+              etName=(TextInputEditText) dialog.findViewById(R.id.etName);
+              etEmail=(TextInputEditText) dialog.findViewById(R.id.etEmail);
+              etPhone=(TextInputEditText) dialog.findViewById(R.id.etPhone);
+              spinner = (AppCompatSpinner) dialog.findViewById(R.id.spinner);
+              mKhosoPresenter.getTheloai(mContext,spinner);
+              break;
+          }
+        }
+      });
     }catch (Exception e){
       e.printStackTrace();
     }

@@ -1,17 +1,19 @@
 package com.toan_itc.mobifone.mvp.presenter.khoso;
 
+import android.content.Context;
+import android.widget.Spinner;
 import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.data.rxjava.DefaultObserver;
 import com.toan_itc.mobifone.data.service.RestData;
 import com.toan_itc.mobifone.libs.logger.Logger;
 import com.toan_itc.mobifone.mvp.model.khoso.Dangsim;
 import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
+import com.toan_itc.mobifone.mvp.model.theloai.Theloai;
 import com.toan_itc.mobifone.mvp.presenter.base.BasePresenter;
 import com.toan_itc.mobifone.mvp.view.khoso.KhosoView;
-
+import com.toan_itc.mobifone.ui.adapter.khoso.TheloaiAdapter;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
 
 /**
@@ -21,7 +23,7 @@ import javax.inject.Inject;
 public class KhosoPresenter extends BasePresenter<KhosoView> {
   private RestData mRestData;
   private PreferencesHelper mPreferencesHelper;
-  private List<Khoso.Data> dataList=new ArrayList<>();
+  private List<Khoso.DataBean> dataList=new ArrayList<>();
   @Inject
   KhosoPresenter(RestData restData, PreferencesHelper preferencesHelper){
     this.mRestData=restData;
@@ -52,7 +54,7 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
               }
             }));
   }
-  public List<Khoso.Data> loadMore(String url){
+  public List<Khoso.DataBean> loadMore(String url){
     Logger.e("loadMore="+url);
     getMvpView().showLoading();
     addSubscribe(mRestData.getLoadmore(url)
@@ -102,5 +104,25 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
                 }
               }
             }));
+  }
+  public void getTheloai(Context mContext,Spinner spinner){
+    addSubscribe(mRestData.getTheLoai(115)
+        .subscribe(new DefaultObserver<List<com.toan_itc.mobifone.mvp.model.khoso.Theloai>>() {
+          @Override
+          public void onNext(List<com.toan_itc.mobifone.mvp.model.khoso.Theloai> theloaiList) {
+            try {
+              getMvpView().hideLoading();
+              if(theloaiList!=null&&!theloaiList.isEmpty()) {
+                TheloaiAdapter theloaiAdapter=new TheloaiAdapter(mContext, theloaiList);
+                spinner.setAdapter(theloaiAdapter);
+              }
+            }catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }));
+  }
+  public PreferencesHelper getPreferencesHelper(){
+    return mPreferencesHelper;
   }
 }

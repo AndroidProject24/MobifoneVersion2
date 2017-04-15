@@ -236,9 +236,9 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,M
   public void hideToolBar(boolean isHide) {
     if(mToolbar != null) {
       if (isHide)
-        getSupportActionBar().hide();
+       mToolbar.setVisibility(View.GONE);
       else
-        getSupportActionBar().show();
+        mToolbar.setVisibility(View.VISIBLE);
     }
   }
   private void setPermissions(){

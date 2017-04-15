@@ -117,6 +117,13 @@ public class RestData {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
   }
+  public Observable<List<com.toan_itc.mobifone.mvp.model.khoso.Theloai>> getTheLoai(int IDtheloai) {
+    return mRestApi.getTheLoai(IDtheloai)
+        .map(data->data.data)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
   //Congno
   public Observable<ListCongno> getCongno(String auth_code, String idUser) {
     return mRestApi.getCongno(auth_code,idUser)

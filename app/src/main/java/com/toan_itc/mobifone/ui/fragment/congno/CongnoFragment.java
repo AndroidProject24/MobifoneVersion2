@@ -12,10 +12,10 @@ import com.toan_itc.mobifone.mvp.presenter.congno.CongnoPresenter;
 import com.toan_itc.mobifone.mvp.view.congno.CongnoView;
 import com.toan_itc.mobifone.ui.activity.BaseActivity;
 import com.toan_itc.mobifone.ui.adapter.congno.CongnoAdapter;
-import com.toan_itc.mobifone.ui.adapter.congno.ListImageAdapter;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
 import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -60,10 +60,9 @@ public class CongnoFragment extends BaseFragment implements CongnoView{
     congnoAdapter.openLoadAnimation();
     mRecyclerview.setAdapter(congnoAdapter);
     congnoAdapter.setOnItemChildClickListener((baseQuickAdapter, view, i) -> {
-      List<String> wordList = Arrays.asList(dataBeanList.get(i).getImages().split(","));
-      ListImageAdapter congnoAdapter1 =new ListImageAdapter(wordList);
-      congnoAdapter1.openLoadAnimation();
-      mRecyclerview.setAdapter(congnoAdapter1);
+      ArrayList<String> wordList = new ArrayList<>();
+      Collections.addAll(wordList, dataBeanList.get(i).getImages().split(","));
+      replaceFagment(getFragmentManager(), R.id.fragment, ListImageFragment.newInstance(wordList));
     });
   }
 

@@ -9,6 +9,7 @@ import com.fernandocejas.frodo.core.checks.Preconditions;
 import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.data.rxjava.DefaultObserver;
 import com.toan_itc.mobifone.data.service.RestData;
+import com.toan_itc.mobifone.libs.logger.Logger;
 import com.toan_itc.mobifone.mvp.model.upanh.Upanh;
 import com.toan_itc.mobifone.mvp.presenter.base.BasePresenter;
 import com.toan_itc.mobifone.mvp.view.upanh.UpanhView;
@@ -58,6 +59,7 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
             .getAsJSONObject(new JSONObjectRequestListener() {
               @Override
               public void onResponse(JSONObject response) {
+                Logger.e(response.toString());
                 getMvpView().uploadOK();
               }
               @Override
@@ -205,5 +207,8 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
                 }
               }
             }));
+  }
+  public PreferencesHelper getmPreferencesHelper(){
+    return mPreferencesHelper;
   }
 }

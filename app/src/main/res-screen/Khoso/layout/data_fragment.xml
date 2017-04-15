@@ -12,7 +12,7 @@
         android:background="@null"
         android:gravity="start|center_vertical"
         android:hint="@string/home_txt_hint_search"
-        android:digits="*?012345789"
+        android:digits="*?0123456789"
         android:textColor="@color/md_black_1000"
         android:textSize="14sp"/>
     <android.support.v7.widget.AppCompatSpinner

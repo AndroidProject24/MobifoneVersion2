@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="rippelColor">#5F000000</color>
-    <color name="primary_dark">#07bfac</color>
+    <color name="primary_dark">#87af4a</color>
     <color name="emailbackground">#0977ec</color>
     <color name="backgroundPrimary">#EEEEEE</color>
-    <color name="colorPrimary">#07bfac</color>
-    <color name="colorPrimaryDark">#00897B</color>
+    <color name="colorPrimary">#87af4a</color>
+    <color name="colorPrimaryDark">#4b7111</color>
     <color name="colorAccent">#FFFFFF</color>
     <color name="background_item">#5F000000</color> <!-- 12% -->
     <color name="white">#FFFFFF</color>

@@ -7,14 +7,17 @@ import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
 
 import java.util.List;
 
-public class KhosoAdapter extends BaseQuickAdapter<Khoso.Data, BaseViewHolder> {
-    public KhosoAdapter(List<Khoso.Data> datas) {
+public class KhosoAdapter extends BaseQuickAdapter<Khoso.DataBean, BaseViewHolder> {
+    public KhosoAdapter(List<Khoso.DataBean> datas) {
         super(R.layout.khoso_item,datas);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, Khoso.Data khoso) {
-        helper.setText(R.id.txt_name, khoso.getSdtview());
-        helper.setText(R.id.txt_vnd,khoso.getGia());
+    protected void convert(BaseViewHolder helper, Khoso.DataBean khoso) {
+      helper.setText(R.id.txt_vnd,khoso.getGia())
+          .setText(R.id.txt_name, khoso.getSdtview())
+          .setText(R.id.btn_goicuoc, khoso.getGoicuoc())
+          .addOnClickListener(R.id.btn_goicuoc)
+          .addOnClickListener(R.id.img_shop);
     }
 }

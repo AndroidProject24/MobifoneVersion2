@@ -7,10 +7,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.utils.Constant;
-import java.util.List;
+import java.util.ArrayList;
 
 public class ListImageAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-    public ListImageAdapter(List<String> datas) {
+    public ListImageAdapter(ArrayList<String> datas) {
         super(R.layout.image_item,datas);
     }
 
