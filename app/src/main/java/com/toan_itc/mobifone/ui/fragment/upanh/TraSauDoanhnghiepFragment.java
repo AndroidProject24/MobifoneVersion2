@@ -15,7 +15,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.github.clans.fab.FloatingActionButton;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.compress.CompressConfig;
@@ -30,15 +32,10 @@ import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.presenter.upanh.UpanhPresenter;
 import com.toan_itc.mobifone.mvp.view.upanh.UpanhView;
 import com.toan_itc.mobifone.ui.activity.BaseActivity;
+import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
 import com.toan_itc.mobifone.utils.FileUtils;
-
 import java.io.File;
-
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import static com.toan_itc.mobifone.utils.ImageUtils.loadImageView;
 
@@ -109,7 +106,7 @@ public class TraSauDoanhnghiepFragment extends TakePhotoFragment implements Upan
 
   @OnClick(R.id.fab)
   public void btn_upload(){
-    mUpanhPresenter.uploadDoanhnghiep(mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getName(),mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getDichvu(),requestBody,requestBody1,requestBody2,requestBody3,requestBody4,requestBody5);
+    mUpanhPresenter.uploadDoanhnghiep(mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getPhone(),mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getDichvu(),requestBody,requestBody1,requestBody2,requestBody3,requestBody4,requestBody5);
   }
   @OnClick(R.id.btn_cmnd_mattruoc)
   public void btn_cmnd_mattruoc(){
@@ -250,6 +247,9 @@ public class TraSauDoanhnghiepFragment extends TakePhotoFragment implements Upan
     super.takeSuccess(result);
     Logger.e("takeSuccess：" + result.getImage().getCompressPath());
     returnData(result.getImage().getCompressPath());
+  }
+  @Override public void requestLogin() {
+    replaceFagment(getFragmentManager(), R.id.fragment, LoginFragment.newInstance());
   }
 }
 

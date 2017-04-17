@@ -13,6 +13,8 @@ import com.toan_itc.mobifone.mvp.model.vas.Goicuoc;
 import com.toan_itc.mobifone.mvp.model.vas.Vas;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -108,4 +110,8 @@ public interface RestApi {
     @FormUrlEncoded
     @POST("banvas")
     Observable<Vas> getVas(@Field("auth_code") String auth_code, @Field("iduser") String iduser, @Field("sdt") String sdt, @Field("captcha") String captcha, @Field("magoi") String magoi);
+
+    @GET("smsvas")
+    Observable<Response<ResponseBody>> checkVas(@Query("auth_code") String auth_code, @Query("iduser") String iduser,@Query("sdt") String sdt,@Query("from") String from,@Query("to") String to);
+
 }

@@ -6,6 +6,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.TextUtils;
+import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,7 +26,7 @@ import javax.inject.Inject;
 
 import static com.toan_itc.mobifone.utils.ImageUtils.loadImageView;
 
-public class VasFragment extends BaseFragment implements VasView {
+public class VasFragment extends BaseFragment implements VasView,View.OnClickListener{
   @BindView(R.id.edt_sdt) TextInputEditText edtSdt;
   @BindView(R.id.spinner) AppCompatSpinner spinner;
   @BindView(R.id.img_captcha) AppCompatImageView imgCaptcha;
@@ -78,13 +79,25 @@ public class VasFragment extends BaseFragment implements VasView {
     replaceFagment(getFragmentManager(), R.id.fragment, LoginFragment.newInstance());
   }
 
+  @Override public void showHtml(String html) {
+
+  }
+
   @OnClick(R.id.btnRegister)
   public void btnRegister(){
     if (!TextUtils.isEmpty(edtSdt.getText().toString()) && !TextUtils.isEmpty(edtCaptcha.getText().toString())) {
-      vasPresenter.registerGoiCuoc(edtSdt.getText().toString(),edtCaptcha.getText().toString(),((Goicuoc) spinner.getSelectedItem()).getMagoi());
+      vasPresenter.registerGoiCuoc(edtSdt.getText().toString(),edtCaptcha.getText().toString(),((Goicuoc) spinner.getSelectedItem()).getMagoi(),this);
     }else{
-      Snackbar.make(getLoadingTargetView(),"vui lòng nhập đầy đủ thông tin!",Snackbar.LENGTH_LONG).show();;
+      Snackbar.make(getLoadingTargetView(),"vui lòng nhập đầy đủ thông tin!",Snackbar.LENGTH_LONG).show();
     }
+  }
+  @OnClick(R.id.btncheckVas)
+  void checkVAS(){
+    replaceFagment(getFragmentManager(),R.id.fragment, CheckVasFragment.newInstance(edtSdt.getText().toString()));
+  }
+
+  @Override public void onClick(View v) {
+    replaceFagment(getFragmentManager(),R.id.fragment, VasFragment.newInstance());
   }
 }
 

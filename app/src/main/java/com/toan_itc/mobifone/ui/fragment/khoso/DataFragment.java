@@ -20,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.jakewharton.rxbinding.internal.Preconditions;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
@@ -42,6 +43,7 @@ import com.toan_itc.mobifone.ui.adapter.khoso.DangsimAdapter;
 import com.toan_itc.mobifone.ui.adapter.khoso.DausoAdapter;
 import com.toan_itc.mobifone.ui.adapter.khoso.KhosoAdapter;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
+import com.toan_itc.mobifone.ui.fragment.upanh.UpanhTraSauFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.UpanhTratruocFragment;
 import com.toan_itc.mobifone.utils.DialogUtil;
 import java.util.ArrayList;
@@ -109,7 +111,6 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
     ((BaseActivity) getActivity()).getActivityComponent().inject(this);
     mKhosoPresenter.attachView(this);
     mRecyclerview.setLayoutManager(new LinearLayoutManager(mContext));
-    subscribeToEditText();
     mRadioGroup.setOnCheckedChangeListener(this);
     List<Dauso> dausoList = new ArrayList<>();
     dausoList.add(0, new Dauso("Tất cả"));
@@ -201,13 +202,16 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
                         etEmail.getText().toString()) && !TextUtils.isEmpty(
                         spinner.getSelectedItem().toString())) {
                       Info info = new Info();
-                      info.setName(etName.getText().toString());
+                      info.setPhone(khoso.getData().get(i).getSdtview());
                       info.setCmnd(etEmail.getText().toString());
                       info.setDichvu(((com.toan_itc.mobifone.mvp.model.khoso.Theloai) spinner.getSelectedItem()).getIdloai());
                       info.setHokhau(etPhone.getText().toString());
                       mKhosoPresenter.getPreferencesHelper().putJsonInfo(info);
                       dialog.dismiss();
-                      replaceFagment(getFragmentManager(), R.id.fragment, UpanhTratruocFragment.newInstance(IntDef.ONE));
+                      if(Preconditions.checkNotNull(getArguments().getInt(StringDef.BUNDLE_TITLE), "data not null!")==KhosimDef.SIM_TRA_SAU)
+                        replaceFagment(getFragmentManager(), R.id.fragment, UpanhTraSauFragment.newInstance(IntDef.TWO));
+                      else
+                        replaceFagment(getFragmentManager(), R.id.fragment, UpanhTratruocFragment.newInstance(IntDef.ONE));
                     } else {
                       Snackbar.make(mRecyclerview, "Vui lòng điền đầy đủ thông tin!", Snackbar.LENGTH_LONG).show();
                     }
@@ -244,11 +248,19 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
 
   @Override
   public void emty(String message) {
+    if(mKhosoAdapter==null)
+      mKhosoAdapter=new KhosoAdapter(null);
     mKhosoAdapter.setNewData(null);
     mKhosoAdapter.setEmptyView(R.layout.view_empty, (ViewGroup) mRecyclerview.getParent());
     Snackbar.make(mRecyclerview,message,Snackbar.LENGTH_LONG).show();
   }
 
+  @OnClick(R.id.btn_search)
+  void clickSearch(){
+    if (txt_search.getText().length() > 0) {
+      search_sim(txt_search.getText().toString(),returnDauso(),returnDangSo());
+    }
+  }
   private void subscribeToEditText() {
     addSubscription(RxTextView.textChangeEvents(txt_search)
             .skip(1)
@@ -385,7 +397,8 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   }
   private String returnDangSo(){
     try {
-      return ((Dangsim) mSpinner.getSelectedItem()).getTenkey();
+      if(((Dangsim) mSpinner.getSelectedItem()).getTenkey()!=null)
+        return ((Dangsim) mSpinner.getSelectedItem()).getTenkey();
     }catch (Exception e){
       e.printStackTrace();
     }

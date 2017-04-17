@@ -16,6 +16,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -140,6 +142,12 @@ public class RestData {
 
   public Observable<Vas> registerVas(String sdt,String captcha,String magoi,String auth,String idUser) {
     return mRestApi.getVas(auth,idUser,sdt,captcha,magoi)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<Response<ResponseBody>> checkVas(String auth,String idUser,String sdt,String dateStart,String dateEnd) {
+    return mRestApi.checkVas(auth,idUser,sdt,dateStart,dateEnd)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }

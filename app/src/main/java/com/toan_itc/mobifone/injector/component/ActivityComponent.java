@@ -19,6 +19,7 @@ import com.toan_itc.mobifone.ui.fragment.upanh.TraSauCanhanFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.TraSauDoanhnghiepFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.UpanhTratruocFragment;
 
+import com.toan_itc.mobifone.ui.fragment.vas.CheckVasFragment;
 import com.toan_itc.mobifone.ui.fragment.vas.VasFragment;
 import dagger.Component;
 
@@ -66,4 +67,6 @@ public interface ActivityComponent {
 
   /*VAS*/
   void inject(VasFragment vasFragment);
+
+  void inject(CheckVasFragment checkVasFragment);
 }

@@ -13,15 +13,12 @@ import com.toan_itc.mobifone.libs.logger.Logger;
 import com.toan_itc.mobifone.mvp.model.upanh.Upanh;
 import com.toan_itc.mobifone.mvp.presenter.base.BasePresenter;
 import com.toan_itc.mobifone.mvp.view.upanh.UpanhView;
-
-import org.json.JSONObject;
-
 import java.io.File;
-
 import javax.inject.Inject;
-
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Toan.IT
@@ -59,8 +56,18 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
             .getAsJSONObject(new JSONObjectRequestListener() {
               @Override
               public void onResponse(JSONObject response) {
-                Logger.e(response.toString());
-                getMvpView().uploadOK();
+                String error="0";
+                try {
+                  error=response.getString("error");
+                } catch (JSONException e) {
+                  e.printStackTrace();
+                }
+                if(error.equalsIgnoreCase("2"))
+                  getMvpView().requestLogin();
+                else if(error.equalsIgnoreCase("0"))
+                  getMvpView().uploadOK();
+                else
+                  getMvpView().uploadFail();
               }
               @Override
               public void onError(ANError error) {
@@ -94,6 +101,7 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
   }
 
   public void uploadTraSauCanhan(String sdt, String theloai, File cmnd_mt,File cmnd_ms,File hd_mt,File hd_ms,File hd){
+    Logger.e(sdt+"theloai="+theloai);
     AndroidNetworking.upload("http://n3t.top/test/api/upanh/tratruoc")
             .addMultipartFile("cmnd_mt",cmnd_mt)
             .addMultipartFile("cmnd_ms",cmnd_ms)
@@ -118,7 +126,18 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
             .getAsJSONObject(new JSONObjectRequestListener() {
               @Override
               public void onResponse(JSONObject response) {
-                getMvpView().uploadOK();
+                String error="0";
+                try {
+                  error=response.getString("error");
+                } catch (JSONException e) {
+                  e.printStackTrace();
+                }
+                if(error.equalsIgnoreCase("2"))
+                  getMvpView().requestLogin();
+                else if(error.equalsIgnoreCase("0"))
+                  getMvpView().uploadOK();
+                else
+                  getMvpView().uploadFail();
               }
               @Override
               public void onError(ANError error) {
@@ -176,7 +195,18 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
             .getAsJSONObject(new JSONObjectRequestListener() {
               @Override
               public void onResponse(JSONObject response) {
-                getMvpView().uploadOK();
+                String error="0";
+                try {
+                   error=response.getString("error");
+                } catch (JSONException e) {
+                  e.printStackTrace();
+                }
+                if(error.equalsIgnoreCase("2"))
+                  getMvpView().requestLogin();
+                else if(error.equalsIgnoreCase("0"))
+                  getMvpView().uploadOK();
+                else
+                  getMvpView().uploadFail();
               }
               @Override
               public void onError(ANError error) {

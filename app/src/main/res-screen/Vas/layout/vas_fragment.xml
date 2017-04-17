@@ -1,73 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.toan_itc.mobifone.libs.view.StateLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.toan_itc.mobifone.libs.view.StateLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/stateLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical">
-<!--
+    android:gravity="center_vertical"
+    >
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/edt_sdt"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/hint_et_phone"
+        android:inputType="phone"
+        android:textColor="@color/md_black_1000"
+        android:textColorHint="@color/md_blue_grey_200"
+        android:textSize="@dimen/text_medium"
+        />
 
-  <android.support.v7.widget.AppCompatTextView
-      android:id="@+id/txt_view_sdt"
-      android:layout_marginRight="20dp"
-      android:layout_marginTop="15dp"
-      android:textSize="18sp"
-      android:text="SĐT:"
-      android:textColor="@color/md_black_1000"
-      style="@style/style_base"
-      />
--->
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner"
+        android:layout_width="230dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/edt_sdt"
+        android:layout_centerHorizontal="true"
+        android:spinnerMode="dropdown"
+        />
 
-  <android.support.design.widget.TextInputEditText
-      android:id="@+id/edt_sdt"
-      android:layout_width="230dp"
-      android:layout_height="wrap_content"
-      android:hint="@string/hint_et_phone"
-      android:layout_centerHorizontal="true"
-      android:textColorHint="@color/md_blue_grey_200"
-      android:textColor="@color/md_black_1000"
-      android:inputType="phone"
-      android:textSize="@dimen/text_medium"/>
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_captcha"
+        android:layout_width="230dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/spinner"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        />
 
-  <android.support.v7.widget.AppCompatSpinner
-      android:id="@+id/spinner"
-      android:layout_below="@+id/edt_sdt"
-      android:layout_width="230dp"
-      android:layout_height="40dp"
-      android:layout_centerHorizontal="true"
-      android:spinnerMode="dropdown"/>
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/edt_captcha"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/img_captcha"
+        android:layout_below="@+id/img_captcha"
+        android:layout_marginLeft="50dp"
+        android:hint="@string/hint_et_captcha"
+        android:inputType="text"
+        android:textColor="@color/md_black_1000"
+        android:textColorHint="@color/md_blue_grey_200"
+        android:textSize="@dimen/text_medium"
+        />
 
-  <android.support.v7.widget.AppCompatImageView
-      android:id="@+id/img_captcha"
-      android:layout_below="@+id/spinner"
-      android:layout_width="230dp"
-      android:layout_height="100dp"
-      android:layout_centerHorizontal="true"
-      android:adjustViewBounds="true"/>
-
-  <android.support.design.widget.TextInputEditText
-      android:id="@+id/edt_captcha"
-      android:layout_below="@+id/img_captcha"
-      android:layout_alignLeft="@+id/img_captcha"
-      android:layout_marginLeft="50dp"
-      android:layout_width="120dp"
-      android:layout_height="wrap_content"
-      android:hint="@string/hint_et_captcha"
-      android:textColorHint="@color/md_blue_grey_200"
-      android:textColor="@color/md_black_1000"
-      android:inputType="text"
-      android:textSize="@dimen/text_medium"/>
-
-  <Button
-      android:id="@+id/btnRegister"
-      android:layout_width="200dp"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/edt_captcha"
-      android:layout_centerHorizontal="true"
-      android:layout_marginTop="16dp"
-      android:textColor="@color/md_black_1000"
-      android:background="@color/primary"
-      android:text="@string/btn_register"
-      android:textSize="@dimen/text_medium"/>
-
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_captcha"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@color/primary"
+        android:text="@string/btn_register"
+        android:textColor="@color/md_black_1000"
+        android:textSize="@dimen/text_medium"
+        />
+    <Button
+        android:id="@+id/btncheckVas"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@color/primary"
+        android:text="@string/check_vas"
+        android:textColor="@color/md_black_1000"
+        android:textSize="@dimen/text_medium"
+        />
+  </RelativeLayout>
 </com.toan_itc.mobifone.libs.view.StateLayout>

@@ -19,6 +19,7 @@ import com.toan_itc.mobifone.libs.view.FadeViewAnimProvider;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.view.base.BaseView;
 import com.toan_itc.mobifone.ui.fragment.congno.CongnoFragment;
+import com.toan_itc.mobifone.ui.fragment.congno.ListImageFragment;
 import com.toan_itc.mobifone.ui.fragment.khoso.KhosoFragment;
 import com.toan_itc.mobifone.ui.fragment.km.KhuyenmaiFragment;
 import com.toan_itc.mobifone.ui.fragment.thutuc.ThutucFragment;
@@ -252,6 +253,8 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
       replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
     }else if(currenttag.equalsIgnoreCase(UpanhFragment.class.getName())) {
       replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
+    }else if(currenttag.equalsIgnoreCase(ListImageFragment.class.getName())) {
+      replaceFagment(getFragmentManager(),R.id.fragment, CongnoFragment.newInstance());
     }else{
       replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
     }

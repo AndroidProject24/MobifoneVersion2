@@ -13,4 +13,6 @@ public interface UpanhView extends BaseView {
     void uploadOK();
 
     void uploadFail();
+
+    void requestLogin();
 }

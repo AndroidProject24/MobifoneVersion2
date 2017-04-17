@@ -16,4 +16,6 @@ public interface VasView extends BaseView {
     void registerVas(Vas vas);
 
     void requestLogin();
+
+    void showHtml(String html);
 }

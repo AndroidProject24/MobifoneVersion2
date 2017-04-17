@@ -66,6 +66,7 @@
     <string name="ng_ph_ng_qu_n_t_nh_th_nh_ph">Đường-Phường-Quận-Tỉnh/Thành Phố</string>
     <string name="a_ch1">Địa chỉ:</string>
     <string name="btn_register">Đăng ký</string>
+    <string name="check_vas">Kiểm tra Vas</string>
     <string name="hint_et_email">Email</string>
     <string name="hint_et_phone">Phone</string>
     <string name="hint_et_name_fist">Tên </string>
