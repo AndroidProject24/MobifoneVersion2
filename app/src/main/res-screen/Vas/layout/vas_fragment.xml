@@ -62,8 +62,8 @@
         android:layout_marginTop="16dp"
         android:background="@color/primary"
         android:text="@string/btn_register"
-        android:textColor="@color/md_black_1000"
-        android:textSize="@dimen/text_medium"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_small"
         />
     <Button
         android:id="@+id/btncheckVas"
@@ -74,8 +74,8 @@
         android:layout_marginTop="16dp"
         android:background="@color/primary"
         android:text="@string/check_vas"
-        android:textColor="@color/md_black_1000"
-        android:textSize="@dimen/text_medium"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_small"
         />
   </RelativeLayout>
 </com.toan_itc.mobifone.libs.view.StateLayout>

@@ -252,7 +252,7 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
       mKhosoAdapter=new KhosoAdapter(null);
     mKhosoAdapter.setNewData(null);
     mKhosoAdapter.setEmptyView(R.layout.view_empty, (ViewGroup) mRecyclerview.getParent());
-    Snackbar.make(mRecyclerview,message,Snackbar.LENGTH_LONG).show();
+   // Snackbar.make(mRecyclerview,message,Snackbar.LENGTH_LONG).show();
   }
 
   @OnClick(R.id.btn_search)
