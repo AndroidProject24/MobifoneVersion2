@@ -52,7 +52,7 @@ public class RestData {
               List<Dangsim> listSim=new ArrayList<Dangsim>();
               Dangsim dangsim=new Dangsim();
               dangsim.setTenkey("");
-              dangsim.setTends("Tất cả");
+              dangsim.setTends("Dạng số");
               listSim.add(0,dangsim);
               for(Dangsim old: dangsims){
                 Dangsim simOld=new Dangsim();

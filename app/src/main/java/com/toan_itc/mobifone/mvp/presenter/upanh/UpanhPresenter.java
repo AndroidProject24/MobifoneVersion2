@@ -4,7 +4,6 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.androidnetworking.interfaces.UploadProgressListener;
 import com.fernandocejas.frodo.core.checks.Preconditions;
 import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.data.rxjava.DefaultObserver;
@@ -45,13 +44,10 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
             .setTag("uploadTraTruoc")
             .setPriority(Priority.HIGH)
             .build()
-            .setUploadProgressListener(new UploadProgressListener() {
-              @Override
-              public void onProgress(long bytesUploaded, long totalBytes) {
-                float m = (bytesUploaded / (float) totalBytes);
-                int pro = (int) (m * 100);
-                getMvpView().uploadProgress(pro);
-              }
+            .setUploadProgressListener((bytesUploaded, totalBytes) -> {
+              float m = (bytesUploaded / (float) totalBytes);
+              int pro = (int) (m * 100);
+              getMvpView().uploadProgress(pro);
             })
             .getAsJSONObject(new JSONObjectRequestListener() {
               @Override
@@ -102,7 +98,7 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
 
   public void uploadTraSauCanhan(String sdt, String theloai, File cmnd_mt,File cmnd_ms,File hd_mt,File hd_ms,File hd){
     Logger.e(sdt+"theloai="+theloai);
-    AndroidNetworking.upload("http://n3t.top/test/api/upanh/tratruoc")
+    AndroidNetworking.upload("http://n3t.top/test/api/upanh/trasaucanhan")
             .addMultipartFile("cmnd_mt",cmnd_mt)
             .addMultipartFile("cmnd_ms",cmnd_ms)
             .addMultipartFile("hopdong_mt",hd_mt)
@@ -115,13 +111,10 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
             .setTag("uploadTraSauCanhan")
             .setPriority(Priority.HIGH)
             .build()
-            .setUploadProgressListener(new UploadProgressListener() {
-              @Override
-              public void onProgress(long bytesUploaded, long totalBytes) {
-                float m = (bytesUploaded / (float) totalBytes);
-                int pro = (int) (m * 100);
-                getMvpView().uploadProgress(pro);
-              }
+            .setUploadProgressListener((bytesUploaded, totalBytes) -> {
+              float m = (bytesUploaded / (float) totalBytes);
+              int pro = (int) (m * 100);
+              getMvpView().uploadProgress(pro);
             })
             .getAsJSONObject(new JSONObjectRequestListener() {
               @Override
@@ -132,6 +125,7 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
                 } catch (JSONException e) {
                   e.printStackTrace();
                 }
+                Logger.e(response.toString());
                 if(error.equalsIgnoreCase("2"))
                   getMvpView().requestLogin();
                 else if(error.equalsIgnoreCase("0"))
@@ -170,7 +164,7 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
             }));
   }
   public void uploadDoanhnghiep(String sdt, String theloai, File cmnd_mt,File cmnd_ms,File hd_mt,File hd_ms,File hd,File gpkd){
-    AndroidNetworking.upload("http://n3t.top/test/api/upanh/tratruoc")
+    AndroidNetworking.upload("http://n3t.top/test/api/upanh/trasaudoanhnghiep")
             .addMultipartFile("cmnd_mt",cmnd_mt)
             .addMultipartFile("cmnd_ms",cmnd_ms)
             .addMultipartFile("hopdong_mt",hd_mt)
@@ -184,13 +178,10 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
             .setTag("uploadDoanhnghiep")
             .setPriority(Priority.HIGH)
             .build()
-            .setUploadProgressListener(new UploadProgressListener() {
-              @Override
-              public void onProgress(long bytesUploaded, long totalBytes) {
-                float m = (bytesUploaded / (float) totalBytes);
-                int pro = (int) (m * 100);
-                getMvpView().uploadProgress(pro);
-              }
+            .setUploadProgressListener((bytesUploaded, totalBytes) -> {
+              float m = (bytesUploaded / (float) totalBytes);
+              int pro = (int) (m * 100);
+              getMvpView().uploadProgress(pro);
             })
             .getAsJSONObject(new JSONObjectRequestListener() {
               @Override

@@ -1,8 +1,11 @@
 package com.toan_itc.mobifone.ui.fragment.vas;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.widget.AppCompatTextView;
 import android.webkit.WebView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,17 +21,18 @@ import com.toan_itc.mobifone.ui.activity.BaseActivity;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
 import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
 import dagger.internal.Preconditions;
+import java.util.Calendar;
 import java.util.List;
 import javax.inject.Inject;
-
+@SuppressLint("SetTextI18n")
 public class CheckVasFragment extends BaseFragment implements VasView {
   @BindView(R.id.edt_phone) TextInputEditText edtPhone;
-  @BindView(R.id.edt_date_start) TextInputEditText edtDateStart;
-  @BindView(R.id.edt_date_end) TextInputEditText edtDateEnd;
+  @BindView(R.id.edt_date_start) AppCompatTextView edtDateStart;
+  @BindView(R.id.edt_date_end) AppCompatTextView edtDateEnd;
   @BindView(R.id.show_html) WebView showHtml;
   private Context mContext;
   @Inject VasPresenter vasPresenter;
-
+  private int mYear, mMonth, mDay;
   public static CheckVasFragment newInstance(String sdt) {
     CheckVasFragment fra = new CheckVasFragment();
     Bundle bundle = new Bundle();
@@ -56,7 +60,16 @@ public class CheckVasFragment extends BaseFragment implements VasView {
   }
 
   @Override protected void initData() {
-    edtPhone.setText(Preconditions.checkNotNull(getArguments()).getString(StringDef.BUNDLE_DATA,"BUNDLE_DATA not null"));
+    try {
+      edtPhone.setText(Preconditions.checkNotNull(getArguments())
+          .getString(StringDef.BUNDLE_DATA, "BUNDLE_DATA not null"));
+      Calendar c = Calendar.getInstance();
+      mYear = c.get(Calendar.YEAR);
+      mMonth = c.get(Calendar.MONTH);
+      mDay = c.get(Calendar.DAY_OF_MONTH);
+    }catch (Exception e){
+      e.printStackTrace();
+    }
   }
 
   @Override protected StateLayout getLoadingTargetView() {
@@ -77,6 +90,20 @@ public class CheckVasFragment extends BaseFragment implements VasView {
 
   @Override public void showHtml(String html) {
     showHtml.loadDataWithBaseURL("", html, "text/html", "UTF-8", "");
+  }
+
+  @OnClick(R.id.edt_date_start)
+  void dateStart(){
+    DatePickerDialog datePickerDialog = new DatePickerDialog(mContext,
+        (view, year, monthOfYear, dayOfMonth) -> edtDateStart.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year), mYear, mMonth, mDay);
+    datePickerDialog.show();
+  }
+
+  @OnClick(R.id.edt_date_end)
+  void dateEnd(){
+    DatePickerDialog datePickerDialog = new DatePickerDialog(mContext,
+        (view, year, monthOfYear, dayOfMonth) -> edtDateEnd.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year), mYear, mMonth, mDay);
+    datePickerDialog.show();
   }
 
   @OnClick(R.id.btncheckVas) void checkVAS() {

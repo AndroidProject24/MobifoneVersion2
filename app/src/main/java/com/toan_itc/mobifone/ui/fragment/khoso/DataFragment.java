@@ -15,11 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.jakewharton.rxbinding.internal.Preconditions;
 import com.jakewharton.rxbinding.widget.RxTextView;
@@ -57,7 +54,7 @@ import rx.android.schedulers.AndroidSchedulers;
  * Created by hugeterry(http://hugeterry.cn)
  * Date: 17/1/28 17:36
  */
-public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.OnCheckedChangeListener,Spinner.OnItemSelectedListener {
+public class DataFragment extends BaseFragment implements KhosoView,Spinner.OnItemSelectedListener {
   @Inject
   KhosoPresenter
   mKhosoPresenter;
@@ -65,14 +62,6 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   RecyclerView mRecyclerview;
   @BindView(R.id.txt_search)
   EditText txt_search;
-  @BindView(R.id.rad_090)
-  RadioButton mRad090;
-  @BindView(R.id.rad_093)
-  RadioButton mRad093;
-  @BindView(R.id.rad_089)
-  RadioButton mRad089;
-  @BindView(R.id.radio_group)
-  RadioGroup mRadioGroup;
   @BindView(R.id.spinner) AppCompatSpinner mSpinner;
   @BindView(R.id.spinner_dauso)
   AppCompatSpinner mSpinner_dauso;
@@ -111,14 +100,16 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
     ((BaseActivity) getActivity()).getActivityComponent().inject(this);
     mKhosoPresenter.attachView(this);
     mRecyclerview.setLayoutManager(new LinearLayoutManager(mContext));
-    mRadioGroup.setOnCheckedChangeListener(this);
     List<Dauso> dausoList = new ArrayList<>();
-    dausoList.add(0, new Dauso("Tất cả"));
-    dausoList.add(1, new Dauso("0120"));
-    dausoList.add(2, new Dauso("0121"));
-    dausoList.add(3, new Dauso("0122"));
-    dausoList.add(4, new Dauso("0126"));
-    dausoList.add(5, new Dauso("0128"));
+    dausoList.add(0, new Dauso("Đầu số"));
+    dausoList.add(1, new Dauso("090"));
+    dausoList.add(2, new Dauso("093"));
+    dausoList.add(3, new Dauso("089"));
+    dausoList.add(4, new Dauso("0120"));
+    dausoList.add(5, new Dauso("0121"));
+    dausoList.add(6, new Dauso("0122"));
+    dausoList.add(7, new Dauso("0126"));
+    dausoList.add(8, new Dauso("0128"));
     mSpinner_dauso.setAdapter(new DausoAdapter(mContext, dausoList));
   }
 
@@ -131,7 +122,7 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   protected void initData() {
     Logger.e(KhosimDef.SIM_DEP+"");
     mKhosoPresenter.dangSim("0");
-    search_sim("", mRad090.getText().toString(), "");
+    search_sim("", "", "");
   }
 
   @Override
@@ -312,21 +303,6 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
   }
 
   @Override
-  public void onCheckedChanged(RadioGroup group, int checkedId) {
-    switch (checkedId){
-      case R.id.rad_089:
-        search_sim(returnSearch(),returnRadio(0), returnDangSo());
-        break;
-      case R.id.rad_090:
-        search_sim(returnSearch(),returnRadio(1),returnDangSo());
-        break;
-      case R.id.rad_093:
-        search_sim(returnSearch(),returnRadio(2),returnDangSo());
-        break;
-    }
-  }
-
-  @Override
   public void onDestroyView() {
     super.onDestroyView();
     mKhosoPresenter.detachView();
@@ -338,34 +314,14 @@ public class DataFragment extends BaseFragment implements KhosoView,RadioGroup.O
     else
       return "";
   }
-  private String returnRadio(int index){
-    String select = "";
-    try {
-      switch (index) {
-        case 0:
-          select = mRad089.getText().toString();
-          break;
-        case 1:
-          select = mRad090.getText().toString();
-          break;
-        case 2:
-          select = mRad093.getText().toString();
-          break;
-      }
-    }catch (Exception e){
-      e.printStackTrace();
-    }
-    return select;
-  }
+
   private String returnDauso(){
     try {
-      String dauso = ((RadioButton) ButterKnife.findById(getView(), mRadioGroup.getCheckedRadioButtonId())).getText().toString();
-      if (dauso.equalsIgnoreCase("Tuỳ chọn")) {
-        if (mSpinner_dauso.getSelectedItem().toString().trim().equalsIgnoreCase("Tất cả"))
-          dauso = "";
-        else
-          dauso = mSpinner_dauso.getSelectedItem().toString().trim();
-      }
+      String dauso = "";
+      if (mSpinner_dauso.getSelectedItem().toString().trim().equalsIgnoreCase("Đầu số"))
+        dauso = "";
+      else
+        dauso = mSpinner_dauso.getSelectedItem().toString().trim();
       return dauso;
     }catch (Exception e){
       e.printStackTrace();

@@ -56,7 +56,7 @@
             android:id="@+id/etPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Hộ khẩu thường trú ở tphcm"
+            android:hint="Hộ khẩu thường trú"
             android:textColorHint="@color/md_blue_grey_300"
             android:textColor="@color/md_black_1000"
             android:inputType="text"
