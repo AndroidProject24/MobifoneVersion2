@@ -3,16 +3,15 @@ package com.toan_itc.mobifone.ui.fragment.upanh;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-
-import com.jph.takephoto.app.TakePhoto;
-import com.jph.takephoto.app.TakePhotoImpl;
-import com.jph.takephoto.model.InvokeParam;
-import com.jph.takephoto.model.TContextWrap;
-import com.jph.takephoto.model.TResult;
-import com.jph.takephoto.permission.InvokeListener;
-import com.jph.takephoto.permission.PermissionManager;
-import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.toan_itc.mobifone.R;
+import com.toan_itc.mobifone.libs.takephoto.library.app.TakePhoto;
+import com.toan_itc.mobifone.libs.takephoto.library.app.TakePhotoImpl;
+import com.toan_itc.mobifone.libs.takephoto.library.model.InvokeParam;
+import com.toan_itc.mobifone.libs.takephoto.library.model.TContextWrap;
+import com.toan_itc.mobifone.libs.takephoto.library.model.TResult;
+import com.toan_itc.mobifone.libs.takephoto.library.permission.InvokeListener;
+import com.toan_itc.mobifone.libs.takephoto.library.permission.PermissionManager;
+import com.toan_itc.mobifone.libs.takephoto.library.permission.TakePhotoInvocationHandler;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
 

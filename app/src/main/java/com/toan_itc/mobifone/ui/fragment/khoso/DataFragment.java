@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.Spinner;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -60,8 +60,7 @@ public class DataFragment extends BaseFragment implements KhosoView,Spinner.OnIt
   mKhosoPresenter;
   @BindView(R.id.recyclerview)
   RecyclerView mRecyclerview;
-  @BindView(R.id.txt_search)
-  EditText txt_search;
+  @BindView(R.id.txt_search) AppCompatEditText txt_search;
   @BindView(R.id.spinner) AppCompatSpinner mSpinner;
   @BindView(R.id.spinner_dauso)
   AppCompatSpinner mSpinner_dauso;
@@ -199,10 +198,15 @@ public class DataFragment extends BaseFragment implements KhosoView,Spinner.OnIt
                       info.setHokhau(etPhone.getText().toString());
                       mKhosoPresenter.getPreferencesHelper().putJsonInfo(info);
                       dialog.dismiss();
-                      if(Preconditions.checkNotNull(getArguments().getInt(StringDef.BUNDLE_TITLE), "data not null!")==KhosimDef.SIM_TRA_SAU)
-                        replaceFagment(getFragmentManager(), R.id.fragment, UpanhTraSauFragment.newInstance(IntDef.TWO));
-                      else
+                      try {
+                        if (Preconditions.checkNotNull(getArguments().getInt(StringDef.BUNDLE_TITLE), "data not null!") == KhosimDef.SIM_TRA_SAU)
+                          replaceFagment(getFragmentManager(), R.id.fragment, UpanhTraSauFragment.newInstance(IntDef.TWO));
+                        else
+                          replaceFagment(getFragmentManager(), R.id.fragment, UpanhTratruocFragment.newInstance(IntDef.ONE));
+                      }catch (Exception e){
+                        e.printStackTrace();
                         replaceFagment(getFragmentManager(), R.id.fragment, UpanhTratruocFragment.newInstance(IntDef.ONE));
+                      }
                     } else {
                       Snackbar.make(mRecyclerview, "Vui lòng điền đầy đủ thông tin!", Snackbar.LENGTH_LONG).show();
                     }
@@ -248,8 +252,12 @@ public class DataFragment extends BaseFragment implements KhosoView,Spinner.OnIt
 
   @OnClick(R.id.btn_search)
   void clickSearch(){
-    if (txt_search.getText().length() > 0) {
-      search_sim(txt_search.getText().toString(),returnDauso(),returnDangSo());
+    try {
+      if (txt_search.getText().length() > 0) {
+        search_sim(txt_search.getText().toString(), returnDauso(), returnDangSo());
+      }
+    }catch (Exception e){
+      e.printStackTrace();
     }
   }
   private void subscribeToEditText() {
@@ -316,17 +324,22 @@ public class DataFragment extends BaseFragment implements KhosoView,Spinner.OnIt
   }
 
   private String returnDauso(){
+    String dauso = "";
     try {
-      String dauso = "";
       if (mSpinner_dauso.getSelectedItem().toString().trim().equalsIgnoreCase("Đầu số"))
         dauso = "";
       else
-        dauso = mSpinner_dauso.getSelectedItem().toString().trim();
+        try {
+          if(((Dauso) mSpinner_dauso.getSelectedItem()).getTen()!=null)
+            dauso = ((Dauso) mSpinner_dauso.getSelectedItem()).getTen();
+        }catch (Exception e){
+          e.printStackTrace();
+        }
       return dauso;
     }catch (Exception e){
       e.printStackTrace();
     }
-    return "";
+    return dauso;
   }
 
   @Override

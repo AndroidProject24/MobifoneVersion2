@@ -19,15 +19,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.github.clans.fab.FloatingActionButton;
-import com.jph.takephoto.app.TakePhoto;
-import com.jph.takephoto.compress.CompressConfig;
-import com.jph.takephoto.model.CropOptions;
-import com.jph.takephoto.model.TResult;
-import com.jph.takephoto.model.TakePhotoOptions;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.intdef.BitmapDef;
 import com.toan_itc.mobifone.intdef.StringDef;
 import com.toan_itc.mobifone.libs.logger.Logger;
+import com.toan_itc.mobifone.libs.takephoto.library.app.TakePhoto;
+import com.toan_itc.mobifone.libs.takephoto.library.compress.CompressConfig;
+import com.toan_itc.mobifone.libs.takephoto.library.model.CropOptions;
+import com.toan_itc.mobifone.libs.takephoto.library.model.TResult;
+import com.toan_itc.mobifone.libs.takephoto.library.model.TakePhotoOptions;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.presenter.upanh.UpanhPresenter;
 import com.toan_itc.mobifone.mvp.view.upanh.UpanhView;
@@ -106,7 +106,15 @@ public class TraSauDoanhnghiepFragment extends TakePhotoFragment implements Upan
 
   @OnClick(R.id.fab)
   public void btn_upload(){
-    mUpanhPresenter.uploadDoanhnghiep(mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getPhone(),mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getDichvu(),requestBody,requestBody1,requestBody2,requestBody3,requestBody4,requestBody5);
+    try {
+      if (mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getPhone() != null
+          && mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getDichvu() != null)
+        mUpanhPresenter.uploadDoanhnghiep(mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getPhone(),mUpanhPresenter.getmPreferencesHelper().getJsonInfo().getDichvu(),requestBody,requestBody1,requestBody2,requestBody3,requestBody4,requestBody5);
+      else
+        Snackbar.make(mCoordinatorlayout, "Vui lòng chọn số trước khi sử dụng chức năng!", Snackbar.LENGTH_LONG).show();
+    }catch (Exception e){
+      e.printStackTrace();
+    }
   }
   @OnClick(R.id.btn_cmnd_mattruoc)
   public void btn_cmnd_mattruoc(){
