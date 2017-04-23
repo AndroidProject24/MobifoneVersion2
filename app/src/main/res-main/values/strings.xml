@@ -17,6 +17,7 @@
     <string name="kho_sim_trasau">KHO SỐ TRẢ SAU</string>hệ
     <string name="kho_sim_dep">KHO CAM KẾT SỐ ĐẸP</string>
     <string name="kho_sim_tratruoc_dep">KHO SỐ TRẢ TRƯỚC SỐ ĐẸP</string>
+    <string name="check_sdt">KIỂM TRA &#032; &#032; TÌNH TRẠNG</string>
 
     <!--UPANH-->
     <string name="upload_tratruoc">TRẢ TRƯỚC</string>
@@ -67,6 +68,7 @@
     <string name="a_ch1">Địa chỉ:</string>
     <string name="btn_register">Đăng ký</string>
     <string name="check_vas">Kiểm tra Vas</string>
+    <string name="check_state_sdt">Kiểm tra số</string>
     <string name="hint_et_email">Email</string>
     <string name="hint_et_phone">Phone</string>
     <string name="hint_et_name_fist">Tên </string>

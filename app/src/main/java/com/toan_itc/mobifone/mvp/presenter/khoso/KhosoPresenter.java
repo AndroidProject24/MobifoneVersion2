@@ -8,13 +8,13 @@ import com.toan_itc.mobifone.data.service.RestData;
 import com.toan_itc.mobifone.libs.logger.Logger;
 import com.toan_itc.mobifone.mvp.model.khoso.Dangsim;
 import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
-import com.toan_itc.mobifone.mvp.model.theloai.Theloai;
 import com.toan_itc.mobifone.mvp.presenter.base.BasePresenter;
 import com.toan_itc.mobifone.mvp.view.khoso.KhosoView;
 import com.toan_itc.mobifone.ui.adapter.khoso.TheloaiAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import retrofit2.Response;
 
 /**
  * Created by Toan.IT
@@ -122,6 +122,7 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
           }
         }));
   }
+
   public PreferencesHelper getPreferencesHelper(){
     return mPreferencesHelper;
   }

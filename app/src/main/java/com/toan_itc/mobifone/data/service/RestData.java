@@ -1,6 +1,7 @@
 package com.toan_itc.mobifone.data.service;
 
 import com.toan_itc.mobifone.mvp.model.congno.ListCongno;
+import com.toan_itc.mobifone.mvp.model.khoso.CheckSdt;
 import com.toan_itc.mobifone.mvp.model.khoso.Dangsim;
 import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
 import com.toan_itc.mobifone.mvp.model.login.Exit;
@@ -148,6 +149,12 @@ public class RestData {
 
   public Observable<Response<ResponseBody>> checkVas(String auth,String idUser,String sdt,String dateStart,String dateEnd) {
     return mRestApi.checkVas(auth,idUser,sdt,dateStart,dateEnd)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<CheckSdt> checkSDT(String auth,String idUser,String sdt) {
+    return mRestApi.checkSDT(auth,idUser,sdt)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }

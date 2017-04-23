@@ -65,4 +65,10 @@ public class UIKhosoFragment extends BaseFragment{
   public void click_sodep(){
     replaceFagment(getFragmentManager(),R.id.fragment, KhosoFragment.newInstance(KhoSimIndexDef.SIM_DEP));
   }
+
+  @OnClick(R.id.card_check)
+  public void card_check(){
+    replaceFagment(getFragmentManager(),R.id.fragment, CheckSdtFragment.newInstance());
+  }
+
 }

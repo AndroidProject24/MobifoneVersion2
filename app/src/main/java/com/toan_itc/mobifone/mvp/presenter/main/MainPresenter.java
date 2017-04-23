@@ -54,6 +54,7 @@ public class MainPresenter extends BasePresenter<MainView> {
           }
         });
   }
+
   public PreferencesHelper getPreferencesHelper(){
     return mPreferencesHelper;
   }

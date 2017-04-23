@@ -7,15 +7,22 @@ import rx.subjects.Subject;
 
 /**
  * Created by Toan.IT
- * Date: 25/05/2016
+ * Date: 13/07/2016
  */
 
 public class RxBus {
+    private static final RxBus instance = new RxBus();
+
     private final Subject<Object, Object> _bus = new SerializedSubject<>(PublishSubject.create());
+
+    public static RxBus getDefault() {
+        return instance;
+    }
 
     public void send(Object o) {
         _bus.onNext(o);
     }
+
     public Observable<Object> toObserverable() {
         return _bus;
     }

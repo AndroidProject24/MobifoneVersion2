@@ -7,8 +7,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-
 import android.view.View;
+import butterknife.BindView;
 import com.google.firebase.crash.FirebaseCrash;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -18,14 +18,19 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.pusher.client.Pusher;
+import com.pusher.client.PusherOptions;
+import com.pusher.client.channel.Channel;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.data.rxjava.DefaultObserver;
+import com.toan_itc.mobifone.data.rxjava.RxBus;
 import com.toan_itc.mobifone.interfaces.KeyListener;
 import com.toan_itc.mobifone.interfaces.OnBackListener;
 import com.toan_itc.mobifone.interfaces.ToolbarTitleListener;
 import com.toan_itc.mobifone.libs.logger.Logger;
+import com.toan_itc.mobifone.mvp.model.khoso.CheckSdt;
 import com.toan_itc.mobifone.mvp.presenter.main.MainPresenter;
 import com.toan_itc.mobifone.mvp.view.main.MainView;
 import com.toan_itc.mobifone.ui.fragment.MainFragment;
@@ -36,15 +41,12 @@ import com.toan_itc.mobifone.ui.fragment.km.KhuyenmaiFragment;
 import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
 import com.toan_itc.mobifone.ui.fragment.thutuc.ThutucFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.UpanhFragment;
-
+import dagger.internal.Preconditions;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
 import javax.inject.Inject;
-
-import butterknife.BindView;
 import rx.Observable;
 
 import static com.toan_itc.mobifone.R.id.toolbar;
@@ -64,6 +66,24 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,M
     setSupportActionBar(mToolbar);
     initDrawer(savedInstanceState);
     setPermissions();
+  }
+  private void initCheck(){
+    try {
+      Logger.e("my-channel-auth_code".replace("auth_code", Preconditions.checkNotNull(mainPresenter.getPreferencesHelper().getJsonLogin().get_$0().getAuth_code())));
+      PusherOptions options = new PusherOptions();
+      options.setCluster("ap1");
+      Pusher pusher = new Pusher("8a52acf03f615e76dafa", options);
+      Channel channel = pusher.subscribe("my-channel-auth_code".replace("auth_code", Preconditions.checkNotNull(mainPresenter.getPreferencesHelper().getJsonLogin().get_$0().getAuth_code())));
+      channel.bind("my-event", (channelName, eventName, data) -> {
+        Logger.e("my-event="+data);
+        CheckSdt checkSdt=new CheckSdt();
+        checkSdt.setReason(data);
+        RxBus.getDefault().send(checkSdt);
+      });
+      pusher.connect();
+    }catch (Exception e){
+      e.printStackTrace();
+    }
   }
   private void initDrawer(Bundle savedInstanceState){
     IProfile profile=null;
@@ -143,6 +163,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,M
     if(mPreferencesHelper.getJsonLogin()==null) {
       addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
     }else{
+      initCheck();
       addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
     }
   }

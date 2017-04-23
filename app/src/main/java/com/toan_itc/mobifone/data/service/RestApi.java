@@ -2,6 +2,7 @@ package com.toan_itc.mobifone.data.service;
 
 import com.toan_itc.mobifone.mvp.model.JsonArray;
 import com.toan_itc.mobifone.mvp.model.congno.ListCongno;
+import com.toan_itc.mobifone.mvp.model.khoso.CheckSdt;
 import com.toan_itc.mobifone.mvp.model.khoso.Dangsim;
 import com.toan_itc.mobifone.mvp.model.khoso.Khoso;
 import com.toan_itc.mobifone.mvp.model.login.Exit;
@@ -114,4 +115,7 @@ public interface RestApi {
     @GET("smsvas")
     Observable<Response<ResponseBody>> checkVas(@Query("auth_code") String auth_code, @Query("iduser") String iduser,@Query("sdt") String sdt,@Query("from") String from,@Query("to") String to);
 
+    @FormUrlEncoded
+    @POST("sendchecksdt")
+    Observable<CheckSdt> checkSDT(@Field("auth_code") String auth_code, @Field("iduser") String iduser, @Field("sdt") String sdt);
 }
