@@ -4,7 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import com.toan_itc.mobifone.ui.fragment.km.CTKMSodepFragment;
-import com.toan_itc.mobifone.ui.fragment.km.CTKMTrasauFragment;
+import com.toan_itc.mobifone.ui.fragment.km.CTKMTrasauCaNhanFragment;
+import com.toan_itc.mobifone.ui.fragment.km.CTKMTrasauDNFragment;
 import com.toan_itc.mobifone.ui.fragment.km.KMNaptheFragment;
 
 /**
@@ -34,12 +35,15 @@ public class KMPagerAdapter extends FragmentStatePagerAdapter {
     Fragment mFragments=null;
     switch (position){
       case 0:
-        mFragments=CTKMTrasauFragment.newInstance();
+        mFragments= CTKMTrasauCaNhanFragment.newInstance();
         break;
       case 1:
-        mFragments=CTKMSodepFragment.newInstance();
+        mFragments= CTKMTrasauDNFragment.newInstance();
         break;
       case 2:
+        mFragments=CTKMSodepFragment.newInstance();
+        break;
+      case 3:
         mFragments=KMNaptheFragment.newInstance();
         break;
     }

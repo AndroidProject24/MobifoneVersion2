@@ -13,14 +13,13 @@ import com.toan_itc.mobifone.ui.adapter.theloai.KMPagerAdapter;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
 import com.toan_itc.mobifone.utils.Constant;
 
-
 public class KhuyenmaiFragment extends BaseFragment{
   private Context mContext;
   @BindView(R.id.viewPager)
   ViewPager mViewPager;
   @BindView(R.id.coordinatortablayout)
   CoordinatorTabLayout mCoordinatortablayout;
-  private String[] mTitles=new String[3];
+  private String[] mTitles=new String[4];
   public static KhuyenmaiFragment newInstance() {
     return new KhuyenmaiFragment();
   }
@@ -51,13 +50,14 @@ public class KhuyenmaiFragment extends BaseFragment{
   @Override
   protected void initData() {
     int[] colorArray = new int[]{
-            android.R.color.holo_blue_light,
-            android.R.color.holo_red_light,
-            android.R.color.holo_orange_light};
+        android.R.color.holo_blue_light,
+        android.R.color.holo_green_dark,
+        android.R.color.holo_red_light,
+        android.R.color.holo_orange_light};
     mCoordinatortablayout
-            .setContentScrimColorArray(colorArray)
-            .setLoadHeaderImagesListener((imageView, tab) -> Glide.with(mContext).load(Constant.URL_IMAGE).into(imageView))
-            .setupWithViewPager(mViewPager);
+        .setContentScrimColorArray(colorArray)
+        .setLoadHeaderImagesListener((imageView, tab) -> Glide.with(mContext).load(Constant.URL_IMAGE).into(imageView))
+        .setupWithViewPager(mViewPager);
   }
 
   @Override
@@ -67,7 +67,7 @@ public class KhuyenmaiFragment extends BaseFragment{
 
 
   private void initFragments() {
-    mTitles= new String[]{getString(KhuyenmaiDef.KHUYEN_MAI_TRA_SAU), getString(KhuyenmaiDef.KHUYEN_MAI_SO_DEP), getString(KhuyenmaiDef.KHUYEN_MAI_TRONG_NGAY)};
+    mTitles= new String[]{getString(KhuyenmaiDef.KHUYEN_MAI_TRA_SAU_CA_NHAN),getString(KhuyenmaiDef.KHUYEN_MAI_TRA_SAU_DOANH_NGHIEP), getString(KhuyenmaiDef.KHUYEN_MAI_SO_DEP), getString(KhuyenmaiDef.KHUYEN_MAI_TRONG_NGAY)};
   }
 
   private void initViewPager() {

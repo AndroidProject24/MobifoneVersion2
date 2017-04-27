@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Mobifone TN</string>
+    <string name="app_name">Kho Số</string>
+    <string name="app_name_desktop">Kho Số Online</string>
+
     <string name="toolbar_title">HotLine: 0903669889</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -26,7 +28,8 @@
     <string name="upload_doanhnghiep">CÔNG TY</string>
 
     <!--KHUYENMAI-->
-    <string name="km_trasau">TRẢ SAU</string>
+    <string name="km_trasau_cn">TRẢ SAU CÁ NHÂN</string>
+    <string name="km_trasau_dn">TRẢ SAU CÔNG TY</string>
     <string name="km_sodep">CAM KẾT SỐ ĐẸP</string>
     <string name="km_trongngay">NẠP THẺ NGÀY</string>
 

@@ -47,6 +47,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
+import org.json.JSONException;
+import org.json.JSONObject;
 import rx.Observable;
 
 import static com.toan_itc.mobifone.R.id.toolbar;
@@ -69,15 +71,20 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,M
   }
   private void initCheck(){
     try {
-      Logger.e("my-channel-auth_code".replace("auth_code", Preconditions.checkNotNull(mainPresenter.getPreferencesHelper().getJsonLogin().get_$0().getAuth_code())));
       PusherOptions options = new PusherOptions();
       options.setCluster("ap1");
       Pusher pusher = new Pusher("8a52acf03f615e76dafa", options);
       Channel channel = pusher.subscribe("my-channel-auth_code".replace("auth_code", Preconditions.checkNotNull(mainPresenter.getPreferencesHelper().getJsonLogin().get_$0().getAuth_code())));
       channel.bind("my-event", (channelName, eventName, data) -> {
-        Logger.e("my-event="+data);
         CheckSdt checkSdt=new CheckSdt();
-        checkSdt.setReason(data);
+        String dataParse="";
+        try {
+          JSONObject jsonObj = new JSONObject(data);
+          dataParse=jsonObj.getString("message");
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+        checkSdt.setReason(dataParse);
         RxBus.getDefault().send(checkSdt);
       });
       pusher.connect();

@@ -49,10 +49,11 @@
         android:id="@+id/btn_goicuoc"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="20dp"
         android:text="Gói cước"
-        android:textColor="@color/md_black_1000"
+        android:textColor="@color/md_red_500"
         android:layout_gravity="center_vertical"
+        android:textStyle="bold"
         />
 
     <android.support.v7.widget.AppCompatImageView

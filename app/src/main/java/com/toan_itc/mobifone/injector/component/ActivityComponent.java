@@ -9,7 +9,8 @@ import com.toan_itc.mobifone.ui.fragment.khoso.CheckSdtFragment;
 import com.toan_itc.mobifone.ui.fragment.khoso.DataFragment;
 import com.toan_itc.mobifone.ui.fragment.khoso.KhosoFragment;
 import com.toan_itc.mobifone.ui.fragment.km.CTKMSodepFragment;
-import com.toan_itc.mobifone.ui.fragment.km.CTKMTrasauFragment;
+import com.toan_itc.mobifone.ui.fragment.km.CTKMTrasauCaNhanFragment;
+import com.toan_itc.mobifone.ui.fragment.km.CTKMTrasauDNFragment;
 import com.toan_itc.mobifone.ui.fragment.km.KMNaptheFragment;
 import com.toan_itc.mobifone.ui.fragment.login.ChangePasswordFragment;
 import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
@@ -63,7 +64,9 @@ public interface ActivityComponent {
 
   void inject(KMNaptheFragment kmNaptheFragment);
 
-  void inject(CTKMTrasauFragment ctkmTrasauFragment);
+  void inject(CTKMTrasauCaNhanFragment ctkmTrasauCaNhanFragment);
+
+  void inject(CTKMTrasauDNFragment ctkmTrasauDNFragment);
 
   /*CONGNO*/
   void inject(CongnoFragment congnoFragment);
