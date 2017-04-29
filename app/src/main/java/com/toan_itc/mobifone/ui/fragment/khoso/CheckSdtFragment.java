@@ -73,6 +73,8 @@ public class CheckSdtFragment extends BaseFragment implements CheckSdtView {
   }
 
   @Override public void checkSdt(CheckSdt checkSdt) {
+    txtState.setVisibility(View.VISIBLE);
+    show_html.setVisibility(View.GONE);
     txtState.setText(Preconditions.checkNotNull(checkSdt.getReason()));
   }
 

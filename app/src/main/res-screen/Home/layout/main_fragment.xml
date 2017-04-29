@@ -62,34 +62,6 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_congno"
-        android:layout_width="140dp"
-        android:layout_height="130dp"
-        android:layout_below="@+id/card_khoso"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:elevation="100dp"
-        card_view:cardCornerRadius="8dp">
-
-        <LinearLayout
-            android:id="@+id/layout_congno"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <ImageView
-                style="@style/style_image_main"
-                android:src="@drawable/ic_congno"/>
-
-            <TextView
-                style="@style/style_text_main"
-                android:text="@string/cong_no"/>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_km"
@@ -97,7 +69,6 @@
         android:layout_height="130dp"
         android:layout_alignTop="@+id/card_congno"
         android:layout_below="@+id/card_khoso"
-        android:layout_toRightOf="@+id/card_congno"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:elevation="100dp"
@@ -120,11 +91,42 @@
                 android:text="@string/ct_km"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_congno"
+        android:layout_width="140dp"
+        android:layout_height="130dp"
+        android:layout_below="@+id/card_khoso"
+        android:layout_toRightOf="@+id/card_km"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:elevation="100dp"
+        card_view:cardCornerRadius="8dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/layout_congno"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                style="@style/style_image_main"
+                android:src="@drawable/ic_congno"/>
+
+            <TextView
+                style="@style/style_text_main"
+                android:text="@string/cong_no"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_upanh"
         android:layout_width="140dp"
         android:layout_height="130dp"
+        android:layout_alignRight="@+id/card_upanh"
         android:layout_below="@+id/card_congno"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
@@ -155,8 +157,9 @@
         android:id="@+id/card_vas"
         android:layout_width="140dp"
         android:layout_height="130dp"
-        android:layout_alignRight="@+id/card_km"
+        android:layout_toRightOf="@+id/card_upanh"
         android:layout_alignTop="@+id/card_upanh"
+        android:layout_marginLeft="20dp"
         android:layout_below="@+id/card_km"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
@@ -182,4 +185,5 @@
                 android:text="@string/ban_vas"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
+
 </com.toan_itc.mobifone.libs.view.StateLayout>

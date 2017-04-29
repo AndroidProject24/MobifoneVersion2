@@ -1,12 +1,17 @@
 package com.toan_itc.mobifone.ui.fragment.khoso;
 
-import com.toan_itc.mobifone.R;
-import com.toan_itc.mobifone.intdef.KhoSimIndexDef;
-import com.toan_itc.mobifone.libs.view.StateLayout;
-import com.toan_itc.mobifone.ui.fragment.BaseFragment;
-
+import android.support.v7.widget.CardView;
+import android.view.View;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.toan_itc.mobifone.R;
+import com.toan_itc.mobifone.data.local.PreferencesHelper;
+import com.toan_itc.mobifone.intdef.KhoSimIndexDef;
+import com.toan_itc.mobifone.libs.view.StateLayout;
+import com.toan_itc.mobifone.ui.activity.MainActivity;
+import com.toan_itc.mobifone.ui.fragment.BaseFragment;
+import javax.inject.Inject;
 
 /**
  * Toan.IT
@@ -15,7 +20,8 @@ import butterknife.OnClick;
  */
 
 public class UIKhosoFragment extends BaseFragment{
-
+  @Inject PreferencesHelper mPreferencesHelper;
+  @BindView(R.id.card_check) CardView card_check;
 
   public static UIKhosoFragment newInstance() {
     return new UIKhosoFragment();
@@ -29,7 +35,10 @@ public class UIKhosoFragment extends BaseFragment{
 
   @Override
   protected void initViews() {
-
+    ((MainActivity)getActivity()).getActivityComponent().inject(this);
+    if(!mPreferencesHelper.getLogin()){
+      card_check.setVisibility(View.INVISIBLE);
+    }
   }
 
   @Override

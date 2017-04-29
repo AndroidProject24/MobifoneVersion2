@@ -684,8 +684,14 @@ public class ImageUtils {
         return src == null || src.getWidth() == 0 || src.getHeight() == 0;
     }
     public static void loadImageView(Context mContext, String uriPath, ImageView imageView){
-    Glide.with(mContext)
+        Glide.with(mContext)
             .load(uriPath)
             .into(imageView);
-  }
+    }
+    public static void loadImageViewNocache(Context mContext, String uriPath, ImageView imageView){
+        Glide.with(mContext)
+            .load(uriPath+"?&="+System.currentTimeMillis())
+            .skipMemoryCache(true)
+            .into(imageView);
+    }
 }

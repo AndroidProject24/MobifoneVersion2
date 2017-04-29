@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="rippelColor">#5F000000</color>
-    <color name="primary_dark">#87af4a</color>
+    <color name="primary_dark">#0061A2</color>
     <color name="emailbackground">#0977ec</color>
     <color name="backgroundPrimary">#EEEEEE</color>
-    <color name="colorPrimary">#87af4a</color>
-    <color name="colorPrimaryDark">#4b7111</color>
+    <color name="colorPrimary">#0061A2</color>
+    <color name="colorPrimaryDark">#014f84</color>
     <color name="colorAccent">#FFFFFF</color>
     <color name="background_item">#5F000000</color> <!-- 12% -->
     <color name="white">#FFFFFF</color>
@@ -16,7 +16,7 @@
     <color name="refresh1">@color/primary_dark</color>
     <color name="refresh2">@color/colorPrimaryDark</color>
     <color name="refresh3">@color/fab_normal</color>
-    <color name="fab_normal">#F44336</color>
+    <color name="fab_normal">#D03231</color>
     <color name="fab_Pressed">#D32F2F</color>
     <color name="fab_Ripple">#B71C1C</color>
     <color name="fab_normal1">#9C27B0</color>

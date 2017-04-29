@@ -18,19 +18,14 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-import com.pusher.client.Pusher;
-import com.pusher.client.PusherOptions;
-import com.pusher.client.channel.Channel;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.data.rxjava.DefaultObserver;
-import com.toan_itc.mobifone.data.rxjava.RxBus;
 import com.toan_itc.mobifone.interfaces.KeyListener;
 import com.toan_itc.mobifone.interfaces.OnBackListener;
 import com.toan_itc.mobifone.interfaces.ToolbarTitleListener;
 import com.toan_itc.mobifone.libs.logger.Logger;
-import com.toan_itc.mobifone.mvp.model.khoso.CheckSdt;
 import com.toan_itc.mobifone.mvp.presenter.main.MainPresenter;
 import com.toan_itc.mobifone.mvp.view.main.MainView;
 import com.toan_itc.mobifone.ui.fragment.MainFragment;
@@ -41,14 +36,11 @@ import com.toan_itc.mobifone.ui.fragment.km.KhuyenmaiFragment;
 import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
 import com.toan_itc.mobifone.ui.fragment.thutuc.ThutucFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.UpanhFragment;
-import dagger.internal.Preconditions;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
-import org.json.JSONException;
-import org.json.JSONObject;
 import rx.Observable;
 
 import static com.toan_itc.mobifone.R.id.toolbar;
@@ -69,33 +61,11 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,M
     initDrawer(savedInstanceState);
     setPermissions();
   }
-  private void initCheck(){
-    try {
-      PusherOptions options = new PusherOptions();
-      options.setCluster("ap1");
-      Pusher pusher = new Pusher("8a52acf03f615e76dafa", options);
-      Channel channel = pusher.subscribe("my-channel-auth_code".replace("auth_code", Preconditions.checkNotNull(mainPresenter.getPreferencesHelper().getJsonLogin().get_$0().getAuth_code())));
-      channel.bind("my-event", (channelName, eventName, data) -> {
-        CheckSdt checkSdt=new CheckSdt();
-        String dataParse="";
-        try {
-          JSONObject jsonObj = new JSONObject(data);
-          dataParse=jsonObj.getString("message");
-        } catch (JSONException e) {
-          e.printStackTrace();
-        }
-        checkSdt.setReason(dataParse);
-        RxBus.getDefault().send(checkSdt);
-      });
-      pusher.connect();
-    }catch (Exception e){
-      e.printStackTrace();
-    }
-  }
+
   private void initDrawer(Bundle savedInstanceState){
     IProfile profile=null;
     if(mPreferencesHelper.getJsonLogin()!=null)
-      profile = new ProfileDrawerItem().withName(mPreferencesHelper.getJsonLogin().get_$0().getUsername()).withEmail(mPreferencesHelper.getJsonLogin().get_$0().getEmail()).withIcon("https://scontent.fsgn5-2.fna.fbcdn.net/v/t31.0-8/11722301_794373917343882_7256246783339720174_o.jpg?oh=f93a997e513c128aa626de61c205d91c&oe=593ED314").withIdentifier(100);
+      profile = new ProfileDrawerItem().withName(mPreferencesHelper.getJsonLogin().get_$0().getUsername()).withEmail(mPreferencesHelper.getJsonLogin().get_$0().getEmail()).withIcon("").withIdentifier(100);
     else
       profile = new ProfileDrawerItem().withName("").withEmail("").withIcon("").withIdentifier(100);
     headerResult = new AccountHeaderBuilder()
@@ -167,11 +137,10 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,M
   @Override
   protected void initViews() {
     mainPresenter.attachView(this);
-    if(mPreferencesHelper.getJsonLogin()==null) {
-      addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
-    }else{
-      initCheck();
+    if((mPreferencesHelper.getJsonLogin()!=null&& mPreferencesHelper.getLogin()) || !mPreferencesHelper.getLogin()) {
       addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
+    }else{
+      addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
     }
   }
 
@@ -314,4 +283,5 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,M
   @Override public void showEmptyViewAction(String message, View.OnClickListener onClickListener) {
 
   }
+
 }

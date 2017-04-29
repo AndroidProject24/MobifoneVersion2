@@ -50,10 +50,10 @@ public class KhuyenmaiFragment extends BaseFragment{
   @Override
   protected void initData() {
     int[] colorArray = new int[]{
-        android.R.color.holo_blue_light,
-        android.R.color.holo_green_dark,
-        android.R.color.holo_red_light,
-        android.R.color.holo_orange_light};
+        R.color.fab_normal,
+        R.color.colorPrimary,
+        R.color.fab_normal,
+        R.color.colorPrimary};
     mCoordinatortablayout
         .setContentScrimColorArray(colorArray)
         .setLoadHeaderImagesListener((imageView, tab) -> Glide.with(mContext).load(Constant.URL_IMAGE).into(imageView))

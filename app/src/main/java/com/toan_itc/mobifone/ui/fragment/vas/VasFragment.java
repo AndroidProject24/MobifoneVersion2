@@ -11,7 +11,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.toan_itc.mobifone.R;
-import com.toan_itc.mobifone.libs.logger.Logger;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.model.vas.Goicuoc;
 import com.toan_itc.mobifone.mvp.model.vas.Vas;
@@ -24,7 +23,7 @@ import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
 import java.util.List;
 import javax.inject.Inject;
 
-import static com.toan_itc.mobifone.utils.ImageUtils.loadImageView;
+import static com.toan_itc.mobifone.utils.ImageUtils.loadImageViewNocache;
 
 public class VasFragment extends BaseFragment implements VasView,View.OnClickListener{
   @BindView(R.id.edt_sdt) TextInputEditText edtSdt;
@@ -58,8 +57,7 @@ public class VasFragment extends BaseFragment implements VasView,View.OnClickLis
 
   @Override protected void initData() {
     vasPresenter.getGoiCuoc();
-    Logger.e(vasPresenter.imgCaptcha());
-    loadImageView(mContext,vasPresenter.imgCaptcha(),imgCaptcha);
+    loadImageViewNocache(mContext,vasPresenter.imgCaptcha(),imgCaptcha);
   }
 
   @Override protected StateLayout getLoadingTargetView() {
@@ -94,6 +92,11 @@ public class VasFragment extends BaseFragment implements VasView,View.OnClickLis
   @OnClick(R.id.btncheckVas)
   void checkVAS(){
     replaceFagment(getFragmentManager(),R.id.fragment, CheckVasFragment.newInstance(edtSdt.getText().toString()));
+  }
+
+  @OnClick(R.id.btnReload)
+  void btnReload(){
+    loadImageViewNocache(mContext,vasPresenter.imgCaptcha(),imgCaptcha);
   }
 
   @Override public void onClick(View v) {

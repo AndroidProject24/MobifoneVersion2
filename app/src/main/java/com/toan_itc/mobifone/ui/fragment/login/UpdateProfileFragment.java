@@ -10,7 +10,6 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.fernandocejas.frodo.core.checks.Preconditions;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.model.login.Login;
@@ -19,6 +18,7 @@ import com.toan_itc.mobifone.mvp.presenter.login.LoginPresenter;
 import com.toan_itc.mobifone.mvp.view.login.LoginView;
 import com.toan_itc.mobifone.ui.activity.BaseActivity;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
+import dagger.internal.Preconditions;
 import javax.inject.Inject;
 
 import static com.toan_itc.mobifone.utils.Utils.isEmailValid;
@@ -168,7 +168,8 @@ public class UpdateProfileFragment extends BaseFragment implements LoginView {
       } else {
         mLayoutName.setErrorEnabled(false);
         mLayoutEmail.setErrorEnabled(false);
-        mLoginPresenter.updateProfile(Preconditions.checkNotNull(mLoginPresenter.getPreferencesHelper().getJsonLogin()).get_$0().getAuth_code(),name, Preconditions.checkNotNull(mLoginPresenter.getPreferencesHelper().getJsonLogin()).get_$0().getId(), email,mEtPhone.getText().toString(),mEtNameFist.getText().toString(),mEtNameLast.getText().toString());
+        mLoginPresenter.updateProfile(
+            Preconditions.checkNotNull(mLoginPresenter.getPreferencesHelper().getJsonLogin()).get_$0().getAuth_code(),name, Preconditions.checkNotNull(mLoginPresenter.getPreferencesHelper().getJsonLogin()).get_$0().getId(), email,mEtPhone.getText().toString(),mEtNameFist.getText().toString(),mEtNameLast.getText().toString());
       }
     }catch (Exception e){
       e.printStackTrace();

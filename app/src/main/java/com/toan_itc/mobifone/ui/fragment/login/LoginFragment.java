@@ -126,6 +126,13 @@ public class LoginFragment extends BaseFragment implements LoginView {
     checkLogin();
   }
 
+
+  @OnClick(R.id.btnLoginGuest)
+  void btnLoginGuest() {
+    mLoginPresenter.getPreferencesHelper().putTypeLogin(false);
+    replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
+  }
+
   private void checkLogin() {
     try {
       mTxtEmail.setError(null);
@@ -169,6 +176,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
     if(login.get_$0().getUsername()!=null){
       Snackbar.make(mLoginLayout,"Xin chào "+login.get_$0().getUsername() +" đã đăng nhập thành công!",Snackbar.LENGTH_LONG).show();
     }
+    mLoginPresenter.getPreferencesHelper().putTypeLogin(true);
     replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
   }
 

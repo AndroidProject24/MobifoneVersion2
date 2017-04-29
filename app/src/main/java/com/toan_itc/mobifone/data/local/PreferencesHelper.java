@@ -17,6 +17,7 @@ public class PreferencesHelper {
   private static SharedPreferences mPref;
   private static final String PREF_FILE_NAME = "Salon_pref_file";
   private static final String PREF_FINISH_APP = "PREF_FINISH_APP";
+  private static final String PREF_LOGIN = "PREF_LOGIN";
   private static final String PREF_KEY_USER_ID = "PREF_KEY_USER_ID";
   private static final String PREF_KEY_USER_PASS = "PREF_KEY_USER_PASS";
   private static final String PREF_USER= "PREF_USER";
@@ -27,6 +28,14 @@ public class PreferencesHelper {
   }
   public void clear() {
     mPref.edit().clear().apply();
+  }
+
+  public void putTypeLogin(boolean login) {
+    mPref.edit().putBoolean(PREF_LOGIN, login).apply();
+  }
+
+  public boolean getLogin() {
+    return mPref.getBoolean(PREF_LOGIN,true);
   }
 
   public void putUserId(@NonNull String userId) {

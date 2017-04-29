@@ -10,7 +10,6 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.fernandocejas.frodo.core.checks.Preconditions;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.model.login.Login;
@@ -19,6 +18,7 @@ import com.toan_itc.mobifone.mvp.presenter.login.LoginPresenter;
 import com.toan_itc.mobifone.mvp.view.login.LoginView;
 import com.toan_itc.mobifone.ui.activity.BaseActivity;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
+import dagger.internal.Preconditions;
 import javax.inject.Inject;
 
 import static com.toan_itc.mobifone.utils.Utils.isPasswordValid;
@@ -154,7 +154,7 @@ public class ChangePasswordFragment extends BaseFragment implements LoginView {
       } else {
         mLayoutPassOld.setErrorEnabled(false);
         mLayoutPassNew.setErrorEnabled(false);
-        Login login=Preconditions.checkNotNull(mLoginPresenter.getPreferencesHelper().getJsonLogin());
+        Login login= Preconditions.checkNotNull(mLoginPresenter.getPreferencesHelper().getJsonLogin());
         mLoginPresenter.changePassword(Preconditions.checkNotNull(login.get_$0().getAuth_code()),
                 Preconditions.checkNotNull(login.get_$0().getUsername()),
                 Preconditions.checkNotNull(login.get_$0().getId()),passold, passnew);

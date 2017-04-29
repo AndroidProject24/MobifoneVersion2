@@ -65,6 +65,17 @@
             android:text="@string/btn_login"
             android:textSize="@dimen/text_medium" />
 
+        <Button
+            android:id="@+id/btnLoginGuest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/my_button"
+            android:textColor="@color/white"
+            android:text="@string/btn_login_guest"
+            android:textSize="@dimen/text_medium" />
+
         <TextView
             android:id="@+id/tvRestore"
             android:layout_width="wrap_content"

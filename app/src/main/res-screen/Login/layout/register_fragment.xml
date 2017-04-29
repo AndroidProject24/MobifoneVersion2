@@ -77,4 +77,13 @@
         android:text="@string/btn_register"
         android:textSize="@dimen/text_medium"/>
 
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Hotline : 0902391368 "
+        android:textSize="18sp"
+        android:textColor="@color/white"/>
 </com.toan_itc.mobifone.libs.view.StateLayout>

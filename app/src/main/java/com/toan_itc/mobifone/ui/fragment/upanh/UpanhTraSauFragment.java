@@ -75,8 +75,8 @@ public class UpanhTraSauFragment extends TakePhotoFragment{
 
   private void initBottomTab() {
     mNavigationController = layoutTab.material()
-            .addItem(R.drawable.ic_person_black_24dp, getString(R.string.upload_ca_nhan), getResources().getColor(R.color.md_teal_A700))
-            .addItem(R.drawable.ic_location_city_black_24dp, getString(R.string.upload_doanhnghiep), getResources().getColor(R.color.md_red_500))
+            .addItem(R.drawable.ic_person_black_24dp, getString(R.string.upload_ca_nhan), getResources().getColor(R.color.colorPrimary))
+            .addItem(R.drawable.ic_location_city_black_24dp, getString(R.string.upload_doanhnghiep), getResources().getColor(R.color.fab_normal))
             .setMode(MaterialMode.CHANGE_BACKGROUND_COLOR)
             .build();
     mNavigationController.addTabItemSelectedListener(listener);
