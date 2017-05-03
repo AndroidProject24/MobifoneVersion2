@@ -134,7 +134,7 @@ dependencies {
     compile(appDependencies.drawer) {
         transitive = true;
     }
-    compile 'com.google.firebase:firebase-crash:10.0.1'
+    compile 'com.google.firebase:firebase-crash:10.2.4'
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.3@aar'
     compile 'com.soundcloud.android.crop:lib_crop:1.0.0'
     compile 'com.darsh.multipleimageselect:multipleimageselect:1.0.4'

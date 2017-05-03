@@ -36,12 +36,7 @@ import com.toan_itc.mobifone.ui.fragment.km.KhuyenmaiFragment;
 import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
 import com.toan_itc.mobifone.ui.fragment.thutuc.ThutucFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.UpanhFragment;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
-import rx.Observable;
 
 import static com.toan_itc.mobifone.R.id.toolbar;
 
@@ -151,7 +146,8 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,M
 
   @Override
   protected void initData() {
-    addSubscription(Observable.timer(1, TimeUnit.SECONDS)
+    //TODO: AUTO OFF
+   /* addSubscription(Observable.timer(1, TimeUnit.SECONDS)
             .subscribe(new DefaultObserver<Long>(){
               @Override
               public void onCompleted() {
@@ -176,7 +172,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,M
                   }
                 }
               }
-            }));
+            }));*/
   }
 
   @Override

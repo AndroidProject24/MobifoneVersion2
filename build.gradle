@@ -17,8 +17,8 @@ buildscript {
 allprojects {
     ext {
         androidApplicationId = 'com.toan_itc.mobifone'
-        androidVersionCode = 2
-        androidVersionName = "1.1"
+        androidVersionCode = 3
+        androidVersionName = "1.3"
     }
 }
 
