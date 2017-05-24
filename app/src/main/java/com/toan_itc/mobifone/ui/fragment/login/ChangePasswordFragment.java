@@ -1,6 +1,7 @@
 package com.toan_itc.mobifone.ui.fragment.login;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
@@ -99,8 +100,11 @@ public class ChangePasswordFragment extends BaseFragment implements LoginView {
   }
 
   @Override
-  public void changePass(String data) {
-
+  public void changePass(Login login) {
+    if(login!=null)
+      Snackbar.make(stateLayout,"Cập nhật mật khẩu thành công!",Snackbar.LENGTH_LONG).show();
+    else
+      Snackbar.make(stateLayout,"Cập nhật bị lỗi!",Snackbar.LENGTH_LONG).show();
   }
 
   @Override

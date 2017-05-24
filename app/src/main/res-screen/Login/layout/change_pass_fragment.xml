@@ -1,60 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.toan_itc.mobifone.libs.view.StateLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.toan_itc.mobifone.libs.view.StateLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/stateLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_bg"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="@dimen/padding_sides">
+    android:background="@drawable/login_bg">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/layout_pass_old"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/white">
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_sides">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/etPassOld"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layout_pass_old"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/pass_old"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:inputType="textEmailAddress"
-            android:textSize="@dimen/text_medium"/>
-    </android.support.design.widget.TextInputLayout>
+            android:textColorHint="@color/white">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/layout_pass_new"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_pass_old"
-        android:textColorHint="@color/white">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etPassOld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/pass_old"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/text_medium" />
+        </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/etPasswordNew"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layout_pass_new"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/pass_new"
-            android:textColorHint="@color/white"
+            android:layout_below="@+id/layout_pass_old"
+            android:textColorHint="@color/white">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etPasswordNew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/pass_new"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/text_medium" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnChangePass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_pass_new"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/my_button"
+            android:text="@string/pass_change"
             android:textColor="@color/white"
-            android:inputType="textPassword"
-            android:textSize="@dimen/text_medium"/>
-    </android.support.design.widget.TextInputLayout>
+            android:textSize="@dimen/text_medium" />
 
-    <Button
-        android:id="@+id/btnChangePass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_pass_new"
-        android:layout_marginTop="6dp"
-        android:textColor="@color/white"
-        android:background="@drawable/my_button"
-        android:text="@string/pass_change"
-        android:textSize="@dimen/text_medium"/>
-
+    </RelativeLayout>
 </com.toan_itc.mobifone.libs.view.StateLayout>

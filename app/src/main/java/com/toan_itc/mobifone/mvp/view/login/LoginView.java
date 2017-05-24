@@ -16,7 +16,7 @@ public interface LoginView extends BaseView {
 
   void login_error(String error);
 
-  void changePass(String data);
+  void changePass(Login login);
 
   void updateProfile(boolean OK);
 

@@ -111,4 +111,14 @@
         android:text="@string/btn_updateProfile"
         android:textSize="@dimen/text_medium"/>
 
+    <Button
+        android:id="@+id/btn_change_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnUpdateProfile"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/white"
+        android:background="@drawable/my_button"
+        android:text="@string/pass_change"
+        android:textSize="@dimen/text_medium"/>
 </com.toan_itc.mobifone.libs.view.StateLayout>

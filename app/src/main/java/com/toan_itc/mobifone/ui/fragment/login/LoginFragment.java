@@ -191,7 +191,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
   }
 
   @Override
-  public void changePass(String data) {
+  public void changePass(Login login) {
 
   }
 

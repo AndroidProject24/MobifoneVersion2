@@ -42,7 +42,7 @@ public interface RestApi {
 
     @FormUrlEncoded
     @POST("edituser")
-    Observable<Login> changePassword(@Field("auth_code") String auth_code,@Field("username") String username,@Field("id") String id,@Field("old") String passOld, @Field("new") String passNew);
+    Observable<Login> changePassword(@Field("auth_code") String auth_code,@Field("username") String username,@Field("iduser") String id,@Field("old") String passOld, @Field("new") String passNew);
 
     /*EXIT*/
     @FormUrlEncoded
@@ -53,7 +53,7 @@ public interface RestApi {
     @FormUrlEncoded
     @POST("edituser")
     Observable<Login> updateProfile(@Field("auth_code") String auth_code, @Field("username") String username,
-                                           @Field("id") String id, @Query("email") String email,@Field("phone") String phone,
+                                           @Field("iduser") String id, @Query("email") String email,@Field("phone") String phone,
                                            @Field("first_name") String first_name, @Field("last_name") String last_name);
 
     @FormUrlEncoded

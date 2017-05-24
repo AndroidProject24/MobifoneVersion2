@@ -2,6 +2,7 @@ package com.toan_itc.mobifone.mvp.presenter.login;
 
 import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.data.service.RestData;
+import com.toan_itc.mobifone.libs.logger.Logger;
 import com.toan_itc.mobifone.mvp.model.login.Login;
 import com.toan_itc.mobifone.mvp.presenter.base.BasePresenter;
 import com.toan_itc.mobifone.mvp.view.login.LoginView;
@@ -56,6 +57,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
     }
 
     public void changePassword(String authCode,String user,String id,String passOld,String passNew){
+        Logger.e("auth_code="+authCode+"username="+user+"id="+id);
         getMvpView().showLoading();
         mRestData.changePassword(authCode,user,id,passOld,passNew)
                 .subscribe(new Subscriber<Login>() {
@@ -76,8 +78,10 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                         try {
                           if(login.getError()==2)
                             getMvpView().requestLogin();
+                          else if(login.getError()==0)
+                            getMvpView().changePass(login);
                           else
-                            getMvpView().changePass(null);
+                              getMvpView().changePass(null);
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -87,6 +91,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
   public void updateProfile(String auth_code,String username, String id,String email,
                             String phone, String first_name,String last_name){
+      Logger.e("auth_code="+auth_code+"username="+username+"id="+id+"email="+email+"phone="+phone+"first_name="+first_name+"last_name="+last_name);
     getMvpView().showLoading();
     mRestData.updateProfile(auth_code,username,id,email,phone,first_name,last_name)
             .subscribe(new Subscriber<Login>() {

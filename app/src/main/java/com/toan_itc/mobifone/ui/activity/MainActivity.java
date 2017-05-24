@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
-import butterknife.BindView;
+
 import com.google.firebase.crash.FirebaseCrash;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -34,9 +34,13 @@ import com.toan_itc.mobifone.ui.fragment.contact.LienHeFragment;
 import com.toan_itc.mobifone.ui.fragment.khoso.UIKhosoFragment;
 import com.toan_itc.mobifone.ui.fragment.km.KhuyenmaiFragment;
 import com.toan_itc.mobifone.ui.fragment.login.LoginFragment;
+import com.toan_itc.mobifone.ui.fragment.login.UpdateProfileFragment;
 import com.toan_itc.mobifone.ui.fragment.thutuc.ThutucFragment;
 import com.toan_itc.mobifone.ui.fragment.upanh.UpanhFragment;
+
 import javax.inject.Inject;
+
+import butterknife.BindView;
 
 import static com.toan_itc.mobifone.R.id.toolbar;
 
@@ -106,7 +110,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,M
                   } else if (drawerItem.getIdentifier() == 6) {
                     replaceFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
                   } else if (drawerItem.getIdentifier() == 7) {
-                    replaceFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
+                    replaceFagment(getSupportFragmentManager(), R.id.fragment, UpdateProfileFragment.newInstance());
                   } else if (drawerItem.getIdentifier() == 8) {
                     replaceFagment(getSupportFragmentManager(), R.id.fragment, LienHeFragment.newInstance());
                   } else if (drawerItem.getIdentifier() == 9) {

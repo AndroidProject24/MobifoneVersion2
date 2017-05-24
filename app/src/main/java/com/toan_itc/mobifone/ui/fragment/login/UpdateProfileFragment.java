@@ -1,15 +1,14 @@
 package com.toan_itc.mobifone.ui.fragment.login;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.model.login.Login;
@@ -18,8 +17,13 @@ import com.toan_itc.mobifone.mvp.presenter.login.LoginPresenter;
 import com.toan_itc.mobifone.mvp.view.login.LoginView;
 import com.toan_itc.mobifone.ui.activity.BaseActivity;
 import com.toan_itc.mobifone.ui.fragment.BaseFragment;
-import dagger.internal.Preconditions;
+
 import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import dagger.internal.Preconditions;
 
 import static com.toan_itc.mobifone.utils.Utils.isEmailValid;
 
@@ -31,7 +35,7 @@ import static com.toan_itc.mobifone.utils.Utils.isEmailValid;
 public class UpdateProfileFragment extends BaseFragment implements LoginView {
   @Inject
   LoginPresenter
-          mLoginPresenter;
+  mLoginPresenter;
   @BindView(R.id.stateLayout)
   ViewGroup stateLayout;
   @BindView(R.id.etName)
@@ -107,14 +111,17 @@ public class UpdateProfileFragment extends BaseFragment implements LoginView {
 
   }
 
-  @Override
-  public void changePass(String data) {
+    @Override
+    public void changePass(Login login) {
 
-  }
+    }
 
   @Override
   public void updateProfile(boolean ok) {
-
+    if(ok)
+      Snackbar.make(stateLayout,"Cập nhật profile thành công!",Snackbar.LENGTH_LONG).show();
+    else
+      Snackbar.make(stateLayout,"Cập nhật bị lỗi!",Snackbar.LENGTH_LONG).show();
   }
 
   @Override public void requestLogin() {
@@ -131,10 +138,15 @@ public class UpdateProfileFragment extends BaseFragment implements LoginView {
         Snackbar.make(mEtEmail,"Email emty or exist!",Snackbar.LENGTH_LONG).show();
     }*/
 
-  @OnClick(R.id.btnUpdateProfile)
-  void btnUpdateProfile() {
-    check_Update();
-  }
+    @OnClick(R.id.btn_change_pass)
+    void btn_change_pass(){
+      replaceFagment(getFragmentManager(), R.id.fragment, ChangePasswordFragment.newInstance());
+    }
+
+    @OnClick(R.id.btnUpdateProfile)
+    void btnUpdateProfile() {
+      check_Update();
+    }
 
   @SuppressWarnings("ConstantConditions")
   private void check_Update() {
@@ -168,8 +180,8 @@ public class UpdateProfileFragment extends BaseFragment implements LoginView {
       } else {
         mLayoutName.setErrorEnabled(false);
         mLayoutEmail.setErrorEnabled(false);
-        mLoginPresenter.updateProfile(
-            Preconditions.checkNotNull(mLoginPresenter.getPreferencesHelper().getJsonLogin()).get_$0().getAuth_code(),name, Preconditions.checkNotNull(mLoginPresenter.getPreferencesHelper().getJsonLogin()).get_$0().getId(), email,mEtPhone.getText().toString(),mEtNameFist.getText().toString(),mEtNameLast.getText().toString());
+        mLoginPresenter.updateProfile(Preconditions.checkNotNull(mLoginPresenter.getPreferencesHelper().getJsonLogin()).get_$0().getAuth_code(),name,
+                Preconditions.checkNotNull(mLoginPresenter.getPreferencesHelper().getJsonLogin()).get_$0().getId(), email,mEtPhone.getText().toString(),mEtNameFist.getText().toString(),mEtNameLast.getText().toString());
       }
     }catch (Exception e){
       e.printStackTrace();
