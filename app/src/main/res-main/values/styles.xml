@@ -70,7 +70,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_height">40dp</item>
         <item name="android:adjustViewBounds">true</item>
     </style>
 
@@ -78,7 +78,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/md_black_1000</item>
     </style>
 

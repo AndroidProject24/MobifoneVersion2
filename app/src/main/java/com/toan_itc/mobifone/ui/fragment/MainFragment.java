@@ -1,5 +1,6 @@
 package com.toan_itc.mobifone.ui.fragment;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -16,10 +17,13 @@ import com.pusher.client.connection.ConnectionStateChange;
 import com.toan_itc.mobifone.R;
 import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.data.rxjava.RxBus;
+import com.toan_itc.mobifone.data.service.RestApi;
+import com.toan_itc.mobifone.intdef.StringDef;
 import com.toan_itc.mobifone.libs.logger.Logger;
 import com.toan_itc.mobifone.libs.view.StateLayout;
 import com.toan_itc.mobifone.mvp.model.khoso.CheckSdt;
 import com.toan_itc.mobifone.ui.activity.MainActivity;
+import com.toan_itc.mobifone.ui.activity.WebviewActivity;
 import com.toan_itc.mobifone.ui.fragment.congno.CongnoFragment;
 import com.toan_itc.mobifone.ui.fragment.khoso.UIKhosoFragment;
 import com.toan_itc.mobifone.ui.fragment.km.KhuyenmaiFragment;
@@ -43,6 +47,7 @@ public class MainFragment extends BaseFragment {
   @BindView(R.id.card_congno) CardView card_congno;
   @BindView(R.id.card_vas) CardView card_vas;
   @BindView(R.id.card_upanh) CardView card_upanh;
+  @BindView(R.id.card_cuoc) CardView card_cuoc;
   private Pusher pusher;
   public static MainFragment newInstance() {
     return new MainFragment();
@@ -112,7 +117,7 @@ public class MainFragment extends BaseFragment {
     if(!mPreferencesHelper.getLogin()){
       card_vas.setVisibility(View.INVISIBLE);
       card_congno.setVisibility(View.INVISIBLE);
-      card_upanh.setVisibility(View.INVISIBLE);
+      card_upanh.setVisibility(View.GONE);
     }
   }
 
@@ -139,6 +144,13 @@ public class MainFragment extends BaseFragment {
   @OnClick(R.id.card_vas)
   public void click_vas(){
     checkLogin(VasFragment.newInstance());
+  }
+
+  @OnClick(R.id.card_cuoc)
+  public void click_cuoc(){
+      Intent intent = new Intent(getActivity(), WebviewActivity.class);
+      intent.putExtra(StringDef.BUNDLE_DATA, RestApi.CUOC);
+      startActivity(intent);
   }
 
   @OnClick(R.id.card_upanh)

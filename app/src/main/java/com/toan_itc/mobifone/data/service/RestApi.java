@@ -34,7 +34,7 @@ import rx.Observable;
 
 public interface RestApi {
     String BASE_URL = "http://n3t.top/test/api/";
-
+    String CUOC="http://n3t.top/test/fire/test";
     /*LOGIN*/
     @FormUrlEncoded
     @POST("dangnhap")

@@ -18,8 +18,8 @@
   <string name="kho_sim_tratruoc">TRẢ TRƯỚC</string>
   <string name="kho_sim_trasau">TRẢ SAU</string>hệ
   <string name="kho_sim_dep">CAM KẾT SỐ ĐẸP</string>
-  <string name="kho_sim_tratruoc_dep">TRẢ TRƯỚC SỐ ĐẸP</string>
-  <string name="check_sdt">KIỂM TRA &#032; &#032; TÌNH TRẠNG</string>
+  <string name="kho_sim_tratruoc_dep">TRẢ SAU DOANH NGHIỆP</string>
+  <string name="check_sdt">KIỂM TRA &#032; &#032; &#032; &#032; &#032; &#032; TÌNH TRẠNG</string>
 
   <!--UPANH-->
   <string name="upload_tratruoc">TRẢ TRƯỚC</string>
@@ -111,6 +111,7 @@
   <string name="ct_km">Chương trình khuyến mãi</string>
   <string name="up_anh">Úp ảnh</string>
   <string name="ban_vas">Vas</string>
+  <string name="tt_cuoc">Thanh toán cước</string>
 
   <string name="All">Tất cả</string>
 
