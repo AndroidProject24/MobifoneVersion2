@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.crash.FirebaseCrash;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -26,6 +27,7 @@ import com.toan_itc.mobifone.interfaces.KeyListener;
 import com.toan_itc.mobifone.interfaces.OnBackListener;
 import com.toan_itc.mobifone.interfaces.ToolbarTitleListener;
 import com.toan_itc.mobifone.libs.logger.Logger;
+import com.toan_itc.mobifone.libs.thread.DefaultExecutorSupplier;
 import com.toan_itc.mobifone.mvp.presenter.main.MainPresenter;
 import com.toan_itc.mobifone.mvp.view.main.MainView;
 import com.toan_itc.mobifone.ui.fragment.MainFragment;
@@ -150,6 +152,13 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,M
 
   @Override
   protected void initData() {
+      DefaultExecutorSupplier.getInstance().forBackgroundTasks().execute(new Runnable() {
+          @Override
+          public void run() {
+              Glide.get(MainActivity.this).clearDiskCache();
+          }
+      });
+    Glide.get(this).clearMemory();
     //TODO: AUTO OFF
    /* addSubscription(Observable.timer(1, TimeUnit.SECONDS)
             .subscribe(new DefaultObserver<Long>(){

@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha6'
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha7'
         classpath "io.realm:realm-gradle-plugin:2.3.1"
         classpath "com.fernandocejas.frodo:frodo-plugin:0.8.3"
         classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.3.1'//0.4
@@ -17,8 +17,8 @@ buildscript {
 allprojects {
     ext {
         androidApplicationId = 'com.toan_itc.mobifone'
-        androidVersionCode = 6
-        androidVersionName = "1.6"
+        androidVersionCode = 8
+        androidVersionName = "1.8"
     }
 }
 
