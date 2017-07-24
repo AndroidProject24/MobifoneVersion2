@@ -18,4 +18,5 @@ public interface KhosoView extends BaseView {
 
     void emty(String message);
 
+    void nextLink(String link);
 }

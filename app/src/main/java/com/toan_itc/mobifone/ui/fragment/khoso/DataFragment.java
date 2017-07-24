@@ -71,6 +71,7 @@ public class DataFragment extends BaseFragment implements KhosoView,Spinner.OnIt
   private int mCurrentCounter=0;
   private Khoso mKhoso;
   private boolean isFist=true;
+  private String nextLink="";
   private TextInputEditText etName=null;
   private TextInputEditText etEmail=null;
   private TextInputEditText etPhone=null;
@@ -129,11 +130,17 @@ public class DataFragment extends BaseFragment implements KhosoView,Spinner.OnIt
     return mViewGroup;
   }
 
-  @Override
+    @Override
+    public void nextLink(String link) {
+        this.nextLink=link;
+    }
+
+    @Override
   public void listSim(Khoso khoso) {
     try {
       isFist = false;
       mKhoso = Preconditions.checkNotNull(khoso, "khoso not null!");
+      nextLink = mKhoso.getPage().getNextLink();
       mKhosoAdapter = new KhosoAdapter(khoso.getData());
       mRecyclerview.setAdapter(mKhosoAdapter);
       mKhosoAdapter.setOnLoadMoreListener(() -> {
@@ -143,7 +150,7 @@ public class DataFragment extends BaseFragment implements KhosoView,Spinner.OnIt
               //Data are all loaded.
               mKhosoAdapter.loadMoreEnd();
             } else {
-              mKhosoAdapter.addData(mKhosoPresenter.loadMore(mKhoso.getPage().getNextLink()));
+              mKhosoAdapter.addData(mKhosoPresenter.loadMore(nextLink));
               mCurrentCounter = mKhosoAdapter.getData().size();
               mKhosoAdapter.loadMoreComplete();
             }

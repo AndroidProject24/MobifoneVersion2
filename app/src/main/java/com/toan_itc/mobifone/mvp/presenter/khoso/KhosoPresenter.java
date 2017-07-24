@@ -72,6 +72,7 @@ public class KhosoPresenter extends BasePresenter<KhosoView> {
                   getMvpView().hideLoading();
                   if(khoso!=null&&!khoso.getData().isEmpty()) {
                    dataList=khoso.getData();
+                   getMvpView().nextLink(khoso.getPage().getNextLink());
                   }else
                     getMvpView().emty("Hết dữ liệu!");
                 }catch (Exception e){
