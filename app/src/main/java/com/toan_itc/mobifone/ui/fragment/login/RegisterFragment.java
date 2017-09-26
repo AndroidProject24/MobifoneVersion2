@@ -43,12 +43,14 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
   TextInputEditText mEtName;
   @BindView(R.id.etPassword)
   TextInputEditText mEtPassword;
+  @BindView(R.id.etCPassword)
+  TextInputEditText mEtCPassword;
   @BindView(R.id.btnRegister)
   Button mBtnRegister;
-  @BindView(R.id.layout_email)
-  TextInputLayout mLayoutEmail;
   @BindView(R.id.layout_pass)
   TextInputLayout mLayoutPass;
+  @BindView(R.id.layout_cpass)
+  TextInputLayout mLayoutRePass;
   @BindView(R.id.layout_name)
   TextInputLayout mLayoutName;
   @BindView(R.id.stateLayout)
@@ -107,9 +109,10 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
   }
 
   private void check_Register() {
-    mLayoutEmail.setError(null);
+    mLayoutRePass.setError(null);
     mLayoutPass.setError(null);
     String email = mEtEmail.getText().toString();
+    String rePassword = mEtCPassword.getText().toString();
     String user = mEtName.getText().toString();
     String password = mEtPassword.getText().toString();
 
@@ -132,22 +135,22 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
       focusView = mLayoutName;
       cancel = true;
     }
-    if (TextUtils.isEmpty(email)) {
-      mLayoutEmail.setErrorEnabled(true);
-      mLayoutEmail.setError(getString(R.string.error_field_required));
-      focusView = mLayoutEmail;
+    if (TextUtils.isEmpty(rePassword)) {
+        mLayoutRePass.setErrorEnabled(true);
+        mLayoutRePass.setError(getString(R.string.error_field_required));
+      focusView = mLayoutRePass;
       cancel = true;
-    } else if (!isEmailValid(email)) {
-      mLayoutEmail.setErrorEnabled(true);
-      mLayoutEmail.setError(getString(R.string.error_invalid_email));
-      focusView = mLayoutEmail;
+    } else if (!rePassword.equalsIgnoreCase(password)) {
+        mLayoutRePass.setErrorEnabled(true);
+        mLayoutRePass.setError(getString(R.string.error_invalid_rePass));
+      focusView = mLayoutRePass;
       cancel = true;
     }
 
     if (cancel) {
       focusView.requestFocus();
     } else {
-      mLayoutEmail.setErrorEnabled(false);
+      mLayoutRePass.setErrorEnabled(false);
       mLayoutPass.setErrorEnabled(false);
       mLayoutName.setErrorEnabled(false);
       mRegisterPresenter.register(email, user, password);
