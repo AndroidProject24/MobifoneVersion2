@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.bumptech.glide.Glide;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
@@ -73,6 +74,7 @@ public class BaseApplication extends Application {
             OkHttpClient okHttpClient = new OkHttpClient() .newBuilder()
                     //.addNetworkInterceptor(new StethoInterceptor())
                     .build();
+            AndroidNetworking.enableLogging(); // simply enable logging
             AndroidNetworking.initialize(getApplicationContext(),okHttpClient);
         } catch (Exception e) {
             cacheDir = getApplicationContext().getCacheDir().toString();

@@ -239,7 +239,6 @@ public class UpanhTratruocFragment extends TakePhotoFragment implements UpanhVie
   @Override
   public void takeSuccess(TResult result) {
     super.takeSuccess(result);
-    Logger.e("takeSuccess：" + result.getImage().getCompressPath());
     returnData(result.getImage().getCompressPath());
   }
 

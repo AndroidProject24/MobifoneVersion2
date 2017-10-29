@@ -45,24 +45,6 @@
             android:textSize="@dimen/text_medium"/>
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/layout_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_email"
-        android:textColorHint="@color/md_blue_grey_300">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/etPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Hộ khẩu thường trú"
-            android:textColorHint="@color/md_blue_grey_300"
-            android:textColor="@color/md_black_1000"
-            android:inputType="text"
-            android:textSize="@dimen/text_medium"/>
-    </android.support.design.widget.TextInputLayout>
-
     <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/spinner"
         android:layout_toRightOf="@+id/txt_search"
@@ -71,7 +53,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/layout_phone"
+        android:layout_below="@+id/layout_email"
         android:spinnerMode="dropdown"/>
 
 </com.toan_itc.mobifone.libs.view.StateLayout>

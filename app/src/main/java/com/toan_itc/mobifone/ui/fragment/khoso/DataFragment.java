@@ -74,7 +74,6 @@ public class DataFragment extends BaseFragment implements KhosoView,Spinner.OnIt
   private String nextLink="";
   private TextInputEditText etName=null;
   private TextInputEditText etEmail=null;
-  private TextInputEditText etPhone=null;
   private AppCompatSpinner spinner=null ;
   @Override
   public void onAttach(Context context) {
@@ -202,7 +201,6 @@ public class DataFragment extends BaseFragment implements KhosoView,Spinner.OnIt
                       info.setPhone(khoso.getData().get(i).getSdtview());
                       info.setCmnd(etEmail.getText().toString());
                       info.setDichvu(((com.toan_itc.mobifone.mvp.model.khoso.Theloai) spinner.getSelectedItem()).getIdloai());
-                      info.setHokhau(etPhone.getText().toString());
                       mKhosoPresenter.getPreferencesHelper().putJsonInfo(info);
                       dialog.dismiss();
                       try {
@@ -227,10 +225,9 @@ public class DataFragment extends BaseFragment implements KhosoView,Spinner.OnIt
                 }
               }).create();
               dialog.show();
-              etName=(TextInputEditText) dialog.findViewById(R.id.etName);
-              etEmail=(TextInputEditText) dialog.findViewById(R.id.etEmail);
-              etPhone=(TextInputEditText) dialog.findViewById(R.id.etPhone);
-              spinner = (AppCompatSpinner) dialog.findViewById(R.id.spinner);
+              etName= dialog.findViewById(R.id.etName);
+              etEmail= dialog.findViewById(R.id.etEmail);
+              spinner = dialog.findViewById(R.id.spinner);
               mKhosoPresenter.getTheloai(mContext,spinner);
               break;
           }

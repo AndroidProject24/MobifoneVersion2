@@ -67,6 +67,7 @@ public class UpanhPresenter extends BasePresenter<UpanhView> {
               }
               @Override
               public void onError(ANError error) {
+                  Logger.e("uploadFail"+error.getMessage());
                 getMvpView().uploadFail();
               }
             });

@@ -1,6 +1,5 @@
 package com.toan_itc.mobifone.mvp.presenter.theloai;
 
-import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.toan_itc.mobifone.data.local.PreferencesHelper;
 import com.toan_itc.mobifone.data.rxjava.DefaultObserver;
 import com.toan_itc.mobifone.data.service.RestData;
@@ -24,7 +23,7 @@ public class TheloaiPresenter extends BasePresenter<TheloaiView> {
         this.mRestData=restData;
         this.mPreferencesHelper=preferencesHelper;
     }
-    @RxLogObservable
+
     public void getData(int theloai){
       getMvpView().showLoading();
         addSubscribe(mRestData.getData(theloai)

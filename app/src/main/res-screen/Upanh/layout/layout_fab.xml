@@ -29,6 +29,7 @@
         app:fab_showShadow="true"
         app:fab_size="normal"
         app:layout_behavior="com.toan_itc.mobifone.libs.FabBehavior"
+        android:layout_marginLeft="8dp"
         android:visibility="gone"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"/>
